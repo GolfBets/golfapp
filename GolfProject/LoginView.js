@@ -3,7 +3,6 @@
 var React = require("react-native");
 
 var {
-    Component,
     StyleSheet,
     Text,
     Image,
@@ -14,17 +13,19 @@ var {
 
 var SecureView = require("./SecureView");
 
-class LoginView extends Component {
+var LoginView  = React.createClass({
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            username: "",
-            password: ""
-        };
-    }
 
-    render() {
+    getInitialState: function(){
+      return {
+        username: '',
+        password: '',
+      }
+    },
+
+
+    render: function() {
+      console.log(this.state)
         return (
         <Image source={require('./bdg.jpeg')} style={styles.backgroundImage}>
             <View style={styles.container}>
@@ -43,24 +44,24 @@ class LoginView extends Component {
                         onChange={(event) => this.setState({password: event.nativeEvent.text})}
                         style={styles.formInput}
                         value={this.state.password} />
-                    <TouchableHighlight onPress={(this.onSubmitPressed.bind(this))} style={styles.button}>
+                    <TouchableHighlight onPress={(this.onSubmitPressed)} style={styles.button}>
                         <Text style={styles.buttonText}>Submit</Text>
                     </TouchableHighlight>
                 </View>
             </View>
          </Image>
         );
-    }
+    },
 
-    onSubmitPressed() {
+    onSubmitPressed: function() {
         this.props.navigator.push({
-            title: "Secure Page",
+            title: "Course Info",
             component: SecureView,
             passProps: {username: this.state.username, password: this.state.password},
         });
     }
 
-};
+});
 
 var styles = StyleSheet.create({
     container: {
