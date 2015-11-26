@@ -9,9 +9,18 @@ var {
     Image,
     TextInput,
     TouchableHighlight,
+    PickerIOS,
 } = React;
+var PickerItemIOS = PickerIOS.Item;
+
+var GAMES = {
+  roundrobin : {name: 'Round Robin'},
+  nassau: {name: 'Nassau'},
+  matchplay: {name: 'Match Play'},
+};
 
 var GameSetup = React.createClass({
+// probably need to use Picker IOS to create the dropdown menu for game Selection
 
 getInitialState: function(){
   console.log(this.props.username)
@@ -20,11 +29,14 @@ getInitialState: function(){
     player2: "",
     player3: "",
     player4: "",
+    games: 'roundrobin',
 
   }
 },
 render: function() {
   console.log(this.state)
+    var game  = GAMES[this.state.games];
+    var selectionString  = game.name;
     return (
     <Image source={require('./bdg.jpeg')} style={styles.backgroundImage}>
         <View style={styles.container}>
@@ -32,7 +44,7 @@ render: function() {
                 Enter Players Below
             </Text>
             <Text>Player 1 {this.state.player1}</Text>
-            <View>
+            <View style = {styles.halfHeight}>
                 <TextInput
                     placeholder="Player 2"
                     onChange={(event) => this.setState({player2: event.nativeEvent.text})}
@@ -52,6 +64,22 @@ render: function() {
                     <Text style={styles.buttonText}>Submit</Text>
                 </TouchableHighlight>
             </View>
+            <View>
+              <Text>Select your Game</Text>
+              <PickerIOS
+                selectedValue = {this.state.games}
+                onValueChange = {(games) => this.setState({games})}>
+                {Object.keys(GAMES).map((games)=>(
+                  <PickerItemIOS
+                    key={games}
+                    value={games}
+                    label={GAMES[games].name}
+                    />
+                  )
+                )}
+              </PickerIOS>
+              <Text>You Selected: {selectionString}</Text>
+            </View>
         </View>
      </Image>
     );
@@ -63,7 +91,16 @@ var styles = StyleSheet.create({
       backgroundColor: '#006400',
       padding: 30,
       marginTop: 65,
-      alignItems: "stretch"
+      alignItems: "stretch",
+      flexDirection: 'column'
+    },
+    halfHeight: {
+        flex: 2,
+        backgroundColor: 'darkgreen'
+    },
+    quarterHeight: {
+        flex: 1,
+        backgroundColor: 'white'
     },
     flowright: {
       flexDirection: 'row',

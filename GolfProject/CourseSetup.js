@@ -77,7 +77,6 @@ var CourseSetup = React.createClass({
                   <Text style={styles.subheading}>Par  </Text>
                     <TextInput
                         placeholder="hole 1 par"
-                        keyboardType = 'numeric'
                         onChange={(event) => this.setState({hole1par: event.nativeEvent.text})}
                         style={styles.formInput}
                         value={this.state.hole1par} />
