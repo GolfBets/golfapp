@@ -11,7 +11,7 @@ var {
     View,
 } = React;
 
-var SecureView = require("./SecureView");
+var CourseSetup = require("./CourseSetup");
 
 var LoginView  = React.createClass({
 
@@ -56,7 +56,7 @@ var LoginView  = React.createClass({
     onSubmitPressed: function() {
         this.props.navigator.push({
             title: "Course Info",
-            component: SecureView,
+            component: CourseSetup,
             passProps: {username: this.state.username, password: this.state.password},
         });
     }
