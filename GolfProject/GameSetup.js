@@ -11,6 +11,7 @@ var {
     TouchableHighlight,
     PickerIOS,
 } = React;
+
 var PickerItemIOS = PickerIOS.Item;
 
 var GAMES = {
@@ -38,13 +39,13 @@ render: function() {
     var game  = GAMES[this.state.games];
     var selectionString  = game.name;
     return (
-    <Image source={require('./bdg.jpeg')} style={styles.backgroundImage}>
+    <Image source={require('./bcg.jpeg')} style={styles.backgroundImage}>
         <View style={styles.container}>
-            <Text style={styles.title}>
+            <Text style={styles.heading}>
                 Enter Players Below
             </Text>
-            <Text>Player 1 {this.state.player1}</Text>
-            <View style = {styles.halfHeight}>
+            <Text></Text>
+            <Text style= {styles.heading}>Player 1 {this.state.player1}</Text>
                 <TextInput
                     placeholder="Player 2"
                     onChange={(event) => this.setState({player2: event.nativeEvent.text})}
@@ -60,12 +61,10 @@ render: function() {
                     onChange={(event) => this.setState({player4: event.nativeEvent.text})}
                     style={styles.formInput}
                     value={this.state.player4} />
-                <TouchableHighlight onPress={(this.onSubmitPressed)} style={styles.button}>
-                    <Text style={styles.buttonText}>Submit</Text>
-                </TouchableHighlight>
-            </View>
-            <View>
-              <Text>Select your Game</Text>
+                <Text></Text>
+
+
+              <Text style  = {styles.heading}>Select your Game Below</Text>
               <PickerIOS
                 selectedValue = {this.state.games}
                 onValueChange = {(games) => this.setState({games})}>
@@ -78,8 +77,11 @@ render: function() {
                   )
                 )}
               </PickerIOS>
-              <Text>You Selected: {selectionString}</Text>
-            </View>
+              <Text style  = {styles.heading}>You Selected: {selectionString}</Text>
+
+            <TouchableHighlight onPress={(this.onSubmitPressed)} style={styles.button}>
+                <Text style={styles.buttonText}>Submit</Text>
+            </TouchableHighlight>
         </View>
      </Image>
     );
@@ -88,7 +90,7 @@ render: function() {
 });
 var styles = StyleSheet.create({
     container: {
-      backgroundColor: '#006400',
+    //  backgroundColor: '#006400',
       padding: 30,
       marginTop: 65,
       alignItems: "stretch",
@@ -96,7 +98,7 @@ var styles = StyleSheet.create({
     },
     halfHeight: {
         flex: 2,
-        backgroundColor: 'darkgreen'
+      //  backgroundColor: 'darkgreen'
     },
     quarterHeight: {
         flex: 1,
@@ -114,14 +116,14 @@ var styles = StyleSheet.create({
     width: null,
     },
     formInput: {
-        height: 16,
+        height: 20,
         padding: 1,
         marginRight: 2,
         marginBottom: 2,
         marginTop: 2,
         textAlign: 'center',
         flex: 1,
-        fontSize: 13,
+        fontSize: 16,
         borderWidth: 1,
         borderColor: 'white',
         borderRadius: 6,
@@ -130,10 +132,10 @@ var styles = StyleSheet.create({
         backgroundColor: 'white',
     },
     heading: {
-        marginBottom: 20,
+        //marginBottom: 20,
         fontSize: 18,
         textAlign: 'center',
-        color: '#656565',
+        color: 'white',
     },
     subheading: {
         color: "#cccccc"

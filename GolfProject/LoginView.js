@@ -44,7 +44,7 @@ var LoginView  = React.createClass({
                         onChange={(event) => this.setState({password: event.nativeEvent.text})}
                         style={styles.formInput}
                         value={this.state.password} />
-                    <TouchableHighlight onPress={(this.onSubmitPressed)} style={styles.button}>
+                    <TouchableHighlight underlayColor="gray" onPress={(this.onSubmitPressed)} style={styles.button}>
                         <Text style={styles.buttonText}>Submit</Text>
                     </TouchableHighlight>
                 </View>
@@ -67,7 +67,8 @@ var styles = StyleSheet.create({
     container: {
         padding: 30,
         marginTop: 65,
-        alignItems: "stretch"
+        alignItems: "stretch",
+        flex: 1,
     },
     title: {
         fontSize: 18,
