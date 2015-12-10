@@ -25,7 +25,7 @@ module.exports = React.createClass({
     return(
       <Image source={require('../../assets/bdg.jpeg')} style={styles.backgroundImage}>
         <View style = {styles.container}>
-          <Text>Sign Up</Text>
+          <Text style = {styles.label1}>Sign Up</Text>
 
           <Text style={styles.label}>Username:</Text>
           <TextInput
@@ -56,6 +56,9 @@ module.exports = React.createClass({
     );
   },
   onSignupPress: function(){
+    if(this.state.username ===""){
+      return this.setState({errorMessage: 'You need to enter a Username'});
+    }
     if(this.state.password !== this.state.passwordconfirmation){
       return this.setState({errorMessage: 'Your passwords do not match'});
     }
@@ -64,7 +67,7 @@ module.exports = React.createClass({
     user.set('password', this.state.password);
 
     user.signUp(null, {
-      success:(user) => {this.props.navigator.immediatelyResetRouteStack([{name: 'course'}]);},
+      success:(user) => {this.props.navigator.immediatelyResetRouteStack([{name: 'coursefav'}]);},
       error:(user, error) => {this.setState({errorMessage: errormessage});}
     });
   },
@@ -77,7 +80,7 @@ module.exports = React.createClass({
 
 var styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flex: 2,
     justifyContent: 'center',
     alignItems: 'center'
   },

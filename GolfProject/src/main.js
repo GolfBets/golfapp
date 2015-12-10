@@ -7,23 +7,30 @@ var {
 var Parse  = require('parse/react-native');
 var Signin = require('./components/authentication/signin');
 var Signup = require('./components/authentication/signup');
-var Course = require('./components/coursesetup/course');
+var CourseFav = require('./components/coursesetup/coursefav');
+var CourseCity = require('./components/coursesetup/coursecity');
+var Players = require('./components/playersetup/players');
+var Game  = require('./components/gamesetup/game');
 
 var ROUTES = {
   signin: Signin,
   signup: Signup,
-  course: Course,
+  coursefav: CourseFav,
+  coursecity: CourseCity,
+  players: Players,
+  game: Game,
 };
 
 module.exports = React.createClass({
   componentWillMount: function(){
     Parse.initialize('Ip4K6IbQ8ilmRFAh7dO5LUAlZGm0d423JLpcO39f','NbdmBpotlFLCnq2WY7TMuBT0sDtyNG7lxo28vRxP')
   },
-  renderScene: function(route, navigator){
+  renderScene: function(route, navigator, props){
     var Component = ROUTES[route.name];
-    return <Component route ={route} navigator = {navigator}/>;
+    return <Component route ={route} navigator = {navigator} props = {props}/>;
   },
   render: function(){
+    console.log('navigate');
     return(
       <Navigator
       style = {styles.container}
