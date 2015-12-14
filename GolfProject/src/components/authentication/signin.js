@@ -55,7 +55,7 @@ module.exports =  React.createClass({
 
   onPress: function(){
     Parse.User.logIn(this.state.username, this.state.password,{
-      success: (user) => {this.props.navigator.immediatelyResetRouteStack([{name: 'course'}])},
+      success: (user) => {this.props.navigator.immediatelyResetRouteStack([{name: 'coursefav'}])},
       error: (data, error) => {this.setState({errorMessage: error.message});}
     });
   }
@@ -63,7 +63,7 @@ module.exports =  React.createClass({
 
 var styles  = StyleSheet.create({
   container: {
-    flex: 1,
+    flex: 2,
     justifyContent: 'center',
     alignItems: 'center'
   },
