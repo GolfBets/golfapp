@@ -19,16 +19,16 @@ function computeResults (input) {
 			var current = "h" + i;
 		}
 		if (input.indexUsed = "YES") {
-			scores.player1.push(player1NetScore[current]);
-			scores.player2.push(player2NetScore[current]);
-			scores.player3.push(player3NetScore[current]);
-			scores.player4.push(player4NetScore[current]);
+			scores.player1.push(input.player1NetScore[current]);
+			scores.player2.push(input.player2NetScore[current]);
+			scores.player3.push(input.player3NetScore[current]);
+			scores.player4.push(input.player4NetScore[current]);
 		}
 		else {
-			scores.player1.push(player1Score[current]);
-			scores.player2.push(player2Score[current]);
-			scores.player3.push(player3Score[current]);
-			scores.player4.push(player4Score[current]);
+			scores.player1.push(input.player1Score[current]);
+			scores.player2.push(input.player2Score[current]);
+			scores.player3.push(input.player3Score[current]);
+			scores.player4.push(input.player4Score[current]);
 		}
 	}
 	var cont = scores.player1[0];
