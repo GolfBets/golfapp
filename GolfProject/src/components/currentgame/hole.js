@@ -16,14 +16,14 @@ var i = 0;
 module.exports = React.createClass({
   getInitialState: function(){
     return {
-      p1ScrHole1:0,
-      p2ScrHole1:0,
-      p3ScrHole1:0,
-      p4ScrHole1:0,
-      p1NetScrHole1:0,
-      p2NetScrHole1:0,
-      p3NetScrHole1:0,
-      p4NetScrHole1:0,
+      player1score: {h1:0, h2:0, h3:0, h4:4, h5:0, h6:0, h7:0, h8:0, h9:0, h10:0, h11:0, h12:0, h13:0, h14:0, h15:0, h16:0, h17:0, h18:0},
+      player2score: {h1:0, h2:0, h3:0, h4:4, h5:0, h6:0, h7:0, h8:0, h9:0, h10:0, h11:0, h12:0, h13:0, h14:0, h15:0, h16:0, h17:0, h18:0},
+      player3score: {h1:0, h2:0, h3:0, h4:4, h5:0, h6:0, h7:0, h8:0, h9:0, h10:0, h11:0, h12:0, h13:0, h14:0, h15:0, h16:0, h17:0, h18:0},
+      player4score: {h1:0, h2:0, h3:0, h4:4, h5:0, h6:0, h7:0, h8:0, h9:0, h10:0, h11:0, h12:0, h13:0, h14:0, h15:0, h16:0, h17:0, h18:0},
+      player1Netscore: {h1:0, h2:0, h3:0, h4:4, h5:0, h6:0, h7:0, h8:0, h9:0, h10:0, h11:0, h12:0, h13:0, h14:0, h15:0, h16:0, h17:0, h18:0},
+      player2Netscore: {h1:0, h2:0, h3:0, h4:4, h5:0, h6:0, h7:0, h8:0, h9:0, h10:0, h11:0, h12:0, h13:0, h14:0, h15:0, h16:0, h17:0, h18:0},
+      player3Netscore: {h1:0, h2:0, h3:0, h4:4, h5:0, h6:0, h7:0, h8:0, h9:0, h10:0, h11:0, h12:0, h13:0, h14:0, h15:0, h16:0, h17:0, h18:0},
+      player4Netscore: {h1:0, h2:0, h3:0, h4:4, h5:0, h6:0, h7:0, h8:0, h9:0, h10:0, h11:0, h12:0, h13:0, h14:0, h15:0, h16:0, h17:0, h18:0},
       holeNumber: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18],
       score1:this.props.route.coursepar[i],
       score2:this.props.route.coursepar[i],
@@ -147,38 +147,28 @@ module.exports = React.createClass({
       </Image>
     );
   },
-  onSubmitScores: function(){
-    if (this.props.route.playerCount === 4){
-      this.setState({p1ScrHole1:this.state.score1});
-      this.setState({p2ScrHole1:this.state.score2});
-      this.setState({p3ScrHole1:this.state.score3});
-      this.setState({p4ScrHole1:this.state.score4});
-      if (this.props.route.indexUsed === "YES"){
-        this.setState({p1NetScrHole1:this.state.netScore1});
-        this.setState({p2NetScrHole1:this.state.netScore2});
-        this.setState({p3NetScrHole1:this.state.netScore3});
-        this.setState({p4NetScrHole1:this.state.netScore4});
-      };
+  onSubmitScores: function(){// gonna have to change h1 every hole
+      var updatedscore1 = Object.assign({}, this.state.player1score, {h1:this.state.score1});
+      this.setState({player1score:updatedscore1});
+      var updatedscore2 = Object.assign({}, this.state.player2score, {h1:this.state.score2});
+      this.setState({player2score:updatedscore2});
+      var updatedscore3 = Object.assign({}, this.state.player3score, {h1:this.state.score3});
+      this.setState({player3score:updatedscore3});
+      var updatedscore4 = Object.assign({}, this.state.player4score, {h1:this.state.score4});
+      this.setState({player4score:updatedscore4});
+    if (this.props.route.indexUsed === "YES"){
+      var updatednetscore1 = Object.assign({}, this.state.player1Netscore, {h1:this.state.netScore1});
+      this.setState({player1Netscore:updatednetscore1});
+      var updatednetscore2 = Object.assign({}, this.state.player2Netscore, {h1:this.state.netScore2});
+      this.setState({player2Netscore:updatednetscore2});
+      var updatednetscore3 = Object.assign({}, this.state.player3Netscore, {h1:this.state.netScore3});
+      this.setState({player3Netscore:updatednetscore3});
+      var updatednetscore4 = Object.assign({}, this.state.player4Netscore, {h1:this.state.netScore4});
+      this.setState({player4Netscore:updatednetscore4});
     };
-    if (this.props.route.playerCount === 3){
-      this.setState({p1ScrHole1:this.state.score1});
-      this.setState({p2ScrHole1:this.state.score2});
-      this.setState({p3ScrHole1:this.state.score3});
-      if (this.props.route.indexUsed === "YES"){
-        this.setState({p1NetScrHole1:this.state.netScore1});
-        this.setState({p2NetScrHole1:this.state.netScore2});
-        this.setState({p3NetScrHole1:this.state.netScore3});
-      };
-    };
-    if (this.props.route.playerCount === 2){
-      this.setState({p1ScrHole1:this.state.score1});
-      this.setState({p2ScrHole1:this.state.score2});
-      if (this.props.route.indexUsed === "YES"){
-        this.setState({p1NetScrHole1:this.state.netScore1});
-        this.setState({p2NetScrHole1:this.state.netScore2});
-      };
-    };
-    this.props.navigator.push({name:'hole2', p1ScrHole1: this.state.p1ScrHole1,p2ScrHole1: this.state.p2ScrHole1,p3ScrHole1: this.state.p3ScrHole1,p4ScrHole1: this.state.p4ScrHole1,p1NetScrHole1: this.state.p1NetScrHole1,p2NetScrHole1: this.state.p2NetScrHole1, p3NetScrHole1: this.state.p3NetScrHole1,p4NetScrHole1: this.state.p4NetScrHole1, coursepar: this.props.route.coursepar, coursehcp: this.props.route.coursehcp,teams: this.props.route.teams,betPerHole: this.props.route.betPerHole, lowScore: this.props.route.lowScore, lowTotal: this.props.route.lowTotal, indexUsed: this.props.route.indexUsed, gameSelected: this.props.route.gameSelected, course : this.props.route.course, player1: this.props.route.player1, player2: this.props.route.player2, player3:this.props.route.player3, player4: this.props.route.player4, hcpPlayer1: this.props.route.hcpPlayer1, hcpPlayer2: this.props.route.hcpPlayer2, hcpPlayer3: this.props.route.hcpPlayer3, hcpPlayer4: this.props.route.hcpPlayer4, 'playerCount': this.props.route.playerCount});
+
+
+    this.props.navigator.push({name:'hole2', player1score: this.state.player1score, player2score: this.state.player2score, player3score: this.state.player3score, player4score: this.state.player4score, player1Netscore: this.state.player1Netscore, player2Netscore: this.state.player2Netscore, player3Netscore: this.state.player3Netscore, player4Netscore: this.state.player4Netscore,  coursepar: this.props.route.coursepar, coursehcp: this.props.route.coursehcp,teams: this.props.route.teams,betPerHole: this.props.route.betPerHole, lowScore: this.props.route.lowScore, lowTotal: this.props.route.lowTotal, indexUsed: this.props.route.indexUsed, gameSelected: this.props.route.gameSelected, course : this.props.route.course, player1: this.props.route.player1, player2: this.props.route.player2, player3:this.props.route.player3, player4: this.props.route.player4, hcpPlayer1: this.props.route.hcpPlayer1, hcpPlayer2: this.props.route.hcpPlayer2, hcpPlayer3: this.props.route.hcpPlayer3, hcpPlayer4: this.props.route.hcpPlayer4, 'playerCount': this.props.route.playerCount});
   },
 
   netScoreUpPlayer1: function(){
