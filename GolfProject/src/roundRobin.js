@@ -1,4 +1,4 @@
-var computeResults = function (input) {
+function computeResults (input) {
 	var scores = {
 		player1: [],
 		player2: [],
@@ -35,7 +35,7 @@ var computeResults = function (input) {
 	var i = 0;
 	var minPool = 0;
 	var lowTotalPool = 0;
-	while (cont !== 0) {
+	while (cont) {
 		if (i = 6 || 12) {
 			minPool = 0;
 			lowTotalPool = 0;
