@@ -53,28 +53,30 @@ module.exports = React.createClass({
     var username = this.state.user.get('username');
 
     return (
-      <View style = {styles.container}>
-        <View style= {styles.container}>
-          <Text style = {styles.label}>Welcome Back {username}!</Text>
-          <Text style = {styles.label}></Text>
-          <Text style = {styles.label}>Select from your favorite courses below</Text>
-          <Text style = {styles.label}>or</Text>
-          <Text style = {styles.label}>enter the city name of a new course</Text>
-          <TextInput
-            style  = {styles.input}
-            value  = {this.state.city}
-            onChangeText = {(text)=>this.setState({city: text})}
-          />
-          <Button text={'Select City'} onPress={this.onSelectCity}/>
+      <Image source={require('../../assets/grass4.jpeg')} style={styles.backgroundImage}>
+        <View style = {styles.container}>
+          <View style= {styles.container}>
+            <Text style = {styles.label}>Welcome Back {username}!</Text>
+            <Text style = {styles.label}></Text>
+            <Text style = {styles.label}>Select from your favorites</Text>
+            <Text style = {styles.label}>or</Text>
+            <Text style = {styles.label}>Search for a new course by city</Text>
+            <TextInput
+              style  = {styles.input}
+              value  = {this.state.city}
+              onChangeText = {(text)=>this.setState({city: text})}
+            />
+            <Button text={'Select City'} onPress={this.onSelectCity}/>
+          </View>
+          <View style = {styles.container2}>
+            <ListView
+              dataSource = {this.state.dataSource}
+              renderRow = {this.renderCourse}
+              style = {styles.ListView}
+            />
+          </View>
         </View>
-        <View style = {styles.container2}>
-          <ListView
-            dataSource = {this.state.dataSource}
-            renderRow = {this.renderCourse}
-            style = {styles.ListView}
-          />
-        </View>
-      </View>
+      </Image>
     );
   },
   onSelectCity: function(){
@@ -96,7 +98,8 @@ module.exports = React.createClass({
     this.setState({
       course: rowData.name
     });
-
+    var player1 = this.state.user.get('username');
+    this.props.navigator.immediatelyResetRouteStack([{name: 'players', course: this.state.course, player1: player1 }]);
   },
 });
 
@@ -105,7 +108,7 @@ var styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'black'
+
   },
   container2:{
     flex: 1

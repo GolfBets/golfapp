@@ -29,7 +29,7 @@ var styles  = StyleSheet.create({
     borderRadius: 5,
     padding: 5,
     borderColor: 'white',
-    marginTop: 10,
+    marginTop: 5,
   },
   buttonText: {
     color:'white',
