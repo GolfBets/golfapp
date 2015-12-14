@@ -9,13 +9,7 @@ var computeResults = function (input) {
 		1: 0,
 		2: 0,
 		3: 0,
-		4:0
-	}
-		if (input.indexUsed = "YES") {
-		var handicap = true;
-	}
-	else {
-		var handicap = false;
+		4: 0
 	}
 	for (var i = input.start; i < input.start + 18; i++) {
 		if (i > 18) {
@@ -39,9 +33,69 @@ var computeResults = function (input) {
 	}
 	var cont = scores.player1[0];
 	var i = 0;
+	var minPool = 0;
+	var lowTotalPool = 0;
 	while (cont !== 0) {
-		if (i < 6) {
-			
+		if (i = 6 || 12) {
+			minPool = 0;
+			lowTotalPool = 0;
 		}
+		if (i < 6) {
+			var team11 = input.teams[0];
+			var team12 = input.teams[1];
+			var team21 = input.teams[2];
+			var team22 = input.teams[3];
+		}
+		else if (i < 12) {
+			var team11 = input.teams[4];
+			var team12 = input.teams[5];
+			var team21 = input.teams[6];
+			var team22 = input.teams[7];
+		}
+		else {
+			var team11 = input.teams[8];
+			var team12 = input.teams[9];
+			var team21 = input.teams[10];
+			var team22 = input.teams[11];
+		}
+		if (Math.min(scores.['player' + team11][i], scores.['player' + team12].hole[i]) < Math.min(scores.['player' + team21][i], scores.['player' + team22].hole[i])) {
+			player[team11] += (input.betPerHole + minPool/2);
+			player[team12] += (input.betPerHole + minPool/2);
+			player[team21] -= (input.betPerHole + minPool/2);
+			player[team22] -= (input.betPerHole + minPool/2);
+			minPool = 0;
+		}
+		else if (Math.min(scores.['player' + team11][i], scores.['player' + team12].hole[i]) > Math.min(scores.['player' + team21][i], scores.['player' + team22].hole[i])) {
+			player[team11] -= (input.betPerHole + minPool/2);
+			player[team12] -= (input.betPerHole + minPool/2);
+			player[team21] += (input.betPerHole + minPool/2);
+			player[team22] += (input.betPerHole + minPool/2);
+			minPool = 0;
+		}
+		else {
+			minPool += (4 * input.betPerHole);
+		}
+		if (input.lowTotal == true) {
+			if (scores.['player' + team11][i] + scores.['player' + team12].hole[i] < scores.['player' + team21][i] + scores.['player' + team22].hole[i]) {
+				player[team11] += (input.betPerHole + lowTotalPool/2);
+				player[team12] += (input.betPerHole + lowTotalPool/2);
+				player[team21] -= (input.betPerHole + lowTotalPool/2);
+				player[team22] -= (input.betPerHole + lowTotalPool/2);
+				lowTotalPool = 0;
+			}
+			else if (scores.['player' + team11][i] + scores.['player' + team12].hole[i] > scores.['player' + team21][i] + scores.['player' + team22].hole[i]) {
+				player[team11] -= (input.betPerHole + lowTotalPool/2);
+				player[team12] -= (input.betPerHole + lowTotalPool/2);
+				player[team21] += (input.betPerHole + lowTotalPool/2);
+				player[team22] += (input.betPerHole + lowTotalPool/2);
+				lowTotalPool = 0;
+			}
+			else {
+				lowTotalPool += (4 * input.betPerHole);
+			}
+		}
+	i++
+	cont = scores.player1[i];
 	}
+	return players;
 }
