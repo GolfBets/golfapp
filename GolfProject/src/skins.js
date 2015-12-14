@@ -1,9 +1,9 @@
 function skins (input) {
-	var winnings = {};
-	var score = {};
-	for (var i = 1; i <= input.playerCount; i++) {
-		winnings.[i] = 0;
-		scores[i] = [];
+	var results = {};
+	for (var i = 0; i < input.playerCount; i++) {
+		results[i] = {};
+		results[i].score = [];
+		results[i].winnings = 0;
 		for (var i = input.start; i < input.start + 18; i++) {
 			if (i > 18) {
 				var current = "h" + (i - 18);
@@ -12,11 +12,16 @@ function skins (input) {
 				var current = "h" + i;
 			}
 			if (input.indexUsed = "YES") {
-				scores[i].push(player1NetScore[current]);
+				results[i].score.push(player1NetScore[current]);
 			}
 			else {
-				scores[i].push(player1Score[current]);
+				results[i].score.push(player1Score[current]);
 			}
 		}
+	}
+	var cont = scores[1][0];
+	var skin = 0;
+	while (cont) {
+		if ()
 	}
 }
