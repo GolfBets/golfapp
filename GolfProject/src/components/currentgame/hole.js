@@ -16,6 +16,7 @@ var i = 0;
 module.exports = React.createClass({
   getInitialState: function(){
     return {
+      holeNumber: 1,
       player1score: {h1:0, h2:0, h3:0, h4:4, h5:0, h6:0, h7:0, h8:0, h9:0, h10:0, h11:0, h12:0, h13:0, h14:0, h15:0, h16:0, h17:0, h18:0},
       player2score: {h1:0, h2:0, h3:0, h4:4, h5:0, h6:0, h7:0, h8:0, h9:0, h10:0, h11:0, h12:0, h13:0, h14:0, h15:0, h16:0, h17:0, h18:0},
       player3score: {h1:0, h2:0, h3:0, h4:4, h5:0, h6:0, h7:0, h8:0, h9:0, h10:0, h11:0, h12:0, h13:0, h14:0, h15:0, h16:0, h17:0, h18:0},
@@ -24,7 +25,6 @@ module.exports = React.createClass({
       player2Netscore: {h1:0, h2:0, h3:0, h4:4, h5:0, h6:0, h7:0, h8:0, h9:0, h10:0, h11:0, h12:0, h13:0, h14:0, h15:0, h16:0, h17:0, h18:0},
       player3Netscore: {h1:0, h2:0, h3:0, h4:4, h5:0, h6:0, h7:0, h8:0, h9:0, h10:0, h11:0, h12:0, h13:0, h14:0, h15:0, h16:0, h17:0, h18:0},
       player4Netscore: {h1:0, h2:0, h3:0, h4:4, h5:0, h6:0, h7:0, h8:0, h9:0, h10:0, h11:0, h12:0, h13:0, h14:0, h15:0, h16:0, h17:0, h18:0},
-      holeNumber: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18],
       score1:this.props.route.coursepar[i],
       score2:this.props.route.coursepar[i],
       score3:this.props.route.coursepar[i],
@@ -76,13 +76,13 @@ module.exports = React.createClass({
             <Text style = {styles.label2}>{this.props.route.course}</Text>
           </View>
           <View style = {styles.container2}>
-            <Text style = {styles.label5}>Hole {this.state.holeNumber[i]}</Text>
+            <Text style = {styles.label5}>Hole {this.state.holeNumber}</Text>
           </View>
           <View style = {[styles.container3,styles.flowright]}>
             <Text style = {styles.subheading}>Par</Text>
-            <Text style = {styles.subheading}>{this.props.route.coursepar[i]}</Text>
+            <Text style = {styles.subheading}>{this.props.route.coursepar[this.state.holeNumber]}</Text>
             <Text style = {styles.subheading}>Hdcp</Text>
-            <Text style = {styles.subheading}>{this.props.route.coursehcp[i]}</Text>
+            <Text style = {styles.subheading}>{this.props.route.coursehcp[this.state.holeNumber]}</Text>
           </View>
           <Text style = {styles.label7}>Adjust Gross Score with + & - Net Score will update</Text>
           <View style = {styles.container4}>
@@ -105,7 +105,7 @@ module.exports = React.createClass({
                 onPress={this.netScoreDownPlayer2}>
                 <Text style={styles.label4}>-</Text>
               </TouchableHighlight>
-              <Text style = {styles.label6}>{this.state.score2}</Text>
+              <Text style = {styles.label6}>{this.state[`score${1}`]}</Text>
               <TouchableHighlight
                 onPress={this.netScoreUpPlayer2}>
                 <Text style={styles.label4}>+</Text>
@@ -148,7 +148,8 @@ module.exports = React.createClass({
     );
   },
   onSubmitScores: function(){// gonna have to change h1 every hole
-      var updatedscore1 = Object.assign({}, this.state.player1score, {h1:this.state.score1});
+      var updatedscore1 = Object.assign({}, this.state[`player${1}score`]);
+      updatedscore1[`h${1}`] = this.state.score1;
       this.setState({player1score:updatedscore1});
       var updatedscore2 = Object.assign({}, this.state.player2score, {h1:this.state.score2});
       this.setState({player2score:updatedscore2});
