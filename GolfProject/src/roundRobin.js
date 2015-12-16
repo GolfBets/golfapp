@@ -1,5 +1,5 @@
-function computeResults (input) {
-	var bet = input.betPerHole + 0;
+function computeResults (input, route) {
+	var bet = route.betPerHole + 0;
 	console.log(bet)
 	var scores = {
 		player1: [],
@@ -86,7 +86,7 @@ function computeResults (input) {
 		else {
 			minPool += (4 * bet);
 		}
-		if (input.lowTotal == true) {
+		if (route.lowTotal == true) {
 			if (scores[a][i] + scores[b][i] < scores[c][i] + scores[d][i]) {
 				players[team11] += (bet + lowTotalPool/4);
 				players[team12] += (bet + lowTotalPool/4);
