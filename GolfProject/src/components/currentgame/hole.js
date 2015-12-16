@@ -11,20 +11,20 @@ var{
 
 
 var Button  = require('../common/button');
-
+var RoundRobin  = require('../../roundRobin.js');
 
 module.exports = React.createClass({
   getInitialState: function(){
     return {
       holeNumber: 1,
-      player1score: {h1:0, h2:0, h3:0, h4:4, h5:0, h6:0, h7:0, h8:0, h9:0, h10:0, h11:0, h12:0, h13:0, h14:0, h15:0, h16:0, h17:0, h18:0},
-      player2score: {h1:0, h2:0, h3:0, h4:4, h5:0, h6:0, h7:0, h8:0, h9:0, h10:0, h11:0, h12:0, h13:0, h14:0, h15:0, h16:0, h17:0, h18:0},
-      player3score: {h1:0, h2:0, h3:0, h4:4, h5:0, h6:0, h7:0, h8:0, h9:0, h10:0, h11:0, h12:0, h13:0, h14:0, h15:0, h16:0, h17:0, h18:0},
-      player4score: {h1:0, h2:0, h3:0, h4:4, h5:0, h6:0, h7:0, h8:0, h9:0, h10:0, h11:0, h12:0, h13:0, h14:0, h15:0, h16:0, h17:0, h18:0},
-      player1Netscore: {h1:0, h2:0, h3:0, h4:4, h5:0, h6:0, h7:0, h8:0, h9:0, h10:0, h11:0, h12:0, h13:0, h14:0, h15:0, h16:0, h17:0, h18:0},
-      player2Netscore: {h1:0, h2:0, h3:0, h4:4, h5:0, h6:0, h7:0, h8:0, h9:0, h10:0, h11:0, h12:0, h13:0, h14:0, h15:0, h16:0, h17:0, h18:0},
-      player3Netscore: {h1:0, h2:0, h3:0, h4:4, h5:0, h6:0, h7:0, h8:0, h9:0, h10:0, h11:0, h12:0, h13:0, h14:0, h15:0, h16:0, h17:0, h18:0},
-      player4Netscore: {h1:0, h2:0, h3:0, h4:4, h5:0, h6:0, h7:0, h8:0, h9:0, h10:0, h11:0, h12:0, h13:0, h14:0, h15:0, h16:0, h17:0, h18:0},
+      player1score: {h1:0, h2:0, h3:0, h4:0, h5:0, h6:0, h7:0, h8:0, h9:0, h10:0, h11:0, h12:0, h13:0, h14:0, h15:0, h16:0, h17:0, h18:0},
+      player2score: {h1:0, h2:0, h3:0, h4:0, h5:0, h6:0, h7:0, h8:0, h9:0, h10:0, h11:0, h12:0, h13:0, h14:0, h15:0, h16:0, h17:0, h18:0},
+      player3score: {h1:0, h2:0, h3:0, h4:0, h5:0, h6:0, h7:0, h8:0, h9:0, h10:0, h11:0, h12:0, h13:0, h14:0, h15:0, h16:0, h17:0, h18:0},
+      player4score: {h1:0, h2:0, h3:0, h4:0, h5:0, h6:0, h7:0, h8:0, h9:0, h10:0, h11:0, h12:0, h13:0, h14:0, h15:0, h16:0, h17:0, h18:0},
+      player1Netscore: {h1:0, h2:0, h3:0, h4:0, h5:0, h6:0, h7:0, h8:0, h9:0, h10:0, h11:0, h12:0, h13:0, h14:0, h15:0, h16:0, h17:0, h18:0},
+      player2Netscore: {h1:0, h2:0, h3:0, h4:0, h5:0, h6:0, h7:0, h8:0, h9:0, h10:0, h11:0, h12:0, h13:0, h14:0, h15:0, h16:0, h17:0, h18:0},
+      player3Netscore: {h1:0, h2:0, h3:0, h4:0, h5:0, h6:0, h7:0, h8:0, h9:0, h10:0, h11:0, h12:0, h13:0, h14:0, h15:0, h16:0, h17:0, h18:0},
+      player4Netscore: {h1:0, h2:0, h3:0, h4:0, h5:0, h6:0, h7:0, h8:0, h9:0, h10:0, h11:0, h12:0, h13:0, h14:0, h15:0, h16:0, h17:0, h18:0},
       score1:0,
       score2:0,
       score3:0,
@@ -33,43 +33,30 @@ module.exports = React.createClass({
       netScore2: null,
       netScore3: null,
       netScore4: null,
+      start: 1
 
     };
   },
   componentDidMount: function(){
-
-    this.setState({score1:this.props.route.coursepar[this.state.holeNumber-1],score2:this.props.route.coursepar[this.state.holeNumber-1], score3:this.props.route.coursepar[this.state.holeNumber-1],score4:this.props.route.coursepar[this.state.holeNumber-1]});
-    if (this.props.route.hcpPlayer1 >= this.props.route.coursehcp[this.state.holeNumber-1]){
-      this.setState({netScore1: this.props.route.coursepar[this.state.holeNumber-1]-1});
-    }
-    else{
-      this.setState({netScore1: this.props.route.coursepar[this.state.holeNumber-1]});
-    }
-    if (this.props.route.hcpPlayer2 >= this.props.route.coursehcp[this.state.holeNumber-1]){
-      this.setState({netScore2: this.props.route.coursepar[this.state.holeNumber-1]-1});
-    }
-    else{
-      this.setState({netScore2: this.props.route.coursepar[this.state.holeNumber-1]});
-    }
-    if (this.props.route.hcpPlayer3 >= this.props.route.coursehcp[this.state.holeNumber-1]){
-      this.setState({netScore3: this.props.route.coursepar[this.state.holeNumber-1]-1});
-    }
-    else{
-      this.setState({netScore3: this.props.route.coursepar[this.state.holeNumber-1]});
-    }
-    if (this.props.route.hcpPlayer4 >= this.props.route.coursehcp[this.state.holeNumber-1]){
-      this.setState({netScore4: this.props.route.coursepar[this.state.holeNumber-1]-1});
-    }
-    else{
-      this.setState({netScore4: this.props.route.coursepar[this.state.holeNumber-1]});
+    for (i = 1; i<=this.props.route.playerCount; i++){
+      var score ={};
+      score[`score${i}`]=this.props.route.coursepar[this.state.holeNumber-1];
+      this.setState(score);
+      if (this.props.route[`hcpPlayer${i}`] >= this.props.route.coursehcp[this.state.holeNumber-1]){
+        score[`netScore${i}`]=this.props.route.coursepar[this.state.holeNumber-1]-1;
+        this.setState(score);
+      }
+      else{
+        score[`netScore${i}`]=this.props.route.coursepar[this.state.holeNumber-1];
+        this.setState(score);
+      }
     }
   },
 
   render: function(){
 
-    console.log('hole', this.props)
-    console.log('state', this.state)
-
+    console.log('hole', this.props);
+    console.log('state', this.state);
     return(
 
       <Image source={require('../../assets/grass4.jpeg')} style={styles.backgroundImage}>
@@ -149,68 +136,41 @@ module.exports = React.createClass({
       </Image>
     );
   },
+
   onSubmitScores: function(){
-      var updatedscore1 = Object.assign({}, this.state.player1score);
-      updatedscore1[`h${this.state.holeNumber}`] = this.state.score1;
-      this.setState({player1score:updatedscore1});
-      var updatedscore2 = Object.assign({}, this.state.player2score);
-      updatedscore2[`h${this.state.holeNumber}`] = this.state.score2;
-      this.setState({player2score:updatedscore2});
-      var updatedscore3 = Object.assign({}, this.state.player3score);
-      updatedscore3[`h${this.state.holeNumber}`] = this.state.score3;
-      this.setState({player3score:updatedscore3});
-      var updatedscore4 = Object.assign({}, this.state.player4score);
-      updatedscore4[`h${this.state.holeNumber}`] = this.state.score4;
-      this.setState({player4score:updatedscore4});
-    if (this.props.route.indexUsed === "YES"){
-      var updatednetscore1 = Object.assign({}, this.state.player1Netscore);
-      updatednetscore1[`h${this.state.holeNumber}`]=this.state.netScore1;
-      this.setState({player1Netscore:updatednetscore1});
-      var updatednetscore2 = Object.assign({}, this.state.player2Netscore);
-      updatednetscore2[`h${this.state.holeNumber}`]=this.state.netScore2;
-      this.setState({player2Netscore:updatednetscore2});
-      var updatednetscore3 = Object.assign({}, this.state.player3Netscore);
-      updatednetscore3[`h${this.state.holeNumber}`]=this.state.netScore3;
-      this.setState({player3Netscore:updatednetscore3});
-      var updatednetscore4 = Object.assign({}, this.state.player4Netscore);
-      updatednetscore4[`h${this.state.holeNumber}`]=this.state.netScore4;
-      this.setState({player4Netscore:updatednetscore4});
-    };
-
-    this.setState({holeNumber: this.state.holeNumber+1})
-
-
-    this.setState({score1:this.props.route.coursepar[this.state.holeNumber-1],score2:this.props.route.coursepar[this.state.holeNumber-1], score3:this.props.route.coursepar[this.state.holeNumber-1],score4:this.props.route.coursepar[this.state.holeNumber-1]});
-
-
-    if (this.props.route.hcpPlayer1 >= this.props.route.coursehcp[this.state.holeNumber-1]){
-      this.setState({netScore1: this.props.route.coursepar[this.state.holeNumber-1]-1});
+    for (var i = 1; i<=this.props.route.playerCount;i++){
+      var updatedscore = Object.assign({}, this.state[`player${i}score`]);
+      updatedscore[`h${this.state.holeNumber}`] = this.state[`score${i}`];
+      var player = {};
+      player[`player${i}score`] = updatedscore;
+      this.setState(player);
+      if (this.props.route.indexUsed === "YES"){
+        var updatednetscore = Object.assign({}, this.state[`player${i}Netscore`]);
+        updatednetscore[`h${this.state.holeNumber}`] = this.state[`netScore${i}`];
+        var playernet = {};
+        playernet[`player${i}Netscore`] = updatednetscore;
+        this.setState(playernet);
+      }
     }
-    else{
-      this.setState({netScore1: this.props.route.coursepar[this.state.holeNumber-1]});
-    }
-    if (this.props.route.hcpPlayer2 >= this.props.route.coursehcp[this.state.holeNumber-1]){
-      this.setState({netScore2: this.props.route.coursepar[this.state.holeNumber-1]-1});
-    }
-    else{
-      this.setState({netScore2: this.props.route.coursepar[this.state.holeNumber-1]});
-    }
-    if (this.props.route.hcpPlayer3 >= this.props.route.coursehcp[this.state.holeNumber-1]){
-      this.setState({netScore3: this.props.route.coursepar[this.state.holeNumber-1]-1});
-    }
-    else{
-      this.setState({netScore3: this.props.route.coursepar[this.state.holeNumber-1]});
-    }
-    if (this.props.route.hcpPlayer4 >= this.props.route.coursehcp[this.state.holeNumber-1]){
-      this.setState({netScore4: this.props.route.coursepar[this.state.holeNumber-1]-1});
-    }
-    else{
-      this.setState({netScore4: this.props.route.coursepar[this.state.holeNumber-1]});
+    RoundRobin(this.state);
+    this.setState({holeNumber: this.state.holeNumber+1});
+    for (i = 1; i<=this.props.route.playerCount; i++){
+      var score ={};
+      score[`score${i}`]=this.props.route.coursepar[this.state.holeNumber-1];
+      this.setState(score);
+      if (this.props.route[`hcpPlayer${i}`] >= this.props.route.coursehcp[this.state.holeNumber-1]){
+        score[`netScore${i}`]=this.props.route.coursepar[this.state.holeNumber-1]-1;
+        this.setState(score);
+      }
+      else{
+        score[`netScore${i}`]=this.props.route.coursepar[this.state.holeNumber-1];
+        this.setState(score);
+      }
     }
   },
 
   netScoreUpPlayer1: function(){
-    this.setState({score1: ++this.state.score1})
+    this.setState({score1: ++this.state.score1});
     if (this.props.route.hcpPlayer1 >= this.props.route.coursehcp[this.state.holeNumber-1]){
       this.setState({netScore1: (this.state.score1 - 1)});
     }
@@ -219,7 +179,7 @@ module.exports = React.createClass({
     }
   },
   netScoreDownPlayer1: function(){
-    this.setState({score1: --this.state.score1})
+    this.setState({score1: --this.state.score1});
     if (this.props.route.hcpPlayer1 >= this.props.route.coursehcp[this.state.holeNumber-1]){
       this.setState({netScore1: (this.state.score1 - 1)});
     }
@@ -228,7 +188,7 @@ module.exports = React.createClass({
     }
   },
   netScoreUpPlayer2: function(){
-    this.setState({score2: ++this.state.score2})
+    this.setState({score2: ++this.state.score2});
     if (this.props.route.hcpPlayer2 >= this.props.route.coursehcp[this.state.holeNumber-1]){
       this.setState({netScore2: (this.state.score2 - 1)});
     }
@@ -237,7 +197,7 @@ module.exports = React.createClass({
     }
   },
   netScoreDownPlayer2: function(){
-    this.setState({score2: --this.state.score2})
+    this.setState({score2: --this.state.score2});
     if (this.props.route.hcpPlayer2 >= this.props.route.coursehcp[this.state.holeNumber-1]){
       this.setState({netScore2: (this.state.score2 - 1)});
     }
@@ -246,7 +206,7 @@ module.exports = React.createClass({
     }
   },
   netScoreUpPlayer3: function(){
-    this.setState({score3: ++this.state.score3})
+    this.setState({score3: ++this.state.score3});
     if (this.props.route.hcpPlayer3 >= this.props.route.coursehcp[this.state.holeNumber-1]){
       this.setState({netScore3: (this.state.score3 - 1)});
     }
@@ -255,7 +215,7 @@ module.exports = React.createClass({
     }
   },
   netScoreDownPlayer3: function(){
-    this.setState({score3: --this.state.score3})
+    this.setState({score3: --this.state.score3});
     if (this.props.route.hcpPlayer3 >= this.props.route.coursehcp[this.state.holeNumber-1]){
       this.setState({netScore3: (this.state.score3 - 1)});
     }
@@ -264,7 +224,7 @@ module.exports = React.createClass({
     }
   },
   netScoreUpPlayer4: function(){
-    this.setState({score4: ++this.state.score4})
+    this.setState({score4: ++this.state.score4});
     if (this.props.route.hcpPlayer4 >= this.props.route.coursehcp[this.state.holeNumber-1]){
       this.setState({netScore4: (this.state.score4 - 1)});
     }
@@ -273,7 +233,7 @@ module.exports = React.createClass({
     }
   },
   netScoreDownPlayer4: function(){
-    this.setState({score4: --this.state.score4})
+    this.setState({score4: --this.state.score4});
     if (this.props.route.hcpPlayer4 >= this.props.route.coursehcp[this.state.holeNumber-1]){
       this.setState({netScore4: (this.state.score4 - 1)});
     }
@@ -393,7 +353,7 @@ var styles = StyleSheet.create({
       borderColor: 'white',
       borderRadius: 8,
       color: "black",
-      opacity: .3,
+      opacity: 0.3,
       backgroundColor: 'white',
   },
 });

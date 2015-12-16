@@ -7,7 +7,7 @@ var {
   StyleSheet,
   TouchableOpacity
 } = React;
-var Button = require('../common/button')
+var Button = require('../common/button');
 var games  = [{name: "Round Robin"}, {name: "Match Play"}, {name: "Nassau"}];
 
 module.exports = React.createClass({
@@ -27,8 +27,8 @@ module.exports = React.createClass({
 
   componentWillMount: function(){
     var games = `games${this.props.route.playerCount}player`;
-    console.log(games)
-    console.log(this.state[games])
+    console.log(games);
+    console.log(this.state[games]);
     this.setState({
       dataSource: this.state.dataSource.cloneWithRows(this.state[games]),
       loaded: true,
@@ -37,7 +37,7 @@ module.exports = React.createClass({
 
   render: function(){
     if (!this.state.loaded){
-      return <Text>Loading...</Text>
+      return (<Text>Loading...</Text>);
     }
     if (this.state.gameSelected !== "" && this.state.indexUsed !== ""){
       return (
@@ -54,8 +54,8 @@ module.exports = React.createClass({
         </View>
       );
     }
-    console.log('game' ,this.state)
-    console.log('props', this.props)
+    console.log('game' ,this.state);
+    console.log('props', this.props);
     return (
       <View style = {styles.container}>
         <View  style  = {styles.container2}>

@@ -27,7 +27,7 @@ module.exports = React.createClass({
 
   componentWillMount: function(){
     Parse.User.currentAsync()
-      .then((user)=>{this.setState({user: user});})
+      .then((user)=>{this.setState({user: user});});
   },
 
   componentDidMount: function(){
@@ -46,7 +46,7 @@ module.exports = React.createClass({
 
   render: function(){
     if (!this.state.user || !this.state.loaded){
-      return <Text>Loading...</Text>
+      return (<Text>Loading...</Text>);
     }
     var username = this.state.user.get('username');
     console.log("this.props",this.props);
@@ -112,6 +112,7 @@ var styles = StyleSheet.create({
   listView: {
     paddingTop: 20,
     backgroundColor: 'transparent',
+    justifyContent:'center'
   },
   label: {
     fontSize: 18,

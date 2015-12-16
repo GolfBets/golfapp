@@ -29,7 +29,7 @@ module.exports = React.createClass({
 
   componentWillMount: function(){
     Parse.User.currentAsync()
-      .then((user)=>{this.setState({user: user});})
+      .then((user)=>{this.setState({user: user});});
   },
 
   componentDidMount: function(){
@@ -48,7 +48,7 @@ module.exports = React.createClass({
 
   render: function(){
     if (!this.state.user || !this.state.loaded){
-      return <Text>Loading...</Text>
+      return (<Text>Loading...</Text>);
     }
     var username = this.state.user.get('username');
 
@@ -80,8 +80,8 @@ module.exports = React.createClass({
     );
   },
   onSelectCity: function(){
-    this.props.navigator.push({name:'coursecity', city: this.state.city})
-    this.setState({city:""})
+    this.props.navigator.push({name:'coursecity', city: this.state.city});
+    this.setState({city:""});
   },
   renderCourse: function(rowData){
     // console.log('sectionID', sectionID);
@@ -122,6 +122,7 @@ var styles = StyleSheet.create({
   listView: {
     paddingTop: 20,
     backgroundColor: 'transparent',
+    
   },
   label: {
     fontSize: 18,
