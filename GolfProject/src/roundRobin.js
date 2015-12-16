@@ -43,22 +43,22 @@ function computeResults (input, route) {
 			lowTotalPool = 0;
 		}
 		if (i < 6) {
-			var team11 = input.teams[0] + "";
-			var team12 = input.teams[1] + "";
-			var team21 = input.teams[2] + "";
-			var team22 = input.teams[3] + "";
+			var team11 = route.teams[0] + "";
+			var team12 = route.teams[1] + "";
+			var team21 = route.teams[2] + "";
+			var team22 = route.teams[3] + "";
 		}
 		else if (i < 12) {
-			var team11 = input.teams[4] + "";
-			var team12 = input.teams[5] + "";
-			var team21 = input.teams[6] + "";
-			var team22 = input.teams[7] + "";
+			var team11 = route.teams[4] + "";
+			var team12 = route.teams[5] + "";
+			var team21 = route.teams[6] + "";
+			var team22 = route.teams[7] + "";
 		}
 		else {
-			var team11 = input.teams[8] + "";
-			var team12 = input.teams[9] + "";
-			var team21 = input.teams[10] + "";
-			var team22 = input.teams[11] + "";
+			var team11 = route.teams[8] + "";
+			var team12 = route.teams[9] + "";
+			var team21 = route.teams[10] + "";
+			var team22 = route.teams[11] + "";
 		}
 		var a = 'player' + team11;
 		var b = 'player' + team12;
