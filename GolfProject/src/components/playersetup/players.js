@@ -27,7 +27,7 @@ module.exports = React.createClass({
     };
   },
   render: function(){
-    console.log(this.state)
+    console.log(this.state);
     if (this.state.playerCount === 1){
       return (
           <View style  = {styles.container}>
@@ -50,7 +50,7 @@ module.exports = React.createClass({
               </TouchableHighlight>
           </View>
       );
-    };
+    }
     if (this.state.playerCount=== 2){
       return(
         <View style={styles.container}>
@@ -89,7 +89,7 @@ module.exports = React.createClass({
 
         </View>
       )
-    };
+    }
     if (this.state.playerCount=== 3){
       return(
         <View style={styles.container}>
@@ -143,8 +143,8 @@ module.exports = React.createClass({
           <View style = {styles.container2}></View>
 
         </View>
-      )
-    };
+      );
+    }
     if (this.state.playerCount=== 4){
       return(
         <View style={styles.container}>
@@ -214,8 +214,8 @@ module.exports = React.createClass({
           <View style = {styles.container2}></View>
 
         </View>
-      )
-    };
+      );
+    }
   },
 
   onSubmitPlayers: function(){
