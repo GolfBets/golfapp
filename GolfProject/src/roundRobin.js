@@ -19,7 +19,7 @@ function computeResults (input, route) {
 		else {
 			var current = "h" + i;
 		}
-		if (route.indexUsed = "YES") {
+		if (route.indexUsed === "YES") {
 			scores.player1.push(input.player1Netscore[current]);
 			scores.player2.push(input.player2Netscore[current]);
 			scores.player3.push(input.player3Netscore[current]);
