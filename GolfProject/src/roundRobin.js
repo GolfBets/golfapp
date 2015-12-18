@@ -1,6 +1,5 @@
 module.exports = function (input, route) {
 	var bet = route.betPerHole + 0;
-	console.log(bet)
 	var scores = {
 		player1: [],
 		player2: [],
@@ -20,7 +19,7 @@ module.exports = function (input, route) {
 		else {
 			var current = "h" + i;
 		}
-		if (input.indexUsed = "YES") {
+		if (route.indexUsed === "YES") {
 			scores.player1.push(input.player1Netscore[current]);
 			scores.player2.push(input.player2Netscore[current]);
 			scores.player3.push(input.player3Netscore[current]);
@@ -38,7 +37,7 @@ module.exports = function (input, route) {
 	var minPool = 0;
 	var lowTotalPool = 0;
 	while (cont) {
-		if (i === 6 || 12) {
+		if (i === 6 || i ===12) {
 			minPool = 0;
 			lowTotalPool = 0;
 		}
@@ -64,52 +63,46 @@ module.exports = function (input, route) {
 		var b = 'player' + team12;
 		var c = 'player' + team21;
 		var d = 'player' + team22;
-		var e = minPool/4
+		var e = minPool + bet;
 		if (Math.min(scores[a][i], scores[b][i]) < Math.min(scores[c][i], scores[d][i])) {
-			players[team11] += bet;
 			players[team11] += e;
-			players[team12] += (bet + e);
 			players[team12] += e;
-			players[team21] -= (bet + e);
-			players[team22] -= (bet + e);
+			players[team21] -= e;
+			players[team22] -= e;
 			minPool = 0;
 		}
 		else if (Math.min(scores[a][i], scores[b][i]) > Math.min(scores[c][i], scores[d][i])) {
-			players[team11] -= (bet + e);
-			console.log(e)
 			players[team11] -= e;
-			players[team12] -= (bet + e);
-			players[team21] += (bet + e);
-			players[team22] += (bet + e);
+			players[team12] -= e;
+			players[team21] += e;
+			players[team22] += e;
 			minPool = 0;
 		}
 		else {
-			minPool += (4 * bet);
+			minPool += bet;
 		}
 		if (route.lowTotal == true) {
+			var f = lowTotalPool + bet;
 			if (scores[a][i] + scores[b][i] < scores[c][i] + scores[d][i]) {
-				players[team11] += (bet + lowTotalPool/4);
-				players[team12] += (bet + lowTotalPool/4);
-				players[team21] -= (bet + lowTotalPool/4);
-				players[team22] -= (bet + lowTotalPool/4);
+				players[team11] += f;
+				players[team12] += f;
+				players[team21] -= f;
+				players[team22] -= f;
 				lowTotalPool = 0;
 			}
 			else if (scores[a][i] + scores[b][i] > scores[c][i] + scores[d][i]) {
-				players[team11] -= (bet + lowTotalPool/4);
-				players[team12] -= (bet + lowTotalPool/4);
-				players[team21] += (bet + lowTotalPool/4);
-				players[team22] += (bet + lowTotalPool/4);
+				players[team11] -= f;
+				players[team12] -= f;
+				players[team21] += f;
+				players[team22] += f;
 				lowTotalPool = 0;
 			}
 			else {
-				lowTotalPool += (4 * bet);
+				lowTotalPool += bet;
 			}
 		}
 	i++
-	console.log(players)
-	console.log(minPool)
 	cont = scores.player1[i];
-	// console.log(i)
 	}
 	return players;
 }
