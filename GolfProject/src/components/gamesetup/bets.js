@@ -34,10 +34,7 @@ module.exports = React.createClass({
         <View style = {styles.container}>
           <View style = {styles.container2}>
             <Text style  = {styles.label}>Round Robin Bets</Text>
-            <Text style  = {styles.label2}>In Round Robin your foursome will be randomly split into two teams that will change every 6 holes - Bets do not carry past the 6 holes that each team is paired - By the end of the round every one will have paired with each other for 6 holes
-            </Text>
-            <Text style  = {styles.label2}>There are two possible bets Low Score and Low Total. On each hole Low Score is awarded to the team with the player who recorded the lowest score. Low Total is an optional bet that is awarded to the team with the lowest total strokes for the hole. Ties are carried over for both while the team is paired.
-            </Text>
+            
             <Text style = {styles.label}>Enter Bet amount per hole per player</Text>
             <Text style = {styles.label2}>This is amount that applies to Low Score Bet</Text>
             <TextInput

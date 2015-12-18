@@ -81,7 +81,7 @@ module.exports = function (input, route) {
 		else {
 			minPool += bet;
 		}
-		if (route.lowTotal == true) {
+		if (route.lowTotal === true) {
 			var f = lowTotalPool + bet;
 			if (scores[a][i] + scores[b][i] < scores[c][i] + scores[d][i]) {
 				players[team11] += f;
@@ -101,8 +101,9 @@ module.exports = function (input, route) {
 				lowTotalPool += bet;
 			}
 		}
-	i++
+	i++;
 	cont = scores.player1[i];
 	}
+	console.log(players);
 	return players;
-}
+};

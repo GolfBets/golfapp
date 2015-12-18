@@ -43,7 +43,7 @@ module.exports = React.createClass({
   },
 
   render: function(){
-    console.log("round", this.state.teams[0]);
+    console.log("round", this.state.teams);
   if (this.props.route.playerCount === 4){
       return(
         <View style = {styles.container}>
@@ -116,7 +116,7 @@ var styles = StyleSheet.create({
   label2: {
     fontSize: 18,
     color: 'white',
-    justifyContent: 'center'
+  
   },
   label3: {
     fontSize: 18,

@@ -49,8 +49,8 @@ module.exports = React.createClass({
       return (<Text>Loading...</Text>);
     }
     var username = this.state.user.get('username');
-    console.log("this.props",this.props);
-    console.log(this.state);
+    //console.log("this.props",this.props);
+    //console.log(this.state);
     return (
       <View style = {styles.container}>
         <View style= {styles.container}>
