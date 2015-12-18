@@ -17,6 +17,7 @@ module.exports = React.createClass({
   getInitialState: function(){
     return {
       holeNumber: 1,
+      start: 1,
       player1score: {h1:0, h2:0, h3:0, h4:0, h5:0, h6:0, h7:0, h8:0, h9:0, h10:0, h11:0, h12:0, h13:0, h14:0, h15:0, h16:0, h17:0, h18:0},
       player2score: {h1:0, h2:0, h3:0, h4:0, h5:0, h6:0, h7:0, h8:0, h9:0, h10:0, h11:0, h12:0, h13:0, h14:0, h15:0, h16:0, h17:0, h18:0},
       player3score: {h1:0, h2:0, h3:0, h4:0, h5:0, h6:0, h7:0, h8:0, h9:0, h10:0, h11:0, h12:0, h13:0, h14:0, h15:0, h16:0, h17:0, h18:0},
@@ -33,8 +34,11 @@ module.exports = React.createClass({
       netScore2: null,
       netScore3: null,
       netScore4: null,
-      start: 1
-
+      player1Results: 0,
+      player2Results: 0,
+      player3Results: 0,
+      player4Results:0,
+      viewResults: false,
     };
   },
   componentDidMount: function(){
@@ -129,6 +133,7 @@ module.exports = React.createClass({
             </View>
           </View>
           <Button text = "Submit Scores" onPress = {this.onSubmitScores}/>
+          <Button text = "See Results" onPress = {this.onSeeResults}/>
           <View style = {styles.container5}>
             <Text style = {styles.subheading}></Text>
           </View>
@@ -136,7 +141,7 @@ module.exports = React.createClass({
       </Image>
     );
   },
-
+// in order to dynamically update the player scores  - a clone of the object needs to be created because you can't set state on a nested object or a specific array index - in this case two clones needed to be made to dynamically change all the info
   onSubmitScores: function(){
     for (var i = 1; i<=this.props.route.playerCount;i++){
       var updatedscore = Object.assign({}, this.state[`player${i}score`]);
@@ -152,7 +157,7 @@ module.exports = React.createClass({
         this.setState(playernet);
       }
     }
-    RoundRobin(this.state);
+    RoundRobin(this.state, this.props.route);
     this.setState({holeNumber: this.state.holeNumber+1});
     for (i = 1; i<=this.props.route.playerCount; i++){
       var score ={};
@@ -167,6 +172,9 @@ module.exports = React.createClass({
         this.setState(score);
       }
     }
+  },
+  onSeeResults: function(){
+    this.props.navigator.push({name: 'results', player1score: this.state.player1score, player2score: this.state.player2score, player3score: this.state.player3score, player4score: this.state.player4score, player1Netscore: this.state.player1Netscore, player2Netscore: this.state.player2Netscore, player3Netscore: this.state.player3Netscore, player4Netscore: this.state.player4Netscore, teams: this.props.route, player1: this.props.route.player1, player2: this.props.route.player2, player3:this.props.route.player3, player4: this.props.route.player4,course : this.props.route.course});
   },
 
   netScoreUpPlayer1: function(){

@@ -1,4 +1,4 @@
-function computeResults (input, route) {
+module.exports = function (input, route) {
 	var bet = route.betPerHole + 0;
 	console.log(bet)
 	var scores = {
