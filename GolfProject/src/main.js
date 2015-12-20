@@ -40,10 +40,11 @@ module.exports = React.createClass({
   },
   render: function(){
     console.log('navigate');
+
     return(
       <Navigator
       style = {styles.container}
-      initialRoute={{name: 'coursefav'}}
+      initialRoute={{name: 'signin'}}
       renderScene={this.renderScene}
       configureScene = {()=>{return Navigator.SceneConfigs.FloatFromRight;}}
       />

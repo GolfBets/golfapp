@@ -33,6 +33,7 @@ var styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-around',
+    padding:5
   },
   label1: {
     fontSize: 18,

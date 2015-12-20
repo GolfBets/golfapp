@@ -22,7 +22,7 @@ module.exports =  React.createClass({
   },
 
   render: function(){
-    console.log(this.state);
+    //console.log(this.state);
     return (
       <Image source={require('../../assets/bdg.jpeg')} style={styles.backgroundImage}>
         <View style = {styles.container}>

@@ -61,7 +61,7 @@ module.exports = React.createClass({
   render: function(){
     var players = [];
     for (var i = 1; i <= this.props.route.playerCount;i++){
-      players.push(<PlayersHole text1 = {this.props.route[`player${i}`]} onPress1 = {this[`netScoreDownPlayer${i}`]} text2 = {this.state[`score${i}`]} onPress2 = {this[`netScoreUpPlayer${i}`]} text3 = {this.state[`netScore${i}`]}/>);
+      players.push(<PlayersHole key = {i} text1 = {this.props.route[`player${i}`]} onPress1 = {this[`netScoreDownPlayer${i}`]} text2 = {this.state[`score${i}`]} onPress2 = {this[`netScoreUpPlayer${i}`]} text3 = {this.state[`netScore${i}`]}/>);
     }
     var team1;
     var team2;
@@ -149,9 +149,9 @@ module.exports = React.createClass({
 
       this.setState(player);
     }
-    console.log(this.props.route.teams);
-    console.log(this.state);
-    console.log(this.state.player1score.totalFront);
+    //console.log(this.props.route.teams);
+  //  console.log(this.state);
+    //console.log(this.state.player1score.totalFront);
     var playerResults  = RoundRobin(this.state, this.props.route);
     this.setState({
       player1Results: playerResults[1],
@@ -176,7 +176,7 @@ module.exports = React.createClass({
     }
   },
   onSeeResults: function(){
-    this.props.navigator.push({name: 'results', player1score: this.state.player1score, player2score: this.state.player2score, player3score: this.state.player3score, player4score: this.state.player4score, player1Netscore: this.state.player1Netscore, player2Netscore: this.state.player2Netscore, player3Netscore: this.state.player3Netscore, player4Netscore: this.state.player4Netscore, teams: this.props.route, player1: this.props.route.player1, player2: this.props.route.player2, player3:this.props.route.player3, player4: this.props.route.player4,course : this.props.route.course, player1Results: this.state.player1Results, player2Results: this.state.player2Results, player3Results: this.state.player3Results, player4Results: this.state.player4Results});
+    this.props.navigator.immediatelyResetRouteStack([{name: 'results', player1score: this.state.player1score, player2score: this.state.player2score, player3score: this.state.player3score, player4score: this.state.player4score, player1Netscore: this.state.player1Netscore, player2Netscore: this.state.player2Netscore, player3Netscore: this.state.player3Netscore, player4Netscore: this.state.player4Netscore, teams: this.props.route, player1: this.props.route.player1, player2: this.props.route.player2, player3:this.props.route.player3, player4: this.props.route.player4,course : this.props.route.course, player1Results: this.state.player1Results, player2Results: this.state.player2Results, player3Results: this.state.player3Results, player4Results: this.state.player4Results}]);
   },
 
   netScoreUpPlayer1: function(){
@@ -268,6 +268,7 @@ var styles = StyleSheet.create({
   },
   container1: {
     flex:1,
+    marginTop: 10,
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: 'transparent',
@@ -285,12 +286,12 @@ var styles = StyleSheet.create({
     backgroundColor: 'transparent',
   },
   container4:{
-    flex:5,
+    flex:4,
     backgroundColor: 'transparent',
 
   },
   container5:{
-    flex:5,
+    flex:2,
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: 'transparent',
