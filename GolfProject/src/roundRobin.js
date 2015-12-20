@@ -104,6 +104,6 @@ module.exports = function (input, route) {
 	i++;
 	cont = scores.player1[i];
 	}
-	console.log(players);
+	//console.log(players);
 	return players;
 };
