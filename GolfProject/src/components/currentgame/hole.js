@@ -42,7 +42,6 @@ module.exports = React.createClass({
     };
   },
   componentDidMount: function(){
-    console.log("state", this.state);
     for (var i = 1; i<=this.props.route.playerCount; i++){
       var score ={};
       score[`score${i}`]=this.props.route.coursepar[this.state.holeNumber-1];
@@ -66,8 +65,6 @@ module.exports = React.createClass({
   },
 
   render: function(){
-    console.log(this.props);
-    console.log(this.state);
     var players = [];
     for (var i = 1; i <= this.props.route.playerCount;i++){
       players.push(<PlayersHole key = {i} text1 = {this.props.route[`player${i}`]} onPress1 = {this[`netScoreDownPlayer${i}`]} text2 = {this.state[`score${i}`]} onPress2 = {this[`netScoreUpPlayer${i}`]} text3 = {this.state[`netScore${i}`]}/>);
@@ -330,6 +327,7 @@ var styles = StyleSheet.create({
   backgroundImage: {
     backgroundColor: 'transparent',
     flex: 1,
+    marginTop: 20,
     alignSelf: 'stretch',
     width: null,
   },

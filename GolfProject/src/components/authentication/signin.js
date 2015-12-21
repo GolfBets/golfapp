@@ -50,12 +50,12 @@ module.exports =  React.createClass({
   },
 
   onSignupPress: function(){
-    this.props.navigator.push({name:'signup'}) // pass additional props here
+    this.props.navigator.push({name:'signup'}); // pass additional props here
   },
 
   onPress: function(){
     Parse.User.logIn(this.state.username, this.state.password,{
-      success: (user) => {this.props.navigator.immediatelyResetRouteStack([{name: 'coursefav'}])},
+      success: (user) => {this.props.navigator.immediatelyResetRouteStack([{name: 'coursefav'}]);},
       error: (data, error) => {this.setState({errorMessage: error.message});}
     });
   }
@@ -71,6 +71,7 @@ var styles  = StyleSheet.create({
     flex: 1
   },
   backgroundImage: {
+    marginTop:20,
     backgroundColor: 'transparent',
     flex: 1,
     alignSelf: 'stretch',

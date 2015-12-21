@@ -88,6 +88,7 @@ var styles = StyleSheet.create({
     flex: 1
   },
   backgroundImage: {
+    marginTop:20,
     backgroundColor: 'transparent',
     flex: 1,
     alignSelf: 'stretch',

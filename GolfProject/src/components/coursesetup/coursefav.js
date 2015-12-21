@@ -30,9 +30,7 @@ module.exports = React.createClass({
   componentWillMount: function(){
     Parse.User.currentAsync()
       .then((user)=>{this.setState({user: user});});
-  // },
-  //
-  // componentDidMount: function(){
+
     Api('coursenames/Orange')
       .then((data) =>{
         //console.log("componentDidMount", data)
