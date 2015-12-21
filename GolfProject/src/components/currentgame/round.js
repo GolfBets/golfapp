@@ -3,7 +3,8 @@ var React  = require('react-native');
 var{
   View,
   Text,
-  StyleSheet
+  StyleSheet,
+  Image
 } = React;
 
 var Api = require('../common/api');
@@ -42,51 +43,53 @@ module.exports = React.createClass({
     //console.log("round", this.state.teams);
   if (this.props.route.playerCount === 4){
       return(
-        <View style = {styles.container}>
-          <View>
-            <Text style = {styles.label2}>{this.props.route.course}</Text>
-            <Text style = {styles.label2}></Text>
-            <Text style = {styles.label3}>Pairs for Holes 1 to 6</Text>
-            <Text style = {styles.label2}></Text>
-            <View style = {styles.flowright}>
-              <Text style = {styles.label}>Team 1</Text>
-              <Text style = {styles.label}>{this.props.route[`player${this.state.teams[0]}`]}</Text>
-              <Text style = {styles.label}>{this.props.route[`player${this.state.teams[1]}`]}</Text>
+        <Image source={require('../../assets/grass4.jpeg')} style={styles.backgroundImage}>
+          <View style = {styles.container}>
+            <View>
+              <Text style = {styles.label2}>{this.props.route.course}</Text>
+              <Text style = {styles.label2}></Text>
+              <Text style = {styles.label3}>Pairs for Holes 1 to 6</Text>
+              <Text style = {styles.label2}></Text>
+              <View style = {styles.flowright}>
+                <Text style = {styles.label}>Team 1</Text>
+                <Text style = {styles.label}>{this.props.route[`player${this.state.teams[0]}`]}</Text>
+                <Text style = {styles.label}>{this.props.route[`player${this.state.teams[1]}`]}</Text>
+              </View>
+              <View style = {styles.flowright}>
+                <Text style = {styles.label}>Team 2</Text>
+                <Text style = {styles.label}>{this.props.route[`player${this.state.teams[2]}`]}</Text>
+                <Text style = {styles.label}>{this.props.route[`player${this.state.teams[3]}`]}</Text>
+              </View>
+              <Text style = {styles.label2}></Text>
+              <Text style = {styles.label3}>Pairs for Holes 7 to 12</Text>
+              <Text style = {styles.label2}></Text>
+              <View style = {styles.flowright}>
+                <Text style = {styles.label}>Team 1</Text>
+                <Text style = {styles.label}>{this.props.route[`player${this.state.teams[4]}`]}</Text>
+                <Text style = {styles.label}>{this.props.route[`player${this.state.teams[5]}`]}</Text>
+              </View>
+              <View style = {styles.flowright}>
+                <Text style = {styles.label}>Team 2</Text>
+                <Text style = {styles.label}>{this.props.route[`player${this.state.teams[6]}`]}</Text>
+                <Text style = {styles.label}>{this.props.route[`player${this.state.teams[7]}`]}</Text>
+              </View>
+              <Text style = {styles.label2}></Text>
+              <Text style = {styles.label3}>Pairs for Holes 13 to 18</Text>
+              <Text style = {styles.label2}></Text>
+              <View style = {styles.flowright}>
+                <Text style = {styles.label}>Team 1</Text>
+                <Text style = {styles.label}>{this.props.route[`player${this.state.teams[8]}`]}</Text>
+                <Text style = {styles.label}>{this.props.route[`player${this.state.teams[9]}`]}</Text>
+              </View>
+              <View style = {styles.flowright}>
+                <Text style = {styles.label}>Team 2</Text>
+                <Text style = {styles.label}>{this.props.route[`player${this.state.teams[10]}`]}</Text>
+                <Text style = {styles.label}>{this.props.route[`player${this.state.teams[11]}`]}</Text>
+              </View>
             </View>
-            <View style = {styles.flowright}>
-              <Text style = {styles.label}>Team 2</Text>
-              <Text style = {styles.label}>{this.props.route[`player${this.state.teams[2]}`]}</Text>
-              <Text style = {styles.label}>{this.props.route[`player${this.state.teams[3]}`]}</Text>
-            </View>
-            <Text style = {styles.label2}></Text>
-            <Text style = {styles.label3}>Pairs for Holes 7 to 12</Text>
-            <Text style = {styles.label2}></Text>
-            <View style = {styles.flowright}>
-              <Text style = {styles.label}>Team 1</Text>
-              <Text style = {styles.label}>{this.props.route[`player${this.state.teams[4]}`]}</Text>
-              <Text style = {styles.label}>{this.props.route[`player${this.state.teams[5]}`]}</Text>
-            </View>
-            <View style = {styles.flowright}>
-              <Text style = {styles.label}>Team 2</Text>
-              <Text style = {styles.label}>{this.props.route[`player${this.state.teams[6]}`]}</Text>
-              <Text style = {styles.label}>{this.props.route[`player${this.state.teams[7]}`]}</Text>
-            </View>
-            <Text style = {styles.label2}></Text>
-            <Text style = {styles.label3}>Pairs for Holes 13 to 18</Text>
-            <Text style = {styles.label2}></Text>
-            <View style = {styles.flowright}>
-              <Text style = {styles.label}>Team 1</Text>
-              <Text style = {styles.label}>{this.props.route[`player${this.state.teams[8]}`]}</Text>
-              <Text style = {styles.label}>{this.props.route[`player${this.state.teams[9]}`]}</Text>
-            </View>
-            <View style = {styles.flowright}>
-              <Text style = {styles.label}>Team 2</Text>
-              <Text style = {styles.label}>{this.props.route[`player${this.state.teams[10]}`]}</Text>
-              <Text style = {styles.label}>{this.props.route[`player${this.state.teams[11]}`]}</Text>
-            </View>
+            <Button text = "Start your Round" onPress = {this.onHole}/>
           </View>
-          <Button text = "Start your Round" onPress = {this.onHole}/>
-        </View>
+        </Image>  
       );
     }
   },
@@ -100,9 +103,15 @@ var styles = StyleSheet.create({
     flex:1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'black'
+    backgroundColor: 'transparent'
   },
-
+  backgroundImage: {
+    marginTop: 20,
+    backgroundColor: 'transparent',
+    flex: 1,
+    alignSelf: 'stretch',
+    width: null,
+  },
   label: {
     fontSize: 18,
     color: 'white',

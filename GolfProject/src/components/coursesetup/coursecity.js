@@ -56,21 +56,23 @@ module.exports = React.createClass({
     //console.log("this.props",this.props);
     //console.log(this.state);
     return (
-      <View style = {styles.container}>
-        <View style= {styles.container}>
-          <Text style = {styles.label}>Welcome Back {username}!</Text>
-          <Text style = {styles.label}>Select your course below</Text>
-          <Text style = {styles.label}>If you don't see your course below</Text>
-          <Button text = "Enter new city" onPress={this.onPressNewCity}/>
+      <Image source={require('../../assets/grass4.jpeg')} style={styles.backgroundImage}>
+        <View style = {styles.container}>
+          <View style= {styles.container}>
+            <Text style = {styles.label}>Welcome Back {username}!</Text>
+            <Text style = {styles.label}>Select your course below</Text>
+            <Text style = {styles.label}>If you don't see your course below</Text>
+            <Button text = "Enter new city" onPress={this.onPressNewCity}/>
+          </View>
+          <View style = {styles.container2}>
+            <ListView
+              dataSource = {this.state.dataSource}
+              renderRow = {this.renderCourse}
+              style = {styles.ListView}
+            />
+          </View>
         </View>
-        <View style = {styles.container2}>
-          <ListView
-            dataSource = {this.state.dataSource}
-            renderRow = {this.renderCourse}
-            style = {styles.ListView}
-          />
-        </View>
-      </View>
+      </Image>
     );
   },
 
@@ -102,12 +104,13 @@ var styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'black'
+    backgroundColor: 'transparent'
   },
   container2:{
     flex: 1
   },
   backgroundImage: {
+    marginTop:20,
     backgroundColor: 'transparent',
     flex: 1,
     alignSelf: 'stretch',
