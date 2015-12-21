@@ -31,11 +31,7 @@ function nassau (input, route) {
 	function winner () {
 		var winnerArray = [];
 		for (var i = 0; i < results.scores.length; i++) {
-			console.log(team11)
-			console.log(i)
-			console.log(results)
 			if (!results.scores[i]['1']) break;
-			console.log(results.scores[i])
 			if (Math.min(results.scores[i][team11], results.scores[i][team12]) < Math.min(results.scores[i][team21], results.scores[i][team22])) {
 				winnerArray.push(1);
 			}
@@ -46,18 +42,75 @@ function nassau (input, route) {
 				winnerArray.push(0);
 			}
 		}
-		console.log(winnerArray)
 		return winnerArray;
 	}
 	results.winners = winner()
-	// function front () {
-	// 	var bets = [];
-	// 	for (var i = 0; i < input.frontArray; i++) {
-	// 		bets[i] = [];
-	// 		for (var j = 0; j < 9; j++) {
-	// 			if (results.winners[j] === 1)
-	// 		}
-	// 	}
-	// }
+	function front () {
+		var bets = 0;
+		for (var i = 0; i < input.front.length; i++) {
+			var press = 0;
+			for (var j = input.front[i] - 1; j < 9; j++) {
+				if (results.winners[j] == 1) {
+					press++;
+				}
+				else if (results.winners[j] == 2) {
+					press --;
+				}
+			}
+			if (press > 0) {
+				bets++;
+			}
+			if (press < 0) {
+				bets--;
+			}
+		}
+		return bets;
+	}
+	results.front = front();
+	function back () {
+		var bets = 0;
+		for (var i = 0; i < input.back.length; i++) {
+			var press = 0;
+			for (var j = input.front[i] - 1; j < 18; j++) {
+				if (results.winners[j] == 1) {
+					press++;
+				}
+				else if (results.winners[j] == 2) {
+					press --;
+				}
+			}
+			if (press > 0) {
+				bets++;
+			}
+			if (press < 0) {
+				bets--;
+			}
+		}
+		return bets;
+	}
+	results.back = back();
+	function all18 () {
+		var bets = 0;
+		for (var i = 0; i < input.total.length; i++) {
+			var press = 0;
+			for (var j = input.total[i] - 1; j < 18; j++) {
+				if (results.winners[j] == 1) {
+					press++;
+				}
+				else if (results.winners[j] == 2) {
+					press --;
+				}
+			}
+			if (press > 0) {
+				bets++;
+			}
+			if (press < 0) {
+				bets--;
+			}
+		}
+		return bets;
+	}
+	results.all18 = all18();
+	results.total = results.front + results.back + results.all18;
 	return results
 }
