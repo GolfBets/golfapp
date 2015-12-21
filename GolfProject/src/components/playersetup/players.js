@@ -88,7 +88,7 @@ module.exports = React.createClass({
           <View style = {styles.container2}></View>
 
         </View>
-      )
+      );
     }
     if (this.state.playerCount=== 3){
       return(

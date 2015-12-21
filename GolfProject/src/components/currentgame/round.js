@@ -13,10 +13,6 @@ var Button  = require('../common/button');
 module.exports = React.createClass({
   getInitialState: function(){
     return {
-      player1score:[],
-      player2score:[],
-      player3score:[],
-      player4score:[],
       coursepar: null,
       coursehcp: null,
       teams: [],
@@ -89,7 +85,7 @@ module.exports = React.createClass({
               <Text style = {styles.label}>{this.props.route[`player${this.state.teams[11]}`]}</Text>
             </View>
           </View>
-          <Button text = "Hole 1" onPress = {this.onHole}/>
+          <Button text = "Start your Round" onPress = {this.onHole}/>
         </View>
       );
     }

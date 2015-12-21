@@ -28,9 +28,7 @@ module.exports = React.createClass({
   componentWillMount: function(){
     Parse.User.currentAsync()
       .then((user)=>{this.setState({user: user});});
-  },
 
-  componentDidMount: function(){
     Api(`coursesbycity/${this.props.route.city}`)
       .then((data) =>{
         //console.log("componentDidMount", data)
@@ -46,7 +44,13 @@ module.exports = React.createClass({
 
   render: function(){
     if (!this.state.user || !this.state.loaded){
-      return (<Text>Loading...</Text>);
+      return (
+        <Image source={require('../../assets/grass4.jpeg')} style={styles.backgroundImage}>
+          <View style = {styles.container}>
+            <Text style = {styles.label}>Loading...</Text>
+          </View>
+        </Image>
+      );
     }
     var username = this.state.user.get('username');
     //console.log("this.props",this.props);
