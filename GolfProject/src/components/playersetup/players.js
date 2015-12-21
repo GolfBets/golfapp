@@ -27,7 +27,7 @@ module.exports = React.createClass({
     };
   },
   render: function(){
-    console.log(this.state);
+    //console.log(this.state);
     if (this.state.playerCount === 1){
       return (
           <View style  = {styles.container}>
@@ -88,7 +88,7 @@ module.exports = React.createClass({
           <View style = {styles.container2}></View>
 
         </View>
-      )
+      );
     }
     if (this.state.playerCount=== 3){
       return(
@@ -155,6 +155,7 @@ module.exports = React.createClass({
             <Text  style ={styles.label}>HCP </Text>
             <TextInput
               style  = {styles.input2}
+              keyboardType = 'decimal-pad'
               placeholder = "HCP"
               value  = {this.state.hcpPlayer1}
               onChangeText = {(text)=>this.setState({hcpPlayer1:text})}
@@ -171,6 +172,7 @@ module.exports = React.createClass({
             <Text  style ={styles.label}>HCP </Text>
             <TextInput
               style  = {styles.input2}
+              keyboardType = 'decimal-pad'
               placeholder = "HCP"
               value  = {this.state.hcpPlayer2}
               onChangeText = {(text)=>this.setState({hcpPlayer2:text})}
@@ -187,6 +189,7 @@ module.exports = React.createClass({
             <Text  style ={styles.label}>HCP </Text>
             <TextInput
               style  = {styles.input2}
+              keyboardType = 'decimal-pad'
               placeholder = "HCP"
               value  = {this.state.hcpPlayer3}
               onChangeText = {(text)=>this.setState({hcpPlayer3: text})}
@@ -203,6 +206,7 @@ module.exports = React.createClass({
             <Text  style ={styles.label}>HCP </Text>
             <TextInput
               style  = {styles.input2}
+              keyboardType = 'decimal-pad'
               placeholder = "HCP"
               value  = {this.state.hcpPlayer4}
               onChangeText = {(text)=>this.setState({hcpPlayer4:text})}
@@ -219,7 +223,7 @@ module.exports = React.createClass({
   },
 
   onSubmitPlayers: function(){
-    this.props.navigator.push({name: "game", course : this.props.route.course, player1: this.props.route.player1, player2: this.state.player2, player3:this.state.player3, player4: this.state.player4, hcpPlayer1: parseFloat(this.state.hcpPlayer1), hcpPlayer2: parseFloat(this.state.hcpPlayer2), hcpPlayer3: parseFloat(this.state.hcpPlayer3), hcpPlayer4: parseFloat(this.state.hcpPlayer4), 'playerCount': this.state.playerCount});
+    this.props.navigator.immediatelyResetRouteStack([{name: "game", course : this.props.route.course, player1: this.props.route.player1, player2: this.state.player2, player3:this.state.player3, player4: this.state.player4, hcpPlayer1: parseFloat(this.state.hcpPlayer1), hcpPlayer2: parseFloat(this.state.hcpPlayer2), hcpPlayer3: parseFloat(this.state.hcpPlayer3), hcpPlayer4: parseFloat(this.state.hcpPlayer4), 'playerCount': this.state.playerCount}]);
   },
 
 });

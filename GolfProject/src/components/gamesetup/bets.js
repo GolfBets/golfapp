@@ -27,21 +27,19 @@ module.exports = React.createClass({
   },
 
   render: function(){
-    console.log("bets props",this.props);
-    console.log('bets state', this.state);
+    //console.log("bets props",this.props);
+    //console.log('bets state', this.state);
     if (this.props.route.gameSelected === "Round Robin"){
       return (
         <View style = {styles.container}>
           <View style = {styles.container2}>
             <Text style  = {styles.label}>Round Robin Bets</Text>
-            <Text style  = {styles.label2}>In Round Robin your foursome will be randomly split into two teams that will change every 6 holes - Bets do not carry past the 6 holes that each team is paired - By the end of the round every one will have paired with each other for 6 holes
-            </Text>
-            <Text style  = {styles.label2}>There are two possible bets Low Score and Low Total. On each hole Low Score is awarded to the team with the player who recorded the lowest score. Low Total is an optional bet that is awarded to the team with the lowest total strokes for the hole. Ties are carried over for both while the team is paired.
-            </Text>
+
             <Text style = {styles.label}>Enter Bet amount per hole per player</Text>
             <Text style = {styles.label2}>This is amount that applies to Low Score Bet</Text>
             <TextInput
               style = {styles.input}
+              keyboardType = 'numbers-and-punctuation'
               value = {this.state.betPerHole}
               onChangeText = {(text)=>{this.setState({betPerHole:text});}}
             />
@@ -98,7 +96,7 @@ module.exports = React.createClass({
     this.props.navigator.pop();
   },
   onStartRound: function(){
-    this.props.navigator.push({name:'round', betPerHole: parseFloat(this.state.betPerHole), lowScore: this.state.lowScore, lowTotal: this.state.lowTotal, indexUsed: this.props.route.indexUsed, gameSelected: this.props.route.gameSelected, course : this.props.route.course, player1: this.props.route.player1, player2: this.props.route.player2, player3:this.props.route.player3, player4: this.props.route.player4, hcpPlayer1: this.props.route.hcpPlayer1, hcpPlayer2: this.props.route.hcpPlayer2, hcpPlayer3: this.props.route.hcpPlayer3, hcpPlayer4: this.props.route.hcpPlayer4, 'playerCount': this.props.route.playerCount});
+    this.props.navigator.immediatelyResetRouteStack([{name:'round', betPerHole: parseFloat(this.state.betPerHole), lowScore: this.state.lowScore, lowTotal: this.state.lowTotal, indexUsed: this.props.route.indexUsed, gameSelected: this.props.route.gameSelected, course : this.props.route.course, player1: this.props.route.player1, player2: this.props.route.player2, player3:this.props.route.player3, player4: this.props.route.player4, hcpPlayer1: this.props.route.hcpPlayer1, hcpPlayer2: this.props.route.hcpPlayer2, hcpPlayer3: this.props.route.hcpPlayer3, hcpPlayer4: this.props.route.hcpPlayer4, 'playerCount': this.props.route.playerCount}]);
   },
 });
  var styles  = StyleSheet.create({

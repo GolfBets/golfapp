@@ -1,4 +1,4 @@
-function computeResults (input, route) {
+module.exports = function (input, route) {
 	var bet = route.betPerHole + 0;
 	var scores = {
 		player1: [],
@@ -81,7 +81,7 @@ function computeResults (input, route) {
 		else {
 			minPool += bet;
 		}
-		if (route.lowTotal == true) {
+		if (route.lowTotal === true) {
 			var f = lowTotalPool + bet;
 			if (scores[a][i] + scores[b][i] < scores[c][i] + scores[d][i]) {
 				players[team11] += f;
@@ -101,8 +101,9 @@ function computeResults (input, route) {
 				lowTotalPool += bet;
 			}
 		}
-	i++
+	i++;
 	cont = scores.player1[i];
 	}
+	//console.log(players);
 	return players;
-}
+};
