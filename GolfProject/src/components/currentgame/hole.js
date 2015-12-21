@@ -9,7 +9,8 @@ var{
   TouchableHighlight
 } = React;
 
-
+var Tabbar = require('react-native-tabbar');
+var Item = Tabbar.Item;
 var Button  = require('../common/button');
 var RoundRobin  = require('../../roundRobin.js');
 var PlayersHole = require('../common/playershole');
@@ -39,6 +40,7 @@ module.exports = React.createClass({
       player2Results: 0,
       player3Results: 0,
       player4Results:0,
+      selected: "test1"
     };
   },
   componentDidMount: function(){
@@ -89,37 +91,72 @@ module.exports = React.createClass({
     //console.log('state', this.state);
 
     return(
+      <Tabbar selected={this.state.selected} onTabItemPress={this.onTabItemPress}>
+        <Item name="test1">
+          <Item.Content>
+            <View style={{ flex: 1 }}>
 
-      <Image source={require('../../assets/grass4.jpeg')} style={styles.backgroundImage}>
-        <View style = {styles.container}>
-          <View style = {styles.container1}>
-            <Text style = {styles.label2}>{this.props.route.course}</Text>
-          </View>
-          <View style = {styles.container2}>
-            <Text style = {styles.label5}>Hole {this.state.holeNumber}</Text>
-          </View>
-          <View style = {[styles.container3,styles.flowright]}>
-            <Text style = {styles.subheading}>Par</Text>
-            <Text style = {styles.subheading}>{this.props.route.coursepar[this.state.holeNumber-1]}</Text>
-            <Text style = {styles.subheading}>Hdcp</Text>
-            <Text style = {styles.subheading}>{this.props.route.coursehcp[this.state.holeNumber-1]}</Text>
-          </View>
-          <Text style = {styles.label7}>Adjust Gross Score with + & - Net Score will update</Text>
-          <View style = {styles.container4}>{players}</View>
-          <View style = {[styles.container3,styles.flowright]}>
-            <Text style = {styles.subheading2}>Team 1</Text>
-            <Text style = {styles.subheading2}>{team1}</Text>
-            <Text style = {styles.subheading2}>Team 2</Text>
-            <Text style = {styles.subheading2}>{team2}</Text>
-          </View>
-          <Button text = "Submit Scores" onPress = {this.onSubmitScores}/>
-          <Button text = "See Results" onPress = {this.onSeeResults}/>
-          <View style = {styles.container5}>
-            <Text style = {styles.subheading}></Text>
-          </View>
-        </View>
-      </Image>
+                  <Image source={require('../../assets/grass4.jpeg')} style={styles.backgroundImage}>
+                    <View style = {styles.container}>
+                      <View style = {styles.container1}>
+                        <Text style = {styles.label2}>{this.props.route.course}</Text>
+                      </View>
+                      <View style = {styles.container2}>
+                        <Text style = {styles.label5}>Hole {this.state.holeNumber}</Text>
+                      </View>
+                      <View style = {[styles.container3,styles.flowright]}>
+                        <Text style = {styles.subheading}>Par</Text>
+                        <Text style = {styles.subheading}>{this.props.route.coursepar[this.state.holeNumber-1]}</Text>
+                        <Text style = {styles.subheading}>Hdcp</Text>
+                        <Text style = {styles.subheading}>{this.props.route.coursehcp[this.state.holeNumber-1]}</Text>
+                      </View>
+                      <Text style = {styles.label7}>Adjust Gross Score with + & - Net Score will update</Text>
+                      <View style = {styles.container4}>{players}</View>
+                      <View style = {[styles.container3,styles.flowright]}>
+                        <Text style = {styles.subheading2}>Team 1</Text>
+                        <Text style = {styles.subheading2}>{team1}</Text>
+                        <Text style = {styles.subheading2}>Team 2</Text>
+                        <Text style = {styles.subheading2}>{team2}</Text>
+                      </View>
+                      <Button text = "Submit Scores" onPress = {this.onSubmitScores}/>
+                      <Button text = "See Results" onPress = {this.onSeeResults}/>
+                      <View style = {styles.container5}>
+                        <Text style = {styles.subheading}></Text>
+                      </View>
+                    </View>
+                  </Image>
+            </View>
+          </Item.Content>
+          <Item.Icon>
+              <Text>Test1 Icon</Text>
+          </Item.Icon>
+        </Item>
+        <Item name="test2">
+          <Item.Content>
+            <View style={{ flex: 1, backgroundColor: 'red' }}></View>
+          </Item.Content>
+          <Item.Icon>
+            <Text>Test2 Icon</Text>
+          </Item.Icon>
+        </Item>
+        <Item name="test3">
+          <Item.Content>
+            <View style={{flex:1, backgroundColor: 'yellow' }}></View>
+          </Item.Content>
+          <Item.Icon>
+            <Text>Test3 Icon</Text>
+          </Item.Icon>
+        </Item>
+      </Tabbar>
     );
+  },
+
+  onTabItemPress: function (name) {
+    console.log(`click on ${name} item`);
+    this.setState({
+      selected: name
+    });
+
   },
 // in order to dynamically update the player scores  - a clone of the object needs to be created because you can't set state on a nested object or a specific array index - in this case two clones needed to be made to dynamically change all the info
   onSubmitScores: function(){
