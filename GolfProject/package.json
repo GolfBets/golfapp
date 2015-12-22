@@ -6,8 +6,11 @@
     "start": "react-native start"
   },
   "dependencies": {
+    "install": "^0.4.1",
+    "npm": "^3.5.2",
     "parse": "^1.6.9",
     "parse-react": "^0.5.0",
-    "react-native": "^0.14.2"
+    "react-native": "^0.14.2",
+    "react-native-tabbar": "^0.1.1"
   }
 }

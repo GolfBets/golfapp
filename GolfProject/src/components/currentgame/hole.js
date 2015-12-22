@@ -9,10 +9,13 @@ var{
   TouchableHighlight
 } = React;
 
-
+var Tabbar = require('react-native-tabbar');
+var Item = Tabbar.Item;
 var Button  = require('../common/button');
 var RoundRobin  = require('../../roundRobin.js');
 var PlayersHole = require('../common/playershole');
+var ScoreCard  = require('./scorecard');
+var BetResults = require('./betresults');
 
 module.exports = React.createClass({
   getInitialState: function(){
@@ -39,10 +42,11 @@ module.exports = React.createClass({
       player2Results: 0,
       player3Results: 0,
       player4Results:0,
+      selected: "Hole",
+      image: require('../../assets/grass4.jpeg')
     };
   },
   componentDidMount: function(){
-    console.log("state", this.state);
     for (var i = 1; i<=this.props.route.playerCount; i++){
       var score ={};
       score[`score${i}`]=this.props.route.coursepar[this.state.holeNumber-1];
@@ -66,8 +70,6 @@ module.exports = React.createClass({
   },
 
   render: function(){
-    console.log(this.props);
-    console.log(this.state);
     var players = [];
     for (var i = 1; i <= this.props.route.playerCount;i++){
       players.push(<PlayersHole key = {i} text1 = {this.props.route[`player${i}`]} onPress1 = {this[`netScoreDownPlayer${i}`]} text2 = {this.state[`score${i}`]} onPress2 = {this[`netScoreUpPlayer${i}`]} text3 = {this.state[`netScore${i}`]}/>);
@@ -88,52 +90,124 @@ module.exports = React.createClass({
     }
 
 
-    //console.log('hole', this.props);
-    //console.log('state', this.state);
+    // console.log('hole', this.props);
+    // console.log('state', this.state);
 
     return(
-
-      <Image source={require('../../assets/grass4.jpeg')} style={styles.backgroundImage}>
-        <View style = {styles.container}>
-          <View style = {styles.container1}>
-            <Text style = {styles.label2}>{this.props.route.course}</Text>
-          </View>
-          <View style = {styles.container2}>
-            <Text style = {styles.label5}>Hole {this.state.holeNumber}</Text>
-          </View>
-          <View style = {[styles.container3,styles.flowright]}>
-            <Text style = {styles.subheading}>Par</Text>
-            <Text style = {styles.subheading}>{this.props.route.coursepar[this.state.holeNumber-1]}</Text>
-            <Text style = {styles.subheading}>Hdcp</Text>
-            <Text style = {styles.subheading}>{this.props.route.coursehcp[this.state.holeNumber-1]}</Text>
-          </View>
-          <Text style = {styles.label7}>Adjust Gross Score with + & - Net Score will update</Text>
-          <View style = {styles.container4}>{players}</View>
-          <View style = {[styles.container3,styles.flowright]}>
-            <Text style = {styles.subheading2}>Team 1</Text>
-            <Text style = {styles.subheading2}>{team1}</Text>
-            <Text style = {styles.subheading2}>Team 2</Text>
-            <Text style = {styles.subheading2}>{team2}</Text>
-          </View>
-          <Button text = "Submit Scores" onPress = {this.onSubmitScores}/>
-          <Button text = "See Results" onPress = {this.onSeeResults}/>
-          <View style = {styles.container5}>
-            <Text style = {styles.subheading}></Text>
-          </View>
-        </View>
-      </Image>
+      <Tabbar selected={this.state.selected}  onTabItemPress={this.onTabItemPress}>
+        <Item name="Hole">
+          <Item.Content>
+            <View style={{ flex: 1 }}>
+                  <Image source={this.state.image} style={styles.backgroundImage}>
+                    <View style = {styles.container}>
+                      <View style = {styles.container1}>
+                        <Text style = {styles.label2}>{this.props.route.course}</Text>
+                      </View>
+                      <View style = {styles.container2}>
+                        <Text style = {styles.label5}>Hole {this.state.holeNumber}</Text>
+                      </View>
+                      <View style = {[styles.container3,styles.flowright]}>
+                        <Text style = {styles.subheading}>Par</Text>
+                        <Text style = {styles.subheading}>{this.props.route.coursepar[this.state.holeNumber-1]}</Text>
+                        <Text style = {styles.subheading}>Hdcp</Text>
+                        <Text style = {styles.subheading}>{this.props.route.coursehcp[this.state.holeNumber-1]}</Text>
+                      </View>
+                      <Text style = {styles.label7}>Adjust Gross Score with + & - Net Score will update</Text>
+                      <View style = {styles.container4}>{players}</View>
+                      <View style = {[styles.container3,styles.flowright]}>
+                        <Text style = {styles.subheading2}>Team 1</Text>
+                        <Text style = {styles.subheading2}>{team1}</Text>
+                        <Text style = {styles.subheading2}>Team 2</Text>
+                        <Text style = {styles.subheading2}>{team2}</Text>
+                      </View>
+                      <Button text = "Submit Scores" onPress = {this.onSubmitScores}/>
+                      <View style = {styles.container5}>
+                        <Text style = {styles.subheading}></Text>
+                      </View>
+                    </View>
+                  </Image>
+            </View>
+          </Item.Content>
+          <Item.Icon>
+              <Text>Current Hole</Text>
+          </Item.Icon>
+        </Item>
+        <Item name="Scores">
+          <Item.Content>
+            <View style={{flex: 1}}>
+              <ScoreCard player1score = {this.state.player1score} player2score = {this.state.player2score} player3score = {this.state.player3score} player4score = {this.state.player4score} player1Netscore = {this.state.player1Netscore} player2Netscore={this.state.player2Netscore} player3Netscore={this.state.player3Netscore} player4Netscore= {this.state.player4Netscore}  player1={this.props.route.player1} player2={this.props.route.player2} player3={this.props.route.player3} player4= {this.props.route.player4} course ={this.props.route.course} player1Results= {this.state.player1Results} player2Results={this.state.player2Results} player3Results={this.state.player3Results} player4Results={this.state.player4Results} playerCount = {this.props.route.playerCount}/>
+            </View>
+          </Item.Content>
+          <Item.Icon>
+            <Text>Scores</Text>
+          </Item.Icon>
+        </Item>
+        <Item name="Bets">
+          <Item.Content>
+            <View style={{flex:1}}>
+              <BetResults  player1={this.props.route.player1} player2={this.props.route.player2} player3={this.props.route.player3} player4= {this.props.route.player4} course ={this.props.route.course} player1Results= {this.state.player1Results} player2Results={this.state.player2Results} player3Results={this.state.player3Results} player4Results={this.state.player4Results} playerCount = {this.props.route.playerCount}/>
+            </View>
+          </Item.Content>
+          <Item.Icon>
+            <Text>Bets</Text>
+          </Item.Icon>
+        </Item>
+      </Tabbar>
     );
+  },
+
+  onTabItemPress: function (name) {
+    // console.log(`click on ${name} item`);
+    this.setState({
+      selected: name
+    });
+    if (this.state.selected === 'Scores'){
+      // console.log("hello");
+      for (var i = 1; i<=this.props.route.playerCount;i++){
+        var updatedscore = this.state[`player${i}score`];
+        var player = {};
+        if (this.state.holeNumber>=9){
+          updatedscore.totalFront = 0;
+          for (var x=1; x<=9; x++){
+            updatedscore.totalFront += this.state[`player${i}score`][`h${x}`];
+            player[`player${i}score`] = updatedscore;
+          }
+        }
+        if (this.state.holeNumber>=18){
+          updatedscore.totalBack = 0;
+          for (var y=10; y<=18; y++){
+            updatedscore.totalBack += this.state[`player${i}score`][`h${y}`];
+            player[`player${i}score`] = updatedscore;
+            updatedscore.total = updatedscore.totalFront + updatedscore.totalBack;
+          }
+        }
+        this.setState(player);
+      }
+      var playerResults  = RoundRobin(this.state, this.props.route);
+      this.setState({
+        player1Results: playerResults[1],
+        player2Results: playerResults[2],
+        player3Results: playerResults[3],
+        player4Results: playerResults[4],
+      });
+    }
   },
 // in order to dynamically update the player scores  - a clone of the object needs to be created because you can't set state on a nested object or a specific array index - in this case two clones needed to be made to dynamically change all the info
   onSubmitScores: function(){
+    if (this.state.image === require('../../assets/grass4.jpeg')){
+      this.setState({image: require('../../assets/grass2.jpeg')});
+    }
+    else{
+      this.setState({image: require('../../assets/grass4.jpeg')});
+    }
     for (var i = 1; i<=this.props.route.playerCount;i++){
-      var updatedscore = Object.assign({}, this.state[`player${i}score`]);
+      var updatedscore = this.state[`player${i}score`];
       updatedscore[`h${this.state.holeNumber}`] = this.state[`score${i}`];
       var player = {};
       player[`player${i}score`] = updatedscore;
       this.setState(player);
       if (this.props.route.indexUsed === "YES"){
-        var updatednetscore = Object.assign({}, this.state[`player${i}Netscore`]);
+        var updatednetscore = this.state[`player${i}Netscore`];
         updatednetscore[`h${this.state.holeNumber}`] = this.state[`netScore${i}`];
         var playernet = {};
         playernet[`player${i}Netscore`] = updatednetscore;
@@ -142,34 +216,34 @@ module.exports = React.createClass({
       //Total front nine and back nine does not depend on starting hole
 
 
-      player[`player${i}score`] = updatedscore;
-      if (this.state.holeNumber>=9){
-        updatedscore.totalFront = 0;
-        for (var x=1; x<=9; x++){
-          updatedscore.totalFront += this.state[`player${i}score`][`h${x}`];
-          player[`player${i}score`] = updatedscore;
-        }
-      }
-      if (this.state.holeNumber===18){
-        updatedscore.totalBack = 0;
-        for (var y=10; y<=18; y++){
-          updatedscore.totalBack += this.state[`player${i}score`][`h${y}`];
-          player[`player${i}score`] = updatedscore;
-          updatedscore.total = updatedscore.totalFront + updatedscore.totalBack;
-        }
-      }
-      this.setState(player);
+    //   player[`player${i}score`] = updatedscore;
+    //   if (this.state.holeNumber>=9){
+    //     updatedscore.totalFront = 0;
+    //     for (var x=1; x<=9; x++){
+    //       updatedscore.totalFront += this.state[`player${i}score`][`h${x}`];
+    //       player[`player${i}score`] = updatedscore;
+    //     }
+    //   }
+    //   if (this.state.holeNumber===18){
+    //     updatedscore.totalBack = 0;
+    //     for (var y=10; y<=18; y++){
+    //       updatedscore.totalBack += this.state[`player${i}score`][`h${y}`];
+    //       player[`player${i}score`] = updatedscore;
+    //       updatedscore.total = updatedscore.totalFront + updatedscore.totalBack;
+    //     }
+    //   }
+    //   this.setState(player);
     }
-    //console.log(this.props.route.teams);
-    //  console.log(this.state);
-    //console.log(this.state.player1score.totalFront);
-    var playerResults  = RoundRobin(this.state, this.props.route);
-    this.setState({
-      player1Results: playerResults[1],
-      player2Results: playerResults[2],
-      player3Results: playerResults[3],
-      player4Results: playerResults[4],
-    });
+    // //console.log(this.props.route.teams);
+    // //  console.log(this.state);
+    // //console.log(this.state.player1score.totalFront);
+    // var playerResults  = RoundRobin(this.state, this.props.route);
+    // this.setState({
+    //   player1Results: playerResults[1],
+    //   player2Results: playerResults[2],
+    //   player3Results: playerResults[3],
+    //   player4Results: playerResults[4],
+    // });
 
     this.setState({holeNumber: this.state.holeNumber+1});
     for (i = 1; i<=this.props.route.playerCount; i++){
@@ -192,9 +266,9 @@ module.exports = React.createClass({
       }
     }
   },
-  onSeeResults: function(){
-    this.props.navigator.push({name: 'results', player1score: this.state.player1score, player2score: this.state.player2score, player3score: this.state.player3score, player4score: this.state.player4score, player1Netscore: this.state.player1Netscore, player2Netscore: this.state.player2Netscore, player3Netscore: this.state.player3Netscore, player4Netscore: this.state.player4Netscore, teams: this.props.route, player1: this.props.route.player1, player2: this.props.route.player2, player3:this.props.route.player3, player4: this.props.route.player4,course : this.props.route.course, player1Results: this.state.player1Results, player2Results: this.state.player2Results, player3Results: this.state.player3Results, player4Results: this.state.player4Results, 'playerCount': this.props.route.playerCount});
-  },
+  // onSeeResults: function(){
+  //   this.props.navigator.push({name: 'results', player1score: this.state.player1score, player2score: this.state.player2score, player3score: this.state.player3score, player4score: this.state.player4score, player1Netscore: this.state.player1Netscore, player2Netscore: this.state.player2Netscore, player3Netscore: this.state.player3Netscore, player4Netscore: this.state.player4Netscore, teams: this.props.route.teams, player1: this.props.route.player1, player2: this.props.route.player2, player3:this.props.route.player3, player4: this.props.route.player4,course : this.props.route.course, player1Results: this.state.player1Results, player2Results: this.state.player2Results, player3Results: this.state.player3Results, player4Results: this.state.player4Results, playerCount: this.props.route.playerCount});
+  // },
 
   netScoreUpPlayer1: function(){
     this.setState({score1: ++this.state.score1});
@@ -330,6 +404,7 @@ var styles = StyleSheet.create({
   backgroundImage: {
     backgroundColor: 'transparent',
     flex: 1,
+    marginTop: 20,
     alignSelf: 'stretch',
     width: null,
   },

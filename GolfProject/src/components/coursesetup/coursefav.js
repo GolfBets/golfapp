@@ -30,9 +30,7 @@ module.exports = React.createClass({
   componentWillMount: function(){
     Parse.User.currentAsync()
       .then((user)=>{this.setState({user: user});});
-  // },
-  //
-  // componentDidMount: function(){
+
     Api('coursenames/Orange')
       .then((data) =>{
         //console.log("componentDidMount", data)
@@ -120,6 +118,7 @@ var styles = StyleSheet.create({
     flex: 1
   },
   backgroundImage: {
+    marginTop: 20,
     backgroundColor: 'transparent',
     flex: 1,
     alignSelf: 'stretch',

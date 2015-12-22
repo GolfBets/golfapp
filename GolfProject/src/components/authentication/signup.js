@@ -68,7 +68,7 @@ module.exports = React.createClass({
 
     user.signUp(null, {
       success:(user) => {this.props.navigator.immediatelyResetRouteStack([{name: 'coursefav'}]);},
-      error:(user, error) => {this.setState({errorMessage: errormessage});}
+      error:(user, error) => {this.setState({errorMessage: error});}
     });
   },
 
@@ -88,6 +88,7 @@ var styles = StyleSheet.create({
     flex: 1
   },
   backgroundImage: {
+    marginTop:20,
     backgroundColor: 'transparent',
     flex: 1,
     alignSelf: 'stretch',
