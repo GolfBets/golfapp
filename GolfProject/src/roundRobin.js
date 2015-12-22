@@ -1,5 +1,4 @@
 module.exports = function (input, route) {
-	var bet = route.betPerHole + 0;
 	var scores = {
 		player1: [],
 		player2: [],
@@ -63,7 +62,7 @@ module.exports = function (input, route) {
 		var b = 'player' + team12;
 		var c = 'player' + team21;
 		var d = 'player' + team22;
-		var e = minPool + bet;
+		var e = minPool + route.betLowScore;
 		if (Math.min(scores[a][i], scores[b][i]) < Math.min(scores[c][i], scores[d][i])) {
 			players[team11] += e;
 			players[team12] += e;
@@ -79,10 +78,10 @@ module.exports = function (input, route) {
 			minPool = 0;
 		}
 		else {
-			minPool += bet;
+			minPool += route.betLowScore;
 		}
 		if (route.lowTotal === true) {
-			var f = lowTotalPool + bet;
+			var f = lowTotalPool + route.betLowScore;
 			if (scores[a][i] + scores[b][i] < scores[c][i] + scores[d][i]) {
 				players[team11] += f;
 				players[team12] += f;
@@ -98,7 +97,7 @@ module.exports = function (input, route) {
 				lowTotalPool = 0;
 			}
 			else {
-				lowTotalPool += bet;
+				lowTotalPool += route.betLowScore;
 			}
 		}
 	i++;
