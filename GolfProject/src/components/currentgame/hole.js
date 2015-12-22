@@ -89,8 +89,8 @@ module.exports = React.createClass({
     }
 
 
-    console.log('hole', this.props);
-    console.log('state', this.state);
+    // console.log('hole', this.props);
+    // console.log('state', this.state);
 
     return(
       <Tabbar selected={this.state.selected} onTabItemPress={this.onTabItemPress}>
@@ -154,12 +154,12 @@ module.exports = React.createClass({
   },
 
   onTabItemPress: function (name) {
-    console.log(`click on ${name} item`);
+    // console.log(`click on ${name} item`);
     this.setState({
       selected: name
     });
     if (this.state.selected === 'Scores'){
-      console.log("hello");
+      // console.log("hello");
       for (var i = 1; i<=this.props.route.playerCount;i++){
         var updatedscore = Object.assign({}, this.state[`player${i}score`]);
         var player = {};
