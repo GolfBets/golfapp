@@ -41,7 +41,8 @@ module.exports = React.createClass({
       player2Results: 0,
       player3Results: 0,
       player4Results:0,
-      selected: "test1"
+      selected: "Hole",
+      image: require('../../assets/grass4.jpeg')
     };
   },
   componentDidMount: function(){
@@ -88,16 +89,15 @@ module.exports = React.createClass({
     }
 
 
-    //console.log('hole', this.props);
-    //console.log('state', this.state);
+    console.log('hole', this.props);
+    console.log('state', this.state);
 
     return(
       <Tabbar selected={this.state.selected} onTabItemPress={this.onTabItemPress}>
-        <Item name="test1">
+        <Item name="Hole">
           <Item.Content>
             <View style={{ flex: 1 }}>
-
-                  <Image source={require('../../assets/grass4.jpeg')} style={styles.backgroundImage}>
+                  <Image source={this.state.image} style={styles.backgroundImage}>
                     <View style = {styles.container}>
                       <View style = {styles.container1}>
                         <Text style = {styles.label2}>{this.props.route.course}</Text>
@@ -120,7 +120,6 @@ module.exports = React.createClass({
                         <Text style = {styles.subheading2}>{team2}</Text>
                       </View>
                       <Button text = "Submit Scores" onPress = {this.onSubmitScores}/>
-                      <Button text = "See Results" onPress = {this.onSeeResults}/>
                       <View style = {styles.container5}>
                         <Text style = {styles.subheading}></Text>
                       </View>
@@ -129,25 +128,25 @@ module.exports = React.createClass({
             </View>
           </Item.Content>
           <Item.Icon>
-              <Text>Test1 Icon</Text>
+              <Text>Current Hole</Text>
           </Item.Icon>
         </Item>
-        <Item name="test2">
+        <Item name="Scores">
           <Item.Content>
             <View style={{flex: 1}}>
               <Results player1score = {this.state.player1score} player2score = {this.state.player2score} player3score = {this.state.player3score} player4score = {this.state.player4score} player1Netscore = {this.state.player1Netscore} player2Netscore={this.state.player2Netscore} player3Netscore={this.state.player3Netscore} player4Netscore= {this.state.player4Netscore}  player1={this.props.route.player1} player2={this.props.route.player2} player3={this.props.route.player3} player4= {this.props.route.player4} course ={this.props.route.course} player1Results= {this.state.player1Results} player2Results={this.state.player2Results} player3Results={this.state.player3Results} player4Results={this.state.player4Results} playerCount = {this.props.route.playerCount}/>
             </View>
           </Item.Content>
           <Item.Icon>
-            <Text>Test2 Icon</Text>
+            <Text>Scores</Text>
           </Item.Icon>
         </Item>
-        <Item name="test3">
+        <Item name="Bets">
           <Item.Content>
             <View style={{flex:1, backgroundColor: 'yellow' }}></View>
           </Item.Content>
           <Item.Icon>
-            <Text>Test3 Icon</Text>
+            <Text>Bets</Text>
           </Item.Icon>
         </Item>
       </Tabbar>
@@ -159,10 +158,45 @@ module.exports = React.createClass({
     this.setState({
       selected: name
     });
-
+    if (this.state.selected === 'Scores'){
+      console.log("hello");
+      for (var i = 1; i<=this.props.route.playerCount;i++){
+        var updatedscore = Object.assign({}, this.state[`player${i}score`]);
+        var player = {};
+        if (this.state.holeNumber>=9){
+          updatedscore.totalFront = 0;
+          for (var x=1; x<=9; x++){
+            updatedscore.totalFront += this.state[`player${i}score`][`h${x}`];
+            player[`player${i}score`] = updatedscore;
+          }
+        }
+        if (this.state.holeNumber>=18){
+          updatedscore.totalBack = 0;
+          for (var y=10; y<=18; y++){
+            updatedscore.totalBack += this.state[`player${i}score`][`h${y}`];
+            player[`player${i}score`] = updatedscore;
+            updatedscore.total = updatedscore.totalFront + updatedscore.totalBack;
+          }
+        }
+        this.setState(player);
+      }
+      var playerResults  = RoundRobin(this.state, this.props.route);
+      this.setState({
+        player1Results: playerResults[1],
+        player2Results: playerResults[2],
+        player3Results: playerResults[3],
+        player4Results: playerResults[4],
+      });
+    }
   },
 // in order to dynamically update the player scores  - a clone of the object needs to be created because you can't set state on a nested object or a specific array index - in this case two clones needed to be made to dynamically change all the info
   onSubmitScores: function(){
+    if (this.state.image === require('../../assets/grass4.jpeg')){
+      this.setState({image: require('../../assets/grass2.jpeg')});
+    }
+    else{
+      this.setState({image: require('../../assets/grass4.jpeg')});
+    }
     for (var i = 1; i<=this.props.route.playerCount;i++){
       var updatedscore = Object.assign({}, this.state[`player${i}score`]);
       updatedscore[`h${this.state.holeNumber}`] = this.state[`score${i}`];
@@ -179,34 +213,34 @@ module.exports = React.createClass({
       //Total front nine and back nine does not depend on starting hole
 
 
-      player[`player${i}score`] = updatedscore;
-      if (this.state.holeNumber>=9){
-        updatedscore.totalFront = 0;
-        for (var x=1; x<=9; x++){
-          updatedscore.totalFront += this.state[`player${i}score`][`h${x}`];
-          player[`player${i}score`] = updatedscore;
-        }
-      }
-      if (this.state.holeNumber===18){
-        updatedscore.totalBack = 0;
-        for (var y=10; y<=18; y++){
-          updatedscore.totalBack += this.state[`player${i}score`][`h${y}`];
-          player[`player${i}score`] = updatedscore;
-          updatedscore.total = updatedscore.totalFront + updatedscore.totalBack;
-        }
-      }
-      this.setState(player);
+    //   player[`player${i}score`] = updatedscore;
+    //   if (this.state.holeNumber>=9){
+    //     updatedscore.totalFront = 0;
+    //     for (var x=1; x<=9; x++){
+    //       updatedscore.totalFront += this.state[`player${i}score`][`h${x}`];
+    //       player[`player${i}score`] = updatedscore;
+    //     }
+    //   }
+    //   if (this.state.holeNumber===18){
+    //     updatedscore.totalBack = 0;
+    //     for (var y=10; y<=18; y++){
+    //       updatedscore.totalBack += this.state[`player${i}score`][`h${y}`];
+    //       player[`player${i}score`] = updatedscore;
+    //       updatedscore.total = updatedscore.totalFront + updatedscore.totalBack;
+    //     }
+    //   }
+    //   this.setState(player);
     }
-    //console.log(this.props.route.teams);
-    //  console.log(this.state);
-    //console.log(this.state.player1score.totalFront);
-    var playerResults  = RoundRobin(this.state, this.props.route);
-    this.setState({
-      player1Results: playerResults[1],
-      player2Results: playerResults[2],
-      player3Results: playerResults[3],
-      player4Results: playerResults[4],
-    });
+    // //console.log(this.props.route.teams);
+    // //  console.log(this.state);
+    // //console.log(this.state.player1score.totalFront);
+    // var playerResults  = RoundRobin(this.state, this.props.route);
+    // this.setState({
+    //   player1Results: playerResults[1],
+    //   player2Results: playerResults[2],
+    //   player3Results: playerResults[3],
+    //   player4Results: playerResults[4],
+    // });
 
     this.setState({holeNumber: this.state.holeNumber+1});
     for (i = 1; i<=this.props.route.playerCount; i++){

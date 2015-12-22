@@ -75,9 +75,9 @@ module.exports= React.createClass({
       </View>
     );
   },
-  onGoBack: function(){
-    this.props.navigator.pop();
-  },
+  // onGoBack: function(){
+  //   this.props.navigator.pop();
+  // },
 });
 
 var styles = StyleSheet.create({
