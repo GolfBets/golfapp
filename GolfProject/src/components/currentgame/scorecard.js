@@ -58,20 +58,6 @@ module.exports= React.createClass({
         </View>
         <Text style = {styles.labelName}></Text>
         <View>{playersBack}</View>
-        <Text style = {styles.label1}>Betting Results</Text>
-        <View style = {styles.flowright}>
-          <Text style = {styles.labelName}>{this.props.player1}</Text>
-          <Text style = {styles.label2}>${this.props.player1Results}</Text>
-          <Text style = {styles.labelName}>{this.props.player2}</Text>
-          <Text style = {styles.label2}>${this.props.player2Results}</Text>
-        </View>
-        <View style = {styles.flowright}>
-          <Text style = {styles.labelName}>{this.props.player3}</Text>
-          <Text style = {styles.label2}>${this.props.player3Results}</Text>
-          <Text style = {styles.labelName}>{this.props.player4}</Text>
-          <Text style = {styles.label2}>${this.props.player4Results}</Text>
-        </View>
-        <Button text = "Go to next hole" onPress = {this.onGoBack}/>
       </View>
     );
   },

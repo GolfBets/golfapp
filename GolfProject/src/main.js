@@ -14,7 +14,7 @@ var Game  = require('./components/gamesetup/game');
 var Bets = require('./components/gamesetup/bets');
 var Round = require('./components/currentgame/round');
 var Hole = require('./components/currentgame/hole');
-var Results = require('./components/currentgame/results');
+
 
 var ROUTES = {
   signin: Signin,
@@ -26,7 +26,7 @@ var ROUTES = {
   bets: Bets,
   round: Round,
   hole: Hole,
-  results: Results
+
 
 };
 

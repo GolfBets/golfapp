@@ -14,7 +14,8 @@ var Item = Tabbar.Item;
 var Button  = require('../common/button');
 var RoundRobin  = require('../../roundRobin.js');
 var PlayersHole = require('../common/playershole');
-var Results  = require('./results');
+var ScoreCard  = require('./scorecard');
+var BetResults = require('./betresults');
 
 module.exports = React.createClass({
   getInitialState: function(){
@@ -93,7 +94,7 @@ module.exports = React.createClass({
     // console.log('state', this.state);
 
     return(
-      <Tabbar selected={this.state.selected} onTabItemPress={this.onTabItemPress}>
+      <Tabbar selected={this.state.selected}  onTabItemPress={this.onTabItemPress}>
         <Item name="Hole">
           <Item.Content>
             <View style={{ flex: 1 }}>
@@ -134,7 +135,7 @@ module.exports = React.createClass({
         <Item name="Scores">
           <Item.Content>
             <View style={{flex: 1}}>
-              <Results player1score = {this.state.player1score} player2score = {this.state.player2score} player3score = {this.state.player3score} player4score = {this.state.player4score} player1Netscore = {this.state.player1Netscore} player2Netscore={this.state.player2Netscore} player3Netscore={this.state.player3Netscore} player4Netscore= {this.state.player4Netscore}  player1={this.props.route.player1} player2={this.props.route.player2} player3={this.props.route.player3} player4= {this.props.route.player4} course ={this.props.route.course} player1Results= {this.state.player1Results} player2Results={this.state.player2Results} player3Results={this.state.player3Results} player4Results={this.state.player4Results} playerCount = {this.props.route.playerCount}/>
+              <ScoreCard player1score = {this.state.player1score} player2score = {this.state.player2score} player3score = {this.state.player3score} player4score = {this.state.player4score} player1Netscore = {this.state.player1Netscore} player2Netscore={this.state.player2Netscore} player3Netscore={this.state.player3Netscore} player4Netscore= {this.state.player4Netscore}  player1={this.props.route.player1} player2={this.props.route.player2} player3={this.props.route.player3} player4= {this.props.route.player4} course ={this.props.route.course} player1Results= {this.state.player1Results} player2Results={this.state.player2Results} player3Results={this.state.player3Results} player4Results={this.state.player4Results} playerCount = {this.props.route.playerCount}/>
             </View>
           </Item.Content>
           <Item.Icon>
@@ -143,7 +144,9 @@ module.exports = React.createClass({
         </Item>
         <Item name="Bets">
           <Item.Content>
-            <View style={{flex:1, backgroundColor: 'yellow' }}></View>
+            <View style={{flex:1}}>
+              <BetResults  player1={this.props.route.player1} player2={this.props.route.player2} player3={this.props.route.player3} player4= {this.props.route.player4} course ={this.props.route.course} player1Results= {this.state.player1Results} player2Results={this.state.player2Results} player3Results={this.state.player3Results} player4Results={this.state.player4Results} playerCount = {this.props.route.playerCount}/>
+            </View>
           </Item.Content>
           <Item.Icon>
             <Text>Bets</Text>
@@ -161,7 +164,7 @@ module.exports = React.createClass({
     if (this.state.selected === 'Scores'){
       // console.log("hello");
       for (var i = 1; i<=this.props.route.playerCount;i++){
-        var updatedscore = Object.assign({}, this.state[`player${i}score`]);
+        var updatedscore = this.state[`player${i}score`];
         var player = {};
         if (this.state.holeNumber>=9){
           updatedscore.totalFront = 0;
@@ -198,13 +201,13 @@ module.exports = React.createClass({
       this.setState({image: require('../../assets/grass4.jpeg')});
     }
     for (var i = 1; i<=this.props.route.playerCount;i++){
-      var updatedscore = Object.assign({}, this.state[`player${i}score`]);
+      var updatedscore = this.state[`player${i}score`];
       updatedscore[`h${this.state.holeNumber}`] = this.state[`score${i}`];
       var player = {};
       player[`player${i}score`] = updatedscore;
       this.setState(player);
       if (this.props.route.indexUsed === "YES"){
-        var updatednetscore = Object.assign({}, this.state[`player${i}Netscore`]);
+        var updatednetscore = this.state[`player${i}Netscore`];
         updatednetscore[`h${this.state.holeNumber}`] = this.state[`netScore${i}`];
         var playernet = {};
         playernet[`player${i}Netscore`] = updatednetscore;

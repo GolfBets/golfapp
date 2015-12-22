@@ -68,7 +68,7 @@ module.exports = React.createClass({
 
     user.signUp(null, {
       success:(user) => {this.props.navigator.immediatelyResetRouteStack([{name: 'coursefav'}]);},
-      error:(user, error) => {this.setState({errorMessage: errormessage});}
+      error:(user, error) => {this.setState({errorMessage: error});}
     });
   },
 
