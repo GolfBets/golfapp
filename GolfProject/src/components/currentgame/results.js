@@ -15,15 +15,15 @@ module.exports= React.createClass({
   render: function(){
     var playersFront  = [];
     var playersBack = [];
-    for (var i = 1; i<=this.props.route.playerCount; i++){
-      playersFront.push(<ScorecardFront key = {i} text1 = {this.props.route[`player${i}`]} h1 = {this.props.route[`player${i}score`].h1} h2 = {this.props.route[`player${i}score`].h2} h3 = {this.props.route[`player${i}score`].h3} h4 = {this.props.route[`player${i}score`].h4} h5 = {this.props.route[`player${i}score`].h5} h6 = {this.props.route[`player${i}score`].h6} h7 = {this.props.route[`player${i}score`].h7} h8 = {this.props.route[`player${i}score`].h8} h9 = {this.props.route[`player${i}score`].h9} totalFront = {this.props.route[`player${i}score`].totalFront}/>);
+    for (var i = 1; i<=this.props.playerCount; i++){
+      playersFront.push(<ScorecardFront key = {i} text1 = {this.props[`player${i}`]} h1 = {this.props[`player${i}score`].h1} h2 = {this.props[`player${i}score`].h2} h3 = {this.props[`player${i}score`].h3} h4 = {this.props[`player${i}score`].h4} h5 = {this.props[`player${i}score`].h5} h6 = {this.props[`player${i}score`].h6} h7 = {this.props[`player${i}score`].h7} h8 = {this.props[`player${i}score`].h8} h9 = {this.props[`player${i}score`].h9} totalFront = {this.props[`player${i}score`].totalFront}/>);
 
-      playersBack.push(<ScorecardBack key = {i} text1 = {this.props.route[`player${i}`]} h10 = {this.props.route[`player${i}score`].h10} h11 = {this.props.route[`player${i}score`].h11} h12 = {this.props.route[`player${i}score`].h12} h13 = {this.props.route[`player${i}score`].h13} h14 = {this.props.route[`player${i}score`].h14} h15 = {this.props.route[`player${i}score`].h15} h16 = {this.props.route[`player${i}score`].h16} h17 = {this.props.route[`player${i}score`].h17} h18 = {this.props.route[`player${i}score`].h18} totalBack = {this.props.route[`player${i}score`].totalBack} total = {this.props.route[`player${i}score`].total}/>);
+      playersBack.push(<ScorecardBack key = {i} text1 = {this.props[`player${i}`]} h10 = {this.props[`player${i}score`].h10} h11 = {this.props[`player${i}score`].h11} h12 = {this.props[`player${i}score`].h12} h13 = {this.props[`player${i}score`].h13} h14 = {this.props[`player${i}score`].h14} h15 = {this.props[`player${i}score`].h15} h16 = {this.props[`player${i}score`].h16} h17 = {this.props[`player${i}score`].h17} h18 = {this.props[`player${i}score`].h18} totalBack = {this.props[`player${i}score`].totalBack} total = {this.props[`player${i}score`].total}/>);
     }
 
     return (
       <View style = {styles.container}>
-        <Text style = {styles.title}>{this.props.route.course}</Text>
+        <Text style = {styles.title}>{this.props.course}</Text>
         <Text style = {styles.label1}>Front 9</Text>
         <View style = {styles.flowright}>
           <Text style = {styles.labelName}>Hole #</Text>
@@ -60,16 +60,16 @@ module.exports= React.createClass({
         <View>{playersBack}</View>
         <Text style = {styles.label1}>Betting Results</Text>
         <View style = {styles.flowright}>
-          <Text style = {styles.labelName}>{this.props.route.player1}</Text>
-          <Text style = {styles.label2}>${this.props.route.player1Results}</Text>
-          <Text style = {styles.labelName}>{this.props.route.player2}</Text>
-          <Text style = {styles.label2}>${this.props.route.player2Results}</Text>
+          <Text style = {styles.labelName}>{this.props.player1}</Text>
+          <Text style = {styles.label2}>${this.props.player1Results}</Text>
+          <Text style = {styles.labelName}>{this.props.player2}</Text>
+          <Text style = {styles.label2}>${this.props.player2Results}</Text>
         </View>
         <View style = {styles.flowright}>
-          <Text style = {styles.labelName}>{this.props.route.player3}</Text>
-          <Text style = {styles.label2}>${this.props.route.player3Results}</Text>
-          <Text style = {styles.labelName}>{this.props.route.player4}</Text>
-          <Text style = {styles.label2}>${this.props.route.player4Results}</Text>
+          <Text style = {styles.labelName}>{this.props.player3}</Text>
+          <Text style = {styles.label2}>${this.props.player3Results}</Text>
+          <Text style = {styles.labelName}>{this.props.player4}</Text>
+          <Text style = {styles.label2}>${this.props.player4Results}</Text>
         </View>
         <Button text = "Go to next hole" onPress = {this.onGoBack}/>
       </View>

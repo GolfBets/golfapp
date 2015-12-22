@@ -14,6 +14,7 @@ var Item = Tabbar.Item;
 var Button  = require('../common/button');
 var RoundRobin  = require('../../roundRobin.js');
 var PlayersHole = require('../common/playershole');
+var Results  = require('./results');
 
 module.exports = React.createClass({
   getInitialState: function(){
@@ -133,7 +134,9 @@ module.exports = React.createClass({
         </Item>
         <Item name="test2">
           <Item.Content>
-            <View style={{ flex: 1, backgroundColor: 'red' }}></View>
+            <View style={{flex: 1}}>
+              <Results player1score = {this.state.player1score} player2score = {this.state.player2score} player3score = {this.state.player3score} player4score = {this.state.player4score} player1Netscore = {this.state.player1Netscore} player2Netscore={this.state.player2Netscore} player3Netscore={this.state.player3Netscore} player4Netscore= {this.state.player4Netscore}  player1={this.props.route.player1} player2={this.props.route.player2} player3={this.props.route.player3} player4= {this.props.route.player4} course ={this.props.route.course} player1Results= {this.state.player1Results} player2Results={this.state.player2Results} player3Results={this.state.player3Results} player4Results={this.state.player4Results} playerCount = {this.props.route.playerCount}/>
+            </View>
           </Item.Content>
           <Item.Icon>
             <Text>Test2 Icon</Text>
@@ -226,9 +229,9 @@ module.exports = React.createClass({
       }
     }
   },
-  onSeeResults: function(){
-    this.props.navigator.push({name: 'results', player1score: this.state.player1score, player2score: this.state.player2score, player3score: this.state.player3score, player4score: this.state.player4score, player1Netscore: this.state.player1Netscore, player2Netscore: this.state.player2Netscore, player3Netscore: this.state.player3Netscore, player4Netscore: this.state.player4Netscore, teams: this.props.route, player1: this.props.route.player1, player2: this.props.route.player2, player3:this.props.route.player3, player4: this.props.route.player4,course : this.props.route.course, player1Results: this.state.player1Results, player2Results: this.state.player2Results, player3Results: this.state.player3Results, player4Results: this.state.player4Results, 'playerCount': this.props.route.playerCount});
-  },
+  // onSeeResults: function(){
+  //   this.props.navigator.push({name: 'results', player1score: this.state.player1score, player2score: this.state.player2score, player3score: this.state.player3score, player4score: this.state.player4score, player1Netscore: this.state.player1Netscore, player2Netscore: this.state.player2Netscore, player3Netscore: this.state.player3Netscore, player4Netscore: this.state.player4Netscore, teams: this.props.route.teams, player1: this.props.route.player1, player2: this.props.route.player2, player3:this.props.route.player3, player4: this.props.route.player4,course : this.props.route.course, player1Results: this.state.player1Results, player2Results: this.state.player2Results, player3Results: this.state.player3Results, player4Results: this.state.player4Results, playerCount: this.props.route.playerCount});
+  // },
 
   netScoreUpPlayer1: function(){
     this.setState({score1: ++this.state.score1});
