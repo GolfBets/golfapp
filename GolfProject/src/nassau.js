@@ -45,72 +45,10 @@ function nassau (input, route) {
 		return winnerArray;
 	}
 	results.winners = winner()
-	function front () {
-		var bets = 0;
-		for (var i = 0; i < input.front.length; i++) {
-			var press = 0;
-			for (var j = input.front[i] - 1; j < 9; j++) {
-				if (results.winners[j] == 1) {
-					press++;
-				}
-				else if (results.winners[j] == 2) {
-					press --;
-				}
-			}
-			if (press > 0) {
-				bets++;
-			}
-			if (press < 0) {
-				bets--;
-			}
-		}
-		return bets;
-	}
-	results.front = front();
-	function back () {
-		var bets = 0;
-		for (var i = 0; i < input.back.length; i++) {
-			var press = 0;
-			for (var j = input.front[i] - 1; j < 18; j++) {
-				if (results.winners[j] == 1) {
-					press++;
-				}
-				else if (results.winners[j] == 2) {
-					press --;
-				}
-			}
-			if (press > 0) {
-				bets++;
-			}
-			if (press < 0) {
-				bets--;
-			}
-		}
-		return bets;
-	}
-	results.back = back();
-	function all18 () {
-		var bets = 0;
-		for (var i = 0; i < input.total.length; i++) {
-			var press = 0;
-			for (var j = input.total[i] - 1; j < 18; j++) {
-				if (results.winners[j] == 1) {
-					press++;
-				}
-				else if (results.winners[j] == 2) {
-					press --;
-				}
-			}
-			if (press > 0) {
-				bets++;
-			}
-			if (press < 0) {
-				bets--;
-			}
-		}
-		return bets;
-	}
-	results.all18 = all18();
+	var nassauPressCalculator = require('./nassauPressCalculator.js');
+	results.front = nassauPressCalculator(input.front, 9, results.winners, route.auto9);
+	results.back = nassauPressCalculator(input.back, 18, results.winners, route.auto9);
+	results.all18 = nassauPressCalculator(input.total, 18, results.winners, route.auto18);
 	results.total = results.front + results.back + results.all18;
 	return results
 }
