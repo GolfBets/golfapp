@@ -14,7 +14,7 @@ var Game  = require('./components/gamesetup/game');
 var Round = require('./components/currentgame/round');
 var Hole = require('./components/currentgame/hole');
 var BetsRoundRobin = require('./components/gamesetup/betsroundrobin');
-
+var BetsNassau = require('./components/gamesetup/betsnassau');
 
 var ROUTES = {
   signin: Signin,
@@ -24,6 +24,7 @@ var ROUTES = {
   players: Players,
   game: Game,
   betsroundrobin: BetsRoundRobin,
+  betsnassau: BetsNassau,
   round: Round,
   hole: Hole,
 
@@ -44,7 +45,7 @@ module.exports = React.createClass({
     return(
       <Navigator
       style = {styles.container}
-      initialRoute={{name: 'signin'}}
+      initialRoute={{name: 'coursefav'}}
       renderScene={this.renderScene}
       configureScene = {()=>{return Navigator.SceneConfigs.FloatFromRight;}}
       />
