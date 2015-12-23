@@ -101,6 +101,7 @@ module.exports = React.createClass({
                 <Text style={styles.label}>{this.props.route.player4}</Text>
               </TouchableHighlight>
             </View>
+            <Text style  = {styles.label}>You selected {this.props.route[`player${this.state.teamMember}`]}</Text>
           </View>
         </View>
       );
@@ -110,7 +111,12 @@ module.exports = React.createClass({
     this.props.navigator.pop();
   },
   onStartRound: function(){
-    this.props.navigator.immediatelyResetRouteStack([{name:'round', betFrontNassau: parseFloat(this.state.betFrontNassau), betBackNassau: parseFloat(this.state.betBackNassau), betTotalNassau: parseFloat(this.state.betTotalNassau), auto9: this.state.auto9, auto18: this.state.auto18, indexUsed: this.props.route.indexUsed, gameSelected: this.props.route.gameSelected, course : this.props.route.course, player1: this.props.route.player1, player2: this.props.route.player2, player3:this.props.route.player3, player4: this.props.route.player4, hcpPlayer1: this.props.route.hcpPlayer1, hcpPlayer2: this.props.route.hcpPlayer2, hcpPlayer3: this.props.route.hcpPlayer3, hcpPlayer4: this.props.route.hcpPlayer4, 'playerCount': this.props.route.playerCount}]);
+    if (this.state.teamMember === 2){this.state.teams = (1,2,3,4);}
+    if (this.state.teamMember === 3){this.state.teams = [1,3,2,4];}
+    if (this.state.teamMember === 4){this.state.teasm = [1,4,2,3];}
+
+
+    this.props.navigator.immediatelyResetRouteStack([{name:'round', teams: this.state.teams, betFrontNassau: parseFloat(this.state.betFrontNassau), betBackNassau: parseFloat(this.state.betBackNassau), betTotalNassau: parseFloat(this.state.betTotalNassau), auto9: this.state.auto9, auto18: this.state.auto18, indexUsed: this.props.route.indexUsed, gameSelected: this.props.route.gameSelected, course : this.props.route.course, player1: this.props.route.player1, player2: this.props.route.player2, player3:this.props.route.player3, player4: this.props.route.player4, hcpPlayer1: this.props.route.hcpPlayer1, hcpPlayer2: this.props.route.hcpPlayer2, hcpPlayer3: this.props.route.hcpPlayer3, hcpPlayer4: this.props.route.hcpPlayer4, 'playerCount': this.props.route.playerCount}]);
   },
 });
  var styles  = StyleSheet.create({

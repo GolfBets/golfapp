@@ -12,7 +12,8 @@ var{
 var Tabbar = require('react-native-tabbar');
 var Item = Tabbar.Item;
 var Button  = require('../common/button');
-var RoundRobin  = require('../../roundRobin.js');
+var RoundRobin  = require('../../roundRobin');
+var Nassau  = require('../../nassau');
 var PlayersHole = require('../common/playershole');
 var ScoreCard  = require('./scorecard');
 var BetResults = require('./betresults');
@@ -43,7 +44,10 @@ module.exports = React.createClass({
       player3Results: 0,
       player4Results:0,
       selected: "Hole",
-      image: require('../../assets/grass4.jpeg')
+      image: require('../../assets/grass4.jpeg'),
+      frontPress: [1],
+      backPress: [10],
+      totalPress: [1],
     };
   },
   componentDidMount: function(){
@@ -76,17 +80,23 @@ module.exports = React.createClass({
     }
     var team1;
     var team2;
-    if (this.state.holeNumber<=6){
+    if (this.props.route.gameSelected === "Round Robin"){
+      if (this.state.holeNumber<=6){
+        team1 = this.props.route[`player${this.props.route.teams[0]}`] + " & " + this.props.route[`player${this.props.route.teams[1]}`];
+        team2 = this.props.route[`player${this.props.route.teams[2]}`] + " & " + this.props.route[`player${this.props.route.teams[3]}`];
+      }
+      if (this.state.holeNumber > 6 && this.state.holeNumber <13 ){
+        team1 = this.props.route[`player${this.props.route.teams[4]}`] + " & " + this.props.route[`player${this.props.route.teams[5]}`];
+        team2 = this.props.route[`player${this.props.route.teams[6]}`] + " & " + this.props.route[`player${this.props.route.teams[7]}`];
+      }
+      if (this.state.holeNumber >= 13){
+        team1 = this.props.route[`player${this.props.route.teams[8]}`] + " & " + this.props.route[`player${this.props.route.teams[9]}`];
+        team2 = this.props.route[`player${this.props.route.teams[10]}`] + " & " + this.props.route[`player${this.props.route.teams[11]}`];
+      }
+    }
+    if (this.props.route.gameSelected === "Nassau"){
       team1 = this.props.route[`player${this.props.route.teams[0]}`] + " & " + this.props.route[`player${this.props.route.teams[1]}`];
       team2 = this.props.route[`player${this.props.route.teams[2]}`] + " & " + this.props.route[`player${this.props.route.teams[3]}`];
-    }
-    if (this.state.holeNumber > 6 && this.state.holeNumber <13 ){
-      team1 = this.props.route[`player${this.props.route.teams[4]}`] + " & " + this.props.route[`player${this.props.route.teams[5]}`];
-      team2 = this.props.route[`player${this.props.route.teams[6]}`] + " & " + this.props.route[`player${this.props.route.teams[7]}`];
-    }
-    if (this.state.holeNumber >= 13){
-      team1 = this.props.route[`player${this.props.route.teams[8]}`] + " & " + this.props.route[`player${this.props.route.teams[9]}`];
-      team2 = this.props.route[`player${this.props.route.teams[10]}`] + " & " + this.props.route[`player${this.props.route.teams[11]}`];
     }
 
 
@@ -185,13 +195,18 @@ module.exports = React.createClass({
       }
     }
     if (this.state.selected ==="Bets"){
-      var playerResults  = RoundRobin(this.state, this.props.route);
-      this.setState({
-        player1Results: playerResults[1],
-        player2Results: playerResults[2],
-        player3Results: playerResults[3],
-        player4Results: playerResults[4],
-      });
+      if (this.props.gameSelected === "Round Robin"){
+        var playerResults  = RoundRobin(this.state, this.props.route);
+        this.setState({
+          player1Results: playerResults[1],
+          player2Results: playerResults[2],
+          player3Results: playerResults[3],
+          player4Results: playerResults[4],
+        });
+      }
+      if (this.props.gameSelected === "Nassau"){
+        var playerResults2  = Nassau(this.state, this.props.route);
+      }
     }
   },
 // in order to dynamically update the player scores  - a clone of the object needs to be created because you can't set state on a nested object or a specific array index - in this case two clones needed to be made to dynamically change all the info

@@ -31,15 +31,43 @@ module.exports = React.createClass({
 
   componentWillMount: function(){
     //console.log(Partners);
-    if (this.props.route.gameSelected=== "Round Robin"){
-      this.setState({teams: Partners()});
+    // if (this.props.route.gameSelected=== "Round Robin"){
+    //   this.setState({teams: Partners()});
 
-    }
+    // }
   },
 
   render: function(){
     //console.log("round", this.state.teams);
-  if (this.props.route.playerCount === 4){
+  if (this.props.route.gameSelected === "Nassau"){
+    return(
+      <Image source={require('../../assets/grass4.jpeg')} style={styles.backgroundImage}>
+        <View style = {styles.container}>
+          <View>
+            <Text style = {styles.label2}>{this.props.route.course}</Text>
+            <Text style = {styles.label2}></Text>
+            <Text style = {styles.label3}>Pairs for the Match</Text>
+            <Text style = {styles.label2}></Text>
+            <View style = {styles.flowright}>
+              <Text style = {styles.label}>Team 1</Text>
+              <Text style = {styles.label}>{this.props.route[`player${this.props.route.teams[0]}`]}</Text>
+              <Text style = {styles.label}>{this.props.route[`player${this.props.route.teams[1]}`]}</Text>
+            </View>
+            <View style = {styles.flowright}>
+              <Text style = {styles.label}>Team 2</Text>
+              <Text style = {styles.label}>{this.props.route[`player${this.props.route.teams[2]}`]}</Text>
+              <Text style = {styles.label}>{this.props.route[`player${this.props.route.teams[3]}`]}</Text>
+            </View>
+          </View>
+          <Button text = "Start your Round" onPress = {this.onHole}/>
+        </View>
+      </Image>
+    );
+  }
+
+
+
+  if (this.props.route.gameSelected === "Round Robin"){
       return(
         <Image source={require('../../assets/grass4.jpeg')} style={styles.backgroundImage}>
           <View style = {styles.container}>
@@ -92,7 +120,7 @@ module.exports = React.createClass({
     }
   },
   onHole: function(){
-    this.props.navigator.immediatelyResetRouteStack([{name:'hole', coursepar: this.state.coursepar, coursehcp: this.state.coursehcp,teams:this.state.teams, betLowScore: this.props.route.betLowScore, lowScore: this.props.route.lowScore, lowTotal: this.props.route.lowTotal, indexUsed: this.props.route.indexUsed, gameSelected: this.props.route.gameSelected, course : this.props.route.course, player1: this.props.route.player1, player2: this.props.route.player2, player3:this.props.route.player3, player4: this.props.route.player4, hcpPlayer1: this.props.route.hcpPlayer1, hcpPlayer2: this.props.route.hcpPlayer2, hcpPlayer3: this.props.route.hcpPlayer3, hcpPlayer4: this.props.route.hcpPlayer4, 'playerCount': this.props.route.playerCount}]);
+    this.props.navigator.immediatelyResetRouteStack([{name:'hole', coursepar: this.state.coursepar, coursehcp: this.state.coursehcp,teams:this.props.route.teams, betLowScore: this.props.route.betLowScore, lowScore: this.props.route.lowScore, lowTotal: this.props.route.lowTotal, indexUsed: this.props.route.indexUsed, gameSelected: this.props.route.gameSelected, course : this.props.route.course, player1: this.props.route.player1, player2: this.props.route.player2, player3:this.props.route.player3, player4: this.props.route.player4, hcpPlayer1: this.props.route.hcpPlayer1, hcpPlayer2: this.props.route.hcpPlayer2, hcpPlayer3: this.props.route.hcpPlayer3, hcpPlayer4: this.props.route.hcpPlayer4, 'playerCount': this.props.route.playerCount}]);
   },
 });
 
