@@ -13,8 +13,8 @@ var Button = require('../common/button');
 module.exports = React.createClass({
   getInitialState: function(){
     return {
-      betLowScore:null,
-      betLowTotal:null,
+      betLowScore:"",
+      betLowTotal:"",
       lowScore: true,
       lowTotal: null,
       betFrontNassau: null,

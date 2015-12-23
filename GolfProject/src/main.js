@@ -11,9 +11,9 @@ var CourseFav = require('./components/coursesetup/coursefav');
 var CourseCity = require('./components/coursesetup/coursecity');
 var Players = require('./components/playersetup/players');
 var Game  = require('./components/gamesetup/game');
-var Bets = require('./components/gamesetup/bets');
 var Round = require('./components/currentgame/round');
 var Hole = require('./components/currentgame/hole');
+var BetsRoundRobin = require('./components/gamesetup/betsroundrobin');
 
 
 var ROUTES = {
@@ -23,7 +23,7 @@ var ROUTES = {
   coursecity: CourseCity,
   players: Players,
   game: Game,
-  bets: Bets,
+  betsroundrobin: BetsRoundRobin,
   round: Round,
   hole: Hole,
 

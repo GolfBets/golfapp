@@ -183,6 +183,8 @@ module.exports = React.createClass({
         }
         this.setState(player);
       }
+    }
+    if (this.state.selected ==="Bets"){
       var playerResults  = RoundRobin(this.state, this.props.route);
       this.setState({
         player1Results: playerResults[1],
