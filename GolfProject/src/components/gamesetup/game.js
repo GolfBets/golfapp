@@ -21,7 +21,7 @@ module.exports = React.createClass({
     loaded: false,
     games4player: [{name: "Round Robin"}, {name: "Match Play"}, {name: "Nassau"}, {name: "Skins"}],
     games2player: [{name: "Match Play"}, {name: "Nassau"}, {name: "Skins"}],
-    games3player: [{name: "Round Robin"}, {name: "Skins"}]
+    games3player: [{name: "Skins"}]
     };
   },
 

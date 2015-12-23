@@ -13,13 +13,13 @@ var Button = require('../common/button');
 module.exports = React.createClass({
   getInitialState: function(){
     return {
-      betPerHole: '',
-      betPerRound: '0',
+      betLowScore:null,
+      betLowTotal:null,
       lowScore: true,
       lowTotal: null,
-      puttbet: '0',
-      greensRegulation: '0',
-      fairwaysHit: '0',
+      betFrontNassau: null,
+      betBackNassua: null,
+      betTotalNassau: null,
       answer1:"",
       answer2:''
 
@@ -34,16 +34,15 @@ module.exports = React.createClass({
         <View style = {styles.container}>
           <View style = {styles.container2}>
             <Text style  = {styles.label}>Round Robin Bets</Text>
-
             <Text style = {styles.label}>Enter Bet amount per hole per player</Text>
-            <Text style = {styles.label2}>This is amount that applies to Low Score Bet</Text>
+            <Text style = {styles.label2}>Low Score Bet </Text>
             <TextInput
               style = {styles.input}
               keyboardType = 'numbers-and-punctuation'
-              value = {this.state.betPerHole}
-              onChangeText = {(text)=>{this.setState({betPerHole:text});}}
+              value = {this.state.betLowScore}
+              onChangeText = {(text)=>{this.setState({betLowScore:text});}}
             />
-            <Text style = {styles.label}>Your Bet is ${this.state.betPerHole} per player per hole</Text>
+          <Text style = {styles.label}>Your Bet is ${this.state.betLowScore} per player per hole</Text>
             <Text style = {styles.label}>   </Text>
             <Text style = {styles.label}>Would you like to Bet Low Total per hole</Text>
             <Text style = {styles.label2}>This will double the Bet per hole you entered above</Text>
@@ -96,7 +95,7 @@ module.exports = React.createClass({
     this.props.navigator.pop();
   },
   onStartRound: function(){
-    this.props.navigator.immediatelyResetRouteStack([{name:'round', betPerHole: parseFloat(this.state.betPerHole), lowScore: this.state.lowScore, lowTotal: this.state.lowTotal, indexUsed: this.props.route.indexUsed, gameSelected: this.props.route.gameSelected, course : this.props.route.course, player1: this.props.route.player1, player2: this.props.route.player2, player3:this.props.route.player3, player4: this.props.route.player4, hcpPlayer1: this.props.route.hcpPlayer1, hcpPlayer2: this.props.route.hcpPlayer2, hcpPlayer3: this.props.route.hcpPlayer3, hcpPlayer4: this.props.route.hcpPlayer4, 'playerCount': this.props.route.playerCount}]);
+    this.props.navigator.immediatelyResetRouteStack([{name:'round', betLowScore: parseFloat(this.state.betLowScore), lowScore: this.state.lowScore, lowTotal: this.state.lowTotal, indexUsed: this.props.route.indexUsed, gameSelected: this.props.route.gameSelected, course : this.props.route.course, player1: this.props.route.player1, player2: this.props.route.player2, player3:this.props.route.player3, player4: this.props.route.player4, hcpPlayer1: this.props.route.hcpPlayer1, hcpPlayer2: this.props.route.hcpPlayer2, hcpPlayer3: this.props.route.hcpPlayer3, hcpPlayer4: this.props.route.hcpPlayer4, 'playerCount': this.props.route.playerCount}]);
   },
 });
  var styles  = StyleSheet.create({

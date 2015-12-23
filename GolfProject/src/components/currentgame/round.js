@@ -89,12 +89,12 @@ module.exports = React.createClass({
             </View>
             <Button text = "Start your Round" onPress = {this.onHole}/>
           </View>
-        </Image>  
+        </Image>
       );
     }
   },
   onHole: function(){
-    this.props.navigator.immediatelyResetRouteStack([{name:'hole', coursepar: this.state.coursepar, coursehcp: this.state.coursehcp,teams:this.state.teams,betPerHole: this.props.route.betPerHole, lowScore: this.props.route.lowScore, lowTotal: this.props.route.lowTotal, indexUsed: this.props.route.indexUsed, gameSelected: this.props.route.gameSelected, course : this.props.route.course, player1: this.props.route.player1, player2: this.props.route.player2, player3:this.props.route.player3, player4: this.props.route.player4, hcpPlayer1: this.props.route.hcpPlayer1, hcpPlayer2: this.props.route.hcpPlayer2, hcpPlayer3: this.props.route.hcpPlayer3, hcpPlayer4: this.props.route.hcpPlayer4, 'playerCount': this.props.route.playerCount}]);
+    this.props.navigator.immediatelyResetRouteStack([{name:'hole', coursepar: this.state.coursepar, coursehcp: this.state.coursehcp,teams:this.state.teams, betLowScore: this.props.route.betLowScore, lowScore: this.props.route.lowScore, lowTotal: this.props.route.lowTotal, indexUsed: this.props.route.indexUsed, gameSelected: this.props.route.gameSelected, course : this.props.route.course, player1: this.props.route.player1, player2: this.props.route.player2, player3:this.props.route.player3, player4: this.props.route.player4, hcpPlayer1: this.props.route.hcpPlayer1, hcpPlayer2: this.props.route.hcpPlayer2, hcpPlayer3: this.props.route.hcpPlayer3, hcpPlayer4: this.props.route.hcpPlayer4, 'playerCount': this.props.route.playerCount}]);
   },
 });
 
