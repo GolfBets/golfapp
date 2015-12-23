@@ -46,9 +46,15 @@ function nassau (input, route) {
 	}
 	results.winners = winner()
 	var nassauPressCalculator = require('./nassauPressCalculator.js');
-	results.front = nassauPressCalculator(input.front, 9, results.winners, route.auto9);
-	results.back = nassauPressCalculator(input.back, 18, results.winners, route.auto9);
-	results.all18 = nassauPressCalculator(input.total, 18, results.winners, route.auto18);
-	results.total = results.front + results.back + results.all18;
-	return results
+	results.front = nassauPressCalculator(input.frontPress, 9, results.winners, route.auto9) * route.betFrontNassau;
+	results.back = nassauPressCalculator(input.backPress, 18, results.winners, route.auto9) * route.betBackNassau;
+	results.all18 = nassauPressCalculator(input.totalPress, 18, results.winners, route.auto18) * route.betTotalNassau;
+	var money = results.front + results.back + results.all18
+	results.winnings['team11'] = money;
+	results.winnings['team12'] = money;
+	results.winnings['team21'] = -money;
+	results.winnings['team22'] = -money;
+	return results.winnings;
 }
+
+module.exports = 'nassau';
