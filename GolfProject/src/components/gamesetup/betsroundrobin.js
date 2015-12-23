@@ -8,7 +8,7 @@ var {
 } = React;
 
 var Button = require('../common/button');
-// var SideBets = require('../common/sidebets');
+var Partners = require('../common/random');
 
 module.exports = React.createClass({
   getInitialState: function(){
@@ -21,7 +21,8 @@ module.exports = React.createClass({
       betBackNassua: null,
       betTotalNassau: null,
       answer1:"",
-      answer2:''
+      answer2:'',
+      teams:[],
 
     };
   },
@@ -29,7 +30,7 @@ module.exports = React.createClass({
   render: function(){
     //console.log("bets props",this.props);
     //console.log('bets state', this.state);
-    if (this.props.route.gameSelected === "Round Robin"){
+
       return (
         <View style = {styles.container}>
           <View style = {styles.container2}>
@@ -61,41 +62,14 @@ module.exports = React.createClass({
           </View>
         </View>
       );
-    }
-    if(this.props.route.gameSelected === 'Nassau'){
-      return (
-        <View style = {styles.container}>
-          <Text style  = {styles.label}>Nassau Bets Page</Text>
-
-          <Button text = "Go Back" onPress = {this.onGoBack}/>
-        </View>
-      );
-    }
-    if(this.props.route.gameSelected === 'Skins'){
-      return (
-        <View style = {styles.container}>
-          <Text style  = {styles.label}>Skins Bets Page</Text>
-
-          <Button text = "Go Back" onPress = {this.onGoBack}/>
-        </View>
-      );
-    }
-    if(this.props.route.gameSelected === 'Match Play'){
-      return (
-        <View style = {styles.container}>
-          <Text style  = {styles.label}>Match Play Bets Page</Text>
-
-          <Button text = "Go Back" onPress = {this.onGoBack}/>
-        </View>
-      );
-    }
   },
 
   onGoBack: function(){
     this.props.navigator.pop();
   },
   onStartRound: function(){
-    this.props.navigator.immediatelyResetRouteStack([{name:'round', betLowScore: parseFloat(this.state.betLowScore), lowScore: this.state.lowScore, lowTotal: this.state.lowTotal, indexUsed: this.props.route.indexUsed, gameSelected: this.props.route.gameSelected, course : this.props.route.course, player1: this.props.route.player1, player2: this.props.route.player2, player3:this.props.route.player3, player4: this.props.route.player4, hcpPlayer1: this.props.route.hcpPlayer1, hcpPlayer2: this.props.route.hcpPlayer2, hcpPlayer3: this.props.route.hcpPlayer3, hcpPlayer4: this.props.route.hcpPlayer4, 'playerCount': this.props.route.playerCount}]);
+
+    this.props.navigator.immediatelyResetRouteStack([{name:'round', teams: Partners(), betLowScore: parseFloat(this.state.betLowScore), lowScore: this.state.lowScore, lowTotal: this.state.lowTotal, indexUsed: this.props.route.indexUsed, gameSelected: this.props.route.gameSelected, course : this.props.route.course, player1: this.props.route.player1, player2: this.props.route.player2, player3:this.props.route.player3, player4: this.props.route.player4, hcpPlayer1: this.props.route.hcpPlayer1, hcpPlayer2: this.props.route.hcpPlayer2, hcpPlayer3: this.props.route.hcpPlayer3, hcpPlayer4: this.props.route.hcpPlayer4, 'playerCount': this.props.route.playerCount}]);
   },
 });
  var styles  = StyleSheet.create({
