@@ -3,12 +3,14 @@ var React  = require('react-native');
 var {
   View,
   Text,
-  StyleSheet
+  StyleSheet,
+  Dimensions
 }=React;
 
 var Button  = require('../common/button');
 var ScorecardFront = require('../common/scorecardfront');
 var ScorecardBack = require('../common/scorecardback');
+var {height, width} = Dimensions.get('window');
 
 module.exports= React.createClass({
 
@@ -69,10 +71,17 @@ module.exports= React.createClass({
 var styles = StyleSheet.create({
 
   container: {
-    marginTop:20,
-    padding:20,
+    transform: [{rotate: '90deg'}],
+    marginTop: width/2 - 48,
+    marginLeft: -94,
+    // padding:20,
     backgroundColor:'black',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    // flex: 1,
+    width: height - 60,
+    height: width,
+    // flexDirection: 'row',
+    // alignItems: 'stretch'
   },
   title:{
     fontSize: 25,
@@ -84,7 +93,9 @@ var styles = StyleSheet.create({
     fontSize: 12,
     color: 'white',
     width:21,
-    textAlign:'center'
+    textAlign:'center',
+    borderWidth: 1,
+    borderColor: 'white'
   },
   label1: {
     fontSize: 15,
@@ -104,7 +115,6 @@ var styles = StyleSheet.create({
     width:60
   },
   flowright: {
-    flex:1,
     justifyContent: "space-between",
     flexDirection: 'row',
 
