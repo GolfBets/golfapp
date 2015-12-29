@@ -1,4 +1,5 @@
 var React = require('react-native');
+var PlayerSetup = require('../common/playerSetup');
 
 var {
   View,
@@ -6,6 +7,7 @@ var {
   TextInput,
   StyleSheet,
   TouchableHighlight,
+  Image
 } =  React;
 
 var Button = require('../common/button');
@@ -26,10 +28,12 @@ module.exports = React.createClass({
 
     };
   },
+
   render: function(){
-    //console.log(this.state);
+    console.log(this.state);
     if (this.state.playerCount === 1){
       return (
+        <Image source={require('../../assets/grass4.jpeg')} style={styles.backgroundImage}>
           <View style  = {styles.container}>
             <Text style  = {styles.label}>Tap number of players</Text>
             <Text style  = {styles.label}>Including yourself</Text>
@@ -49,175 +53,42 @@ module.exports = React.createClass({
                 <Text style={styles.label3}>4</Text>
               </TouchableHighlight>
           </View>
+        </Image>
       );
     }
-    if (this.state.playerCount=== 2){
-      return(
-        <View style={styles.container}>
-          <Text style ={styles.header}>Enter players below and HCP Indexes </Text>
-          <View style  = {styles.flowright}>
-            <Text style ={styles.label}>Player 1 </Text>
-            <Text style ={styles.label2}>{this.props.route.player1}</Text>
-            <Text  style ={styles.label}>HCP </Text>
-            <TextInput
-              style  = {styles.input2}
-              placeholder = "HCP"
-              value  = {this.state.hcpPlayer1}
-              onChangeText = {(text)=>this.setState({hcpPlayer1:text})}
-              />
+    if (this.state.playerCount>=2){
+      var players = [];
+      for (var i = 2; i <= this.state.playerCount; i++){
+        if (i===2){
+        players.push(<PlayerSetup key = {i} value1 = {this.state.player2}  onChangeText = {(text)=>this.setState({player2: text})} value2 = {this.state.hcpPlayer2}  onChangeText2 = {(text)=>this.setState({hcpPlayer2:text})}/>);
+        }
+        if (i===3){
+        players.push(<PlayerSetup key = {i} value1 = {this.state.player3}  onChangeText = {(text)=>this.setState({player3: text})} value2 = {this.state.hcpPlayer3}  onChangeText2 = {(text)=>this.setState({hcpPlayer3:text})}/>);
+        }
+        if (i===4){
+        players.push(<PlayerSetup key = {i} value1 = {this.state.player4}  onChangeText = {(text)=>this.setState({player4: text})} value2 = {this.state.hcpPlayer4}  onChangeText2 = {(text)=>this.setState({hcpPlayer4:text})}/>);
+        }
+      }
+      return (
+        <Image source={require('../../assets/grass4.jpeg')} style={styles.backgroundImage}>
+          <View style={styles.container}>
+            <Text style ={styles.header}>Enter players below and HCP Indexes </Text>
+            <View style  = {styles.flowright}>
+              <Text style ={styles.label2}>{this.props.route.player1}</Text>
+              <TextInput
+                style  = {styles.input2}
+                placeholder = "HCP"
+                value  = {this.state.hcpPlayer1}
+                onChangeText = {(text)=>this.setState({hcpPlayer1:text})}
+                />
+            </View>
+            <View>{players}</View>
+            <Button text = {"Submit Players"} onPress = {this.onSubmitPlayers}/>
+              <Text  style ={styles.label}></Text>
+            <Button text = {"Oops! Go Back"} onPress = {()=>this.setState({playerCount: 1})}/>
+            <View style = {styles.container2}></View>
           </View>
-          <View style  = {styles.flowright}>
-            <Text style ={styles.label}>Player 2 </Text>
-            <TextInput
-              style  = {styles.input}
-              placeholder = "Name"
-              value  = {this.state.Player2}
-              onChangeText = {(text)=>this.setState({player2: text})}
-              />
-            <Text  style ={styles.label}>HCP </Text>
-            <TextInput
-              style  = {styles.input2}
-              placeholder = "HCP"
-              value  = {this.state.hcpPlayer2}
-              onChangeText = {(text)=>this.setState({hcpPlayer2:text})}
-              />
-          </View>
-          <Button text = {"Submit Players"} onPress = {this.onSubmitPlayers}/>
-            <Text  style ={styles.label}></Text>
-          <Button text = {"Oops! Go Back"} onPress = {()=>this.setState({playerCount: 1})}/>
-          <View style = {styles.container2}></View>
-
-        </View>
-      );
-    }
-    if (this.state.playerCount=== 3){
-      return(
-        <View style={styles.container}>
-          <Text style ={styles.header}>Enter players below and HCP Indexes </Text>
-          <View style  = {styles.flowright}>
-            <Text style ={styles.label}>Player 1 </Text>
-            <Text style ={styles.label2}>{this.props.route.player1}</Text>
-            <Text  style ={styles.label}>HCP </Text>
-            <TextInput
-              style  = {styles.input2}
-              placeholder = "HCP"
-              value  = {this.state.hcpPlayer1}
-              onChangeText = {(text)=>this.setState({hcpPlayer1:text})}
-              />
-          </View>
-          <View style  = {styles.flowright}>
-            <Text style ={styles.label}>Player 2 </Text>
-            <TextInput
-              style  = {styles.input}
-              placeholder = "Name"
-              value  = {this.state.Player2}
-              onChangeText = {(text)=>this.setState({player2: text})}
-              />
-            <Text  style ={styles.label}>HCP </Text>
-            <TextInput
-              style  = {styles.input2}
-              placeholder = "HCP"
-              value  = {this.state.hcpPlayer2}
-              onChangeText = {(text)=>this.setState({hcpPlayer2:text})}
-              />
-          </View>
-          <View style  = {styles.flowright}>
-            <Text style ={styles.label}>Player 3 </Text>
-            <TextInput
-              style  = {styles.input}
-              placeholder = "Name"
-              value  = {this.state.Player3}
-              onChangeText = {(text)=>this.setState({player3: text})}
-              />
-            <Text  style ={styles.label}>HCP </Text>
-            <TextInput
-              style  = {styles.input2}
-              placeholder = "HCP"
-              value  = {this.state.hcpPlayer3}
-              onChangeText = {(text)=>this.setState({hcpPlayer3: text})}
-              />
-          </View>
-          <Button text = {"Submit Players"} onPress = {this.onSubmitPlayers}/>
-          <Text  style ={styles.label}></Text>
-          <Button text = {"Oops! Go Back"} onPress = {()=>this.setState({playerCount: 1})}/>
-          <View style = {styles.container2}></View>
-
-        </View>
-      );
-    }
-    if (this.state.playerCount=== 4){
-      return(
-        <View style={styles.container}>
-          <Text style ={styles.header}>Enter players below and HCP Indexes </Text>
-          <View style  = {styles.flowright}>
-            <Text style ={styles.label}>Player 1 </Text>
-            <Text style ={styles.label2}>{this.props.route.player1}</Text>
-            <Text  style ={styles.label}>HCP </Text>
-            <TextInput
-              style  = {styles.input2}
-              keyboardType = 'decimal-pad'
-              placeholder = "HCP"
-              value  = {this.state.hcpPlayer1}
-              onChangeText = {(text)=>this.setState({hcpPlayer1:text})}
-              />
-          </View>
-          <View style  = {styles.flowright}>
-            <Text style ={styles.label}>Player 2 </Text>
-            <TextInput
-              style  = {styles.input}
-              placeholder = "Name"
-              value  = {this.state.Player2}
-              onChangeText = {(text)=>this.setState({player2: text})}
-              />
-            <Text  style ={styles.label}>HCP </Text>
-            <TextInput
-              style  = {styles.input2}
-              keyboardType = 'decimal-pad'
-              placeholder = "HCP"
-              value  = {this.state.hcpPlayer2}
-              onChangeText = {(text)=>this.setState({hcpPlayer2:text})}
-              />
-          </View>
-          <View style  = {styles.flowright}>
-            <Text style ={styles.label}>Player 3 </Text>
-            <TextInput
-              style  = {styles.input}
-              placeholder = "Name"
-              value  = {this.state.Player3}
-              onChangeText = {(text)=>this.setState({player3: text})}
-              />
-            <Text  style ={styles.label}>HCP </Text>
-            <TextInput
-              style  = {styles.input2}
-              keyboardType = 'decimal-pad'
-              placeholder = "HCP"
-              value  = {this.state.hcpPlayer3}
-              onChangeText = {(text)=>this.setState({hcpPlayer3: text})}
-              />
-          </View>
-          <View style  = {styles.flowright}>
-            <Text style ={styles.label}>Player 4 </Text>
-            <TextInput
-              style  = {styles.input}
-              placeholder = "Name"
-              value  = {this.state.Player4}
-              onChangeText = {(text)=>this.setState({player4: text})}
-              />
-            <Text  style ={styles.label}>HCP </Text>
-            <TextInput
-              style  = {styles.input2}
-              keyboardType = 'decimal-pad'
-              placeholder = "HCP"
-              value  = {this.state.hcpPlayer4}
-              onChangeText = {(text)=>this.setState({hcpPlayer4:text})}
-              />
-          </View>
-          <Button text = {"Submit Players"} onPress = {this.onSubmitPlayers}/>
-          <Text  style ={styles.label}></Text>
-          <Button text = {"Oops! Go Back"} onPress = {()=>this.setState({playerCount: 1})}/>
-          <View style = {styles.container2}></View>
-
-        </View>
+        </Image>
       );
     }
   },
@@ -233,13 +104,20 @@ var styles  = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'black'
+    backgroundColor: 'transparent'
   },
   container2:{
     flex: 5,
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: 'black'
+  },
+  backgroundImage: {
+    marginTop:20,
+    backgroundColor: 'transparent',
+    flex: 1,
+    alignSelf: 'stretch',
+    width: null,
   },
   header:{
     fontSize: 18,

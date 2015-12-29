@@ -1,4 +1,5 @@
 function nassau (input, route) {
+	console.log("beginning")
 	var results = {};
 	results.scores = [];
 	results.winnings = {};
@@ -54,7 +55,8 @@ function nassau (input, route) {
 	results.winnings['team12'] = money;
 	results.winnings['team21'] = -money;
 	results.winnings['team22'] = -money;
+	console.log("ending")
 	return results.winnings;
 }
 
-module.exports = 'nassau';
+module.exports = nassau;

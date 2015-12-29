@@ -72,7 +72,7 @@ module.exports = React.createClass({
             />
             <Button text={'Select City'} onPress={this.onSelectCity}/>
           </View>
-          <View style = {styles.container2}>
+          <View style = {styles.row}>
             <ListView
               dataSource = {this.state.dataSource}
               renderRow = {this.renderCourse}
@@ -114,8 +114,13 @@ var styles = StyleSheet.create({
     alignItems: 'center',
 
   },
-  container2:{
-    flex: 1
+  row:{
+    flex:1,
+    flexDirection: 'row',
+    justifyContent: 'center',
+
+    padding:10,
+    backgroundColor: 'transparent',
   },
   backgroundImage: {
     marginTop: 20,
