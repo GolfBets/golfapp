@@ -215,7 +215,7 @@ module.exports = React.createClass({
 // in order to dynamically update the player scores  - a clone of the object needs to be created because you can't set state on a nested object or a specific array index - in this case two clones needed to be made to dynamically change all the info
   onSubmitScores: function(){
     if (this.state.image === require('../../assets/grass4.jpeg')){
-      this.setState({image: require('../../assets/grass2.jpeg')});
+      this.setState({image: require('../../assets/grass5.jpeg')});
     }
     else{
       this.setState({image: require('../../assets/grass4.jpeg')});

@@ -9,7 +9,8 @@ var {
   TouchableOpacity,
   TextInput
 } = React;
-
+var Tabbar = require('react-native-tabbar');
+var Item = Tabbar.Item;
 var Parse  = require('parse/react-native');
 var Button = require('../common/button');
 var Api  = require('../common/api');
@@ -24,6 +25,7 @@ module.exports = React.createClass({
       loaded: false,
       course: "",
       city:"",
+      selected:"Favorites"
     };
   },
 
@@ -43,7 +45,12 @@ module.exports = React.createClass({
       })
       .done();
   },
-
+  onTabItemPress: function (name) {
+    console.log(`click on ${name} item`);
+    this.setState({
+      selected: name
+    });
+  },
   render: function(){
     if (!this.state.user || !this.state.loaded){
       return (
@@ -57,30 +64,67 @@ module.exports = React.createClass({
     var username = this.state.user.get('username');
 
     return (
-      <Image source={require('../../assets/grass4.jpeg')} style={styles.backgroundImage}>
-        <View style = {styles.container}>
-          <View style= {styles.container}>
-            <Text style = {styles.label}>Welcome Back {username}!</Text>
-            <Text style = {styles.label}></Text>
-            <Text style = {styles.label}>Select from your favorites</Text>
-            <Text style = {styles.label}>or</Text>
-            <Text style = {styles.label}>Search for a new course by city</Text>
-            <TextInput
-              style  = {styles.input}
-              value  = {this.state.city}
-              onChangeText = {(text)=>this.setState({city: text})}
-            />
-            <Button text={'Select City'} onPress={this.onSelectCity}/>
-          </View>
-          <View style = {styles.row}>
-            <ListView
-              dataSource = {this.state.dataSource}
-              renderRow = {this.renderCourse}
-              style = {styles.ListView}
-            />
-          </View>
-        </View>
-      </Image>
+
+        <Tabbar selected={this.state.selected} onTabItemPress={this.onTabItemPress}>
+          <Item name="Search By City">
+            <Item.Content>
+              <View style = {{flex: 1}}>
+                <Image source={require('../../assets/grass5.jpeg')} style={styles.backgroundImage}>
+                  <View style = {styles.container}>
+                    <View style= {styles.container}>
+                      <Text style = {styles.label}>Search for a new course by city</Text>
+                      <TextInput
+                        style  = {styles.input}
+                        value  = {this.state.city}
+                        onChangeText = {(text)=>this.setState({city: text})}
+                      />
+                    <Button text={'Search'} onPress={this.onSelectCity}/>
+                    </View>
+                  </View>
+                </Image>
+              </View>
+            </Item.Content>
+            <Item.Icon>
+                <Text>Search By City</Text>
+            </Item.Icon>
+          </Item>
+          <Item name="Favorites">
+            <Item.Content>
+              <View style={{ flex: 1}}>
+                  <Image source={require('../../assets/grass4.jpeg')} style={styles.backgroundImage}>
+                    <View style = {styles.container}>
+                      <View style= {styles.container}>
+                        <Text style = {styles.label}>Welcome Back {username}!</Text>
+                        <Text style = {styles.label}></Text>
+                        <Text style = {styles.label}>Select from your favorites</Text>
+                        <Text style = {styles.label}>or</Text>
+                        <Text style = {styles.label}>Click tab below to search by city</Text>
+                      </View>
+                      <View style = {styles.row}>
+                        <ListView
+                          dataSource = {this.state.dataSource}
+                          renderRow = {this.renderCourse}
+                          style = {styles.ListView}
+                        />
+                      </View>
+                    </View>
+                  </Image>
+              </View>
+            </Item.Content>
+            <Item.Icon>
+                <Text>Favorites</Text>
+            </Item.Icon>
+          </Item>
+          <Item name="test3">
+            <Item.Content>
+              <View style={{flex:1, backgroundColor: 'yellow' }}></View>
+            </Item.Content>
+            <Item.Icon>
+                <Text>Test3 Icon</Text>
+            </Item.Icon>
+          </Item>
+        </Tabbar>
+
     );
   },
   onSelectCity: function(){
@@ -115,7 +159,7 @@ var styles = StyleSheet.create({
 
   },
   row:{
-    flex:1,
+    flex:3,
     flexDirection: 'row',
     justifyContent: 'center',
 

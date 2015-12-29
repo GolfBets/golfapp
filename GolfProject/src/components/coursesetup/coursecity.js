@@ -59,7 +59,6 @@ module.exports = React.createClass({
       <Image source={require('../../assets/grass4.jpeg')} style={styles.backgroundImage}>
         <View style = {styles.container}>
           <View style= {styles.container}>
-            <Text style = {styles.label}>Welcome Back {username}!</Text>
             <Text style = {styles.label}>Select your course below</Text>
             <Text style = {styles.label}>If you don't see your course below</Text>
             <Button text = "Enter new city" onPress={this.onPressNewCity}/>
