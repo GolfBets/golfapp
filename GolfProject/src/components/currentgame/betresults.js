@@ -62,11 +62,11 @@ var styles = StyleSheet.create({
     alignSelf: "center"
   },
   label2: {
-    fontSize: 12,
+    fontSize: 14,
     color: 'white',
   },
   labelName: {
-    fontSize: 12,
+    fontSize: 14,
     color: 'white',
     width:60
   },

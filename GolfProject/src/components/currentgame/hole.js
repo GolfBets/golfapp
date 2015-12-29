@@ -233,62 +233,26 @@ module.exports = React.createClass({
         playernet[`player${i}Netscore`] = updatednetscore;
         this.setState(playernet);
       }
-      //Total front nine and back nine does not depend on starting hole
-
-
-    //   player[`player${i}score`] = updatedscore;
-    //   if (this.state.holeNumber>=9){
-    //     updatedscore.totalFront = 0;
-    //     for (var x=1; x<=9; x++){
-    //       updatedscore.totalFront += this.state[`player${i}score`][`h${x}`];
-    //       player[`player${i}score`] = updatedscore;
-    //     }
-    //   }
-    //   if (this.state.holeNumber===18){
-    //     updatedscore.totalBack = 0;
-    //     for (var y=10; y<=18; y++){
-    //       updatedscore.totalBack += this.state[`player${i}score`][`h${y}`];
-    //       player[`player${i}score`] = updatedscore;
-    //       updatedscore.total = updatedscore.totalFront + updatedscore.totalBack;
-    //     }
-    //   }
-    //   this.setState(player);
     }
-    // //console.log(this.props.route.teams);
-    // //  console.log(this.state);
-    // //console.log(this.state.player1score.totalFront);
-    // var playerResults  = RoundRobin(this.state, this.props.route);
-    // this.setState({
-    //   player1Results: playerResults[1],
-    //   player2Results: playerResults[2],
-    //   player3Results: playerResults[3],
-    //   player4Results: playerResults[4],
-    // });
-
     this.setState({holeNumber: this.state.holeNumber+1});
     for (i = 1; i<=this.props.route.playerCount; i++){
       var score ={};
       score[`score${i}`]=this.props.route.coursepar[this.state.holeNumber-1];
-      this.setState(score);
       if (this.props.route[`hcpPlayer${i}`] >= this.props.route.coursehcp[this.state.holeNumber-1]){
         if(this.props.route[`hcpPlayer${i}`]-18 >= this.props.route.coursehcp[this.state.holeNumber-1]){
             score[`netScore${i}`]=this.props.route.coursepar[this.state.holeNumber-1]-2;
-            this.setState(score);
         }
         else{
           score[`netScore${i}`]=this.props.route.coursepar[this.state.holeNumber-1]-1;
-          this.setState(score);
         }
       }
       else{
         score[`netScore${i}`]=this.props.route.coursepar[this.state.holeNumber-1];
-        this.setState(score);
+
       }
+      this.setState(score);
     }
   },
-  // onSeeResults: function(){
-  //   this.props.navigator.push({name: 'results', player1score: this.state.player1score, player2score: this.state.player2score, player3score: this.state.player3score, player4score: this.state.player4score, player1Netscore: this.state.player1Netscore, player2Netscore: this.state.player2Netscore, player3Netscore: this.state.player3Netscore, player4Netscore: this.state.player4Netscore, teams: this.props.route.teams, player1: this.props.route.player1, player2: this.props.route.player2, player3:this.props.route.player3, player4: this.props.route.player4,course : this.props.route.course, player1Results: this.state.player1Results, player2Results: this.state.player2Results, player3Results: this.state.player3Results, player4Results: this.state.player4Results, playerCount: this.props.route.playerCount});
-  // },
 
   netScoreUpPlayer1: function(){
     this.setState({score1: ++this.state.score1});
