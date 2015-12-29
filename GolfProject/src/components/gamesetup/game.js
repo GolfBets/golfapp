@@ -14,7 +14,6 @@ module.exports = React.createClass({
   getInitialState: function(){
     return {
     gameSelected: "",
-    indexUsed: '',
     dataSource: new ListView.DataSource({
       rowHasChanged: (row1, row2) => row1 !== row2,
     }),
@@ -39,7 +38,7 @@ module.exports = React.createClass({
     if (!this.state.loaded){
       return (<Text>Loading...</Text>);
     }
-    if (this.state.gameSelected !== "" && this.state.indexUsed !== ""){
+    if (this.state.gameSelected !== ""){
       return (
         <View style  = {styles.container}>
           <Button text = "Go Back" onPress = {()=> this.setState({'gameSelected':"", 'indexUsed':""})}/>
@@ -66,17 +65,7 @@ module.exports = React.createClass({
             style = {styles.ListView}
           />
         </View>
-        <View style  = {styles.container2}>
-            <View style  = {styles.container3}>
-              <Text style  = {styles.label}>Would you like to use Handicaps</Text>
-            </View>
-            <View style = {[styles.flowright, styles.container3]}>
-              <Button text = "Yes" onPress= {()=>this.setState({indexUsed: 'YES'})}/>
-                <Text style = {styles.label}>     </Text>
-              <Button text = "No" onPress= {()=>this.setState({indexUsed: 'NO'})}/>
-            </View>
-            <View style = {styles.container4}></View>
-        </View>
+
       </View>
 
     );
@@ -97,8 +86,8 @@ module.exports = React.createClass({
   },
   onSetBets: function(){
     if (this.state.gameSelected === "Round Robin"){
-      this.props.navigator.push({name:'betsroundrobin', indexUsed: this.state.indexUsed, gameSelected: this.state.gameSelected, course : this.props.route.course, player1: this.props.route.player1, player2: this.props.route.player2, player3:this.props.route.player3, player4: this.props.route.player4, hcpPlayer1: this.props.route.hcpPlayer1, hcpPlayer2: this.props.route.hcpPlayer2, hcpPlayer3: this.props.route.hcpPlayer3, hcpPlayer4: this.props.route.hcpPlayer4, 'playerCount': this.props.route.playerCount});
-    }  
+      this.props.navigator.push({name:'betsroundrobin', indexUsed: this.props.route.indexUsed, gameSelected: this.state.gameSelected, course : this.props.route.course, player1: this.props.route.player1, player2: this.props.route.player2, player3:this.props.route.player3, player4: this.props.route.player4, hcpPlayer1: this.props.route.hcpPlayer1, hcpPlayer2: this.props.route.hcpPlayer2, hcpPlayer3: this.props.route.hcpPlayer3, hcpPlayer4: this.props.route.hcpPlayer4, 'playerCount': this.props.route.playerCount});
+    }
     if(this.state.gameSelected === "Nassau"){
       this.props.navigator.push({name:'betsnassau', indexUsed: this.state.indexUsed, gameSelected: this.state.gameSelected, course : this.props.route.course, player1: this.props.route.player1, player2: this.props.route.player2, player3:this.props.route.player3, player4: this.props.route.player4, hcpPlayer1: this.props.route.hcpPlayer1, hcpPlayer2: this.props.route.hcpPlayer2, hcpPlayer3: this.props.route.hcpPlayer3, hcpPlayer4: this.props.route.hcpPlayer4, 'playerCount': this.props.route.playerCount});
     }
