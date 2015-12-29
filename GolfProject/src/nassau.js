@@ -51,11 +51,12 @@ function nassau (input, route) {
 	results.back = nassauPressCalculator(input.backPress, 18, results.winners, route.auto9) * route.betBackNassau;
 	results.all18 = nassauPressCalculator(input.totalPress, 18, results.winners, route.auto18) * route.betTotalNassau;
 	var money = results.front + results.back + results.all18
-	results.winnings['team11'] = money;
-	results.winnings['team12'] = money;
-	results.winnings['team21'] = -money;
-	results.winnings['team22'] = -money;
-	console.log("ending")
+
+	results.winnings[team11] = money;
+	results.winnings[team12] = money;
+	results.winnings[team21] = -money;
+	results.winnings[team22] = -money;
+
 	return results.winnings;
 }
 

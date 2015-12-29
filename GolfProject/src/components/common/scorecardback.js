@@ -36,14 +36,16 @@ module.exports= React.createClass({
 var styles = StyleSheet.create({
   label: {
     fontSize: 12,
-    color: 'white',
-    width:21,
-    textAlign:'center'
+    color: 'black',
+    textAlign:'center',
+    borderColor:'black',
+    borderWidth:1,
+    flex:1
   },
   labelName: {
     fontSize: 12,
-    color: 'white',
-    width:60
+    color: 'black',
+    flex:1.5
   },
   flowright: {
     flex:1,
