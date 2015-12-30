@@ -51,8 +51,6 @@ module.exports = React.createClass({
     };
   },
   componentDidMount: function(){
-    this.setState({selected:'Hole'});
-    console.log("hcp",this.props.route.coursehcp[this.state.holeNumber-1]);
     for (var i = 1; i<=this.props.route.playerCount; i++){
       var score ={};
       score[`score${i}`]=this.props.route.coursepar[this.state.holeNumber-1];
@@ -67,7 +65,6 @@ module.exports = React.createClass({
       }
       else{
         score[`netScore${i}`]=this.props.route.coursepar[this.state.holeNumber-1];
-
       }
       this.setState(score);
     }

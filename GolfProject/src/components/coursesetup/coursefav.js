@@ -32,11 +32,14 @@ module.exports = React.createClass({
   componentWillMount: function(){
     Parse.User.currentAsync()
       .then((user)=>{this.setState({user: user});});
-
-    Api('coursenames/Orange')
+  },
+  componentDidMount: function(){
+    var username = this.state.user.get('username');
+    Api(`getFavorites/${username}`)
       .then((data) =>{
-        //console.log("componentDidMount", data)
-        //console.log("datasource",this.state.dataSource)
+        console.log(this.state.user);
+        console.log("componentDidMount", data);
+        console.log("datasource",this.state.dataSource);
         this.setState({
           dataSource: this.state.dataSource.cloneWithRows(data),
           loaded: true,
@@ -69,11 +72,12 @@ module.exports = React.createClass({
           <Item name="Search By City">
             <Item.Content>
               <View style = {{flex: 1}}>
-                <Image source={require('../../assets/grass5.jpeg')} style={styles.backgroundImage}>
+                <Image source={require('../../assets/grass4.jpeg')} style={styles.backgroundImage}>
                   <View style = {styles.container}>
                     <View style= {styles.container}>
                       <Text style = {styles.label}>Search for a new course by city</Text>
                       <TextInput
+                        placeholder ="Enter City"
                         style  = {styles.input}
                         value  = {this.state.city}
                         onChangeText = {(text)=>this.setState({city: text})}
@@ -85,7 +89,7 @@ module.exports = React.createClass({
               </View>
             </Item.Content>
             <Item.Icon>
-                <Text>Search By City</Text>
+                <Text>Search for Course</Text>
             </Item.Icon>
           </Item>
           <Item name="Favorites">
@@ -97,8 +101,6 @@ module.exports = React.createClass({
                         <Text style = {styles.label}>Welcome Back {username}!</Text>
                         <Text style = {styles.label}></Text>
                         <Text style = {styles.label}>Select from your favorites</Text>
-                        <Text style = {styles.label}>or</Text>
-                        <Text style = {styles.label}>Click tab below to search by city</Text>
                       </View>
                       <View style = {styles.row}>
                         <ListView
