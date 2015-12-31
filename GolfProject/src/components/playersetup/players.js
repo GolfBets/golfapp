@@ -25,13 +25,14 @@ module.exports = React.createClass({
       hcpPlayer3: null,
       hcpPlayer4: null,
       playerCount: 1,
+      indexUsed: "",
 
     };
   },
 
   render: function(){
     console.log(this.state);
-    if (this.state.playerCount === 1){
+    if (this.state.playerCount === 1 || this.state.indexUsed === ""){
       return (
         <Image source={require('../../assets/grass4.jpeg')} style={styles.backgroundImage}>
           <View style  = {styles.container}>
@@ -53,6 +54,16 @@ module.exports = React.createClass({
                 <Text style={styles.label3}>4</Text>
               </TouchableHighlight>
           </View>
+          <View style  = {styles.container}>
+                <Text style  = {styles.label}>Would you like to use Handicaps</Text>
+              <View style = {[styles.flowright]}>
+                <Button text = "Yes" onPress= {()=>this.setState({indexUsed: 'YES'})}/>
+                  <Text style = {styles.label}>     </Text>
+                <Button text = "No" onPress= {()=>this.setState({indexUsed: 'NO'})}/>
+              </View>
+              <View style  = {styles.container}></View>
+          </View>
+
         </Image>
       );
     }
@@ -60,29 +71,25 @@ module.exports = React.createClass({
       var players = [];
       for (var i = 2; i <= this.state.playerCount; i++){
         if (i===2){
-        players.push(<PlayerSetup key = {i} value1 = {this.state.player2}  onChangeText = {(text)=>this.setState({player2: text})} value2 = {this.state.hcpPlayer2}  onChangeText2 = {(text)=>this.setState({hcpPlayer2:text})}/>);
+        players.push(<PlayerSetup key = {i} indexUsed = {this.state.indexUsed} value1 = {this.state.player2}  onChangeText = {(text)=>this.setState({player2: text})} value2 = {this.state.hcpPlayer2}  onChangeText2 = {(text)=>this.setState({hcpPlayer2:text})}/>);
         }
         if (i===3){
-        players.push(<PlayerSetup key = {i} value1 = {this.state.player3}  onChangeText = {(text)=>this.setState({player3: text})} value2 = {this.state.hcpPlayer3}  onChangeText2 = {(text)=>this.setState({hcpPlayer3:text})}/>);
+        players.push(<PlayerSetup key = {i} indexUsed = {this.state.indexUsed} value1 = {this.state.player3}  onChangeText = {(text)=>this.setState({player3: text})} value2 = {this.state.hcpPlayer3}  onChangeText2 = {(text)=>this.setState({hcpPlayer3:text})}/>);
         }
         if (i===4){
-        players.push(<PlayerSetup key = {i} value1 = {this.state.player4}  onChangeText = {(text)=>this.setState({player4: text})} value2 = {this.state.hcpPlayer4}  onChangeText2 = {(text)=>this.setState({hcpPlayer4:text})}/>);
+        players.push(<PlayerSetup key = {i} indexUsed = {this.state.indexUsed} value1 = {this.state.player4}  onChangeText = {(text)=>this.setState({player4: text})} value2 = {this.state.hcpPlayer4}  onChangeText2 = {(text)=>this.setState({hcpPlayer4:text})}/>);
         }
       }
       return (
         <Image source={require('../../assets/grass4.jpeg')} style={styles.backgroundImage}>
           <View style={styles.container}>
-            <Text style ={styles.header}>Enter players below and HCP Indexes </Text>
+            <Text style ={styles.header}>Enter playing partners below </Text>
             <View style  = {styles.flowright}>
               <Text style ={styles.label2}>{this.props.route.player1}</Text>
-              <TextInput
-                style  = {styles.input2}
-                placeholder = "HCP"
-                value  = {this.state.hcpPlayer1}
-                onChangeText = {(text)=>this.setState({hcpPlayer1:text})}
-                />
+              {this.checkIndex()}
             </View>
             <View>{players}</View>
+
             <Button text = {"Submit Players"} onPress = {this.onSubmitPlayers}/>
               <Text  style ={styles.label}></Text>
             <Button text = {"Oops! Go Back"} onPress = {()=>this.setState({playerCount: 1})}/>
@@ -92,9 +99,21 @@ module.exports = React.createClass({
       );
     }
   },
+  checkIndex: function(){
+    if (this.state.indexUsed  === "YES"){
+      return (
+        <TextInput
+          style  = {styles.input2}
+          placeholder = "HCP"
+          value  = {this.state.hcpPlayer1}
+          onChangeText = {(text)=>this.setState({hcpPlayer1:text})}
+          />
+      );
+    }
+  },
 
   onSubmitPlayers: function(){
-    this.props.navigator.immediatelyResetRouteStack([{name: "game", course : this.props.route.course, player1: this.props.route.player1, player2: this.state.player2, player3:this.state.player3, player4: this.state.player4, hcpPlayer1: parseFloat(this.state.hcpPlayer1), hcpPlayer2: parseFloat(this.state.hcpPlayer2), hcpPlayer3: parseFloat(this.state.hcpPlayer3), hcpPlayer4: parseFloat(this.state.hcpPlayer4), 'playerCount': this.state.playerCount}]);
+    this.props.navigator.immediatelyResetRouteStack([{name: "game", indexUsed: this.state.indexUsed, course : this.props.route.course, player1: this.props.route.player1, player2: this.state.player2, player3:this.state.player3, player4: this.state.player4, hcpPlayer1: parseFloat(this.state.hcpPlayer1), hcpPlayer2: parseFloat(this.state.hcpPlayer2), hcpPlayer3: parseFloat(this.state.hcpPlayer3), hcpPlayer4: parseFloat(this.state.hcpPlayer4), 'playerCount': this.state.playerCount}]);
   },
 
 });

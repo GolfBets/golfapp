@@ -16,7 +16,7 @@ height = height - 65;
 module.exports= React.createClass({
 
   render: function(){
-    console.log(this.props)
+    console.log(this.props);
     var playersFront  = [];
     var playersBack = [];
     var parFront = this.props.courseInfo.par.slice(0,9);
@@ -30,27 +30,27 @@ module.exports= React.createClass({
     parFront.push(temp, '');
 
     var rowParFront = parFront.map(function(element, index) {
-      return (<Text style = {styles.label}>{element}</Text>)
-    })
+      return (<Text style = {styles.label}>{element}</Text>);
+    });
 
     var temp1 = 0;
-    for (var i = 0; i < parBack.length; i++) {
+    for (i = 0; i < parBack.length; i++) {
       temp1 += parBack[i];
     }
-    var temp2 = temp + temp1
-    parBack.push(temp1, temp2)
+    var temp2 = temp + temp1;
+    parBack.push(temp1, temp2);
     var rowParBack = parBack.map(function(element, index) {
-      return (<Text style = {styles.label}>{element}</Text>)
-    })
+      return (<Text style = {styles.label}>{element}</Text>);
+    });
     hdcpFront.push('','');
     hdcpBack.push('','');
     var rowHdcpFront = hdcpFront.map(function(element, index) {
-      return (<Text style = {styles.label}>{element}</Text>)
-    })
+      return (<Text style = {styles.label}>{element}</Text>);
+    });
     var rowHdcpBack = hdcpBack.map(function(element, index) {
-      return (<Text style = {styles.label}>{element}</Text>)
-    })
-    for (var i = 1; i<=this.props.playerCount; i++){
+      return (<Text style = {styles.label}>{element}</Text>);
+    });
+    for (i = 1; i<=this.props.playerCount; i++){
       playersFront.push(<ScorecardFront key = {i} text1 = {this.props[`player${i}`]} h1 = {this.props[`player${i}score`].h1} h2 = {this.props[`player${i}score`].h2} h3 = {this.props[`player${i}score`].h3} h4 = {this.props[`player${i}score`].h4} h5 = {this.props[`player${i}score`].h5} h6 = {this.props[`player${i}score`].h6} h7 = {this.props[`player${i}score`].h7} h8 = {this.props[`player${i}score`].h8} h9 = {this.props[`player${i}score`].h9} totalFront = {this.props[`player${i}score`].totalFront}/>);
 
       playersBack.push(<ScorecardBack key = {i} text1 = {this.props[`player${i}`]} h10 = {this.props[`player${i}score`].h10} h11 = {this.props[`player${i}score`].h11} h12 = {this.props[`player${i}score`].h12} h13 = {this.props[`player${i}score`].h13} h14 = {this.props[`player${i}score`].h14} h15 = {this.props[`player${i}score`].h15} h16 = {this.props[`player${i}score`].h16} h17 = {this.props[`player${i}score`].h17} h18 = {this.props[`player${i}score`].h18} totalBack = {this.props[`player${i}score`].totalBack} total = {this.props[`player${i}score`].total}/>);

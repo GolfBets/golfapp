@@ -17,14 +17,21 @@ module.exports = React.createClass({
             value  = {this.props.value1}
             onChangeText = {this.props.onChangeText}
             />
-          <TextInput
-            style  = {styles.input2}
-            placeholder = "HCP"
-            value  = {this.props.value2}
-            onChangeText = {this.props.onChangeText2}
-            />
+          {this.checkIndex()}  
         </View>
     );
+  },
+  checkIndex: function(){
+    if (this.props.indexUsed  === "YES"){
+      return (
+        <TextInput
+          style  = {styles.input2}
+          placeholder = "HCP"
+          value  = {this.props.value2}
+          onChangeText = {this.props.onChangeText2}
+          />
+      );
+    }
   },
 });
 
