@@ -39,23 +39,7 @@ module.exports = React.createClass({
     if (!this.state.loaded){
       return (<Text>Loading...</Text>);
     }
-    if (this.state.gameSelected !== ""){
-      return (
-        <Image source={require('../../assets/grass4.jpeg')} style={styles.backgroundImage}>
-          <View style  = {styles.container}>
-            <Button text = "Go Back" onPress = {()=> this.setState({'gameSelected':"", 'indexUsed':""})}/>
-            <Text style = {styles.label}></Text>
-            <Text style = {styles.label}>You selected {this.state.gameSelected}</Text>
-            <Text style = {styles.label}></Text>
-            <Text style = {styles.label}>and</Text>
-            <Text style = {styles.label}></Text>
-            <Text style = {styles.label}>{this.state.indexUsed} for Handicaps</Text>
-            <Text style = {styles.label}></Text>
-            <Button text = "Set up Bets" onPress = {this.onSetBets}/>
-          </View>
-        </Image>  
-      );
-    }
+
     //console.log('game' ,this.state);
     //console.log('props', this.props);
     return (
@@ -69,16 +53,30 @@ module.exports = React.createClass({
               style = {[styles.ListView]}
             />
           </View>
+          {this.gamePicked()}
         </View>
       </Image>
 
     );
   },
+
+  gamePicked: function(){
+    if (this.state.gameSelected !== ""){
+      return(
+        <View style  = {styles.container}>
+          <Button text = "Go Back" onPress = {()=> this.setState({'gameSelected':""})}/>
+          <Text style = {styles.label}></Text>
+          <Text style = {styles.label}>You selected {this.state.gameSelected}</Text>
+          <Button text = "Set up Bets" onPress = {this.onSetBets}/>
+        </View>
+    );
+    }
+  },
   renderGames: function(rowData){
     return (
     <TouchableOpacity onPress={() => this.onPressRow(rowData)}>
       <View style={styles.container2}>
-        <Text style = {[styles.listView, styles.label]}>{rowData.name}</Text>
+        <Text style = {  [styles.listView, styles.label]}>{rowData.name}</Text>
       </View>
     </TouchableOpacity>
     );
@@ -128,6 +126,10 @@ var styles  = StyleSheet.create({
   label: {
     fontSize: 20,
     color: 'white',
+  },
+  labelselect: {
+    fontSize: 20,
+    color: 'black',
   },
   label1: {
     fontSize: 25,
