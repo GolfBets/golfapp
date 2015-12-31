@@ -118,18 +118,18 @@ module.exports= React.createClass({
 var styles = StyleSheet.create({
 
   container: {
-    // transform: [{rotate: '90deg'}],
-    // marginTop: width/2 - 48,
-    marginTop: 20,
-    marginLeft: 10,
+    transform: [{rotate: '90deg'}],
+    marginTop: width/2 - 48,
+    // marginTop: 20,
+    // marginLeft: 10,
     marginRight: 10,
-    // marginLeft: -94,
+    marginLeft: -94,
     // padding:20,
     backgroundColor:'white',
     justifyContent: 'center',
     // flex: 1,
-    // width: height,
-    // height: width,
+    width: height - 20,
+    height: width,
     // flexDirection: 'row',
     // alignItems: 'stretch'
   },
