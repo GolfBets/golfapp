@@ -10,6 +10,7 @@ var {
 
 var Button = require('../common/button');
 var Parse = require('parse/react-native');
+var Post = require('../common/post');
 module.exports = React.createClass({
 
   getInitialState: function(){
@@ -62,12 +63,16 @@ module.exports = React.createClass({
     if(this.state.password !== this.state.passwordconfirmation){
       return this.setState({errorMessage: 'Your passwords do not match'});
     }
+    Post('createuser', {username: this.state.username});
     var user = new Parse.User();
     user.set('username', this.state.username);
     user.set('password', this.state.password);
 
     user.signUp(null, {
-      success:(user) => {this.props.navigator.immediatelyResetRouteStack([{name: 'coursefav'}]);},
+      success:(user) => {
+        console.log(user);
+        // Post('createuser', )
+        this.props.navigator.immediatelyResetRouteStack([{name: 'coursefav'}]);},
       error:(user, error) => {this.setState({errorMessage: error});}
     });
   },
