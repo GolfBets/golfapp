@@ -5,7 +5,8 @@ var {
   Text,
   StyleSheet,
   TextInput,
-  Image
+  Image,
+  Platform
 } = React;
 
 var Parse = require('parse/react-native');
@@ -71,7 +72,7 @@ var styles  = StyleSheet.create({
     flex: 1
   },
   backgroundImage: {
-    marginTop:20,
+    marginTop:(Platform.OS === 'ios') ? 20 : 0,
     backgroundColor: 'transparent',
     flex: 1,
     alignSelf: 'stretch',
