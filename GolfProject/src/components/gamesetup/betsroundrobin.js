@@ -5,6 +5,7 @@ var {
   Text,
   TextInput,
   StyleSheet,
+  Platform
 } = React;
 
 var Button = require('../common/button');

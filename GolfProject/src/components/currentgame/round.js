@@ -4,7 +4,8 @@ var{
   View,
   Text,
   StyleSheet,
-  Image
+  Image,
+  Platform
 } = React;
 
 var Api = require('../common/api');
@@ -135,7 +136,7 @@ var styles = StyleSheet.create({
     backgroundColor: 'transparent'
   },
   backgroundImage: {
-    marginTop: 20,
+    marginTop:(Platform.OS === 'ios') ? 20 : 0,
     backgroundColor: 'transparent',
     flex: 1,
     alignSelf: 'stretch',

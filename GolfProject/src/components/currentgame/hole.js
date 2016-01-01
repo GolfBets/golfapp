@@ -6,7 +6,8 @@ var{
   StyleSheet,
   TextInput,
   Image,
-  TouchableHighlight
+  TouchableHighlight,
+  Platform
 } = React;
 
 var Tabbar = require('react-native-tabbar');
@@ -371,7 +372,7 @@ var styles = StyleSheet.create({
   backgroundImage: {
     backgroundColor: 'transparent',
     flex: 1,
-    marginTop: 20,
+    marginTop:(Platform.OS === 'ios') ? 20 : 0,
     alignSelf: 'stretch',
     width: null,
   },

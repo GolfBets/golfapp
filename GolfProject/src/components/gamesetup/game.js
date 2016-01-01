@@ -6,7 +6,8 @@ var {
   ListView,
   StyleSheet,
   TouchableOpacity,
-  Image
+  Image,
+  Platform
 } = React;
 var Button = require('../common/button');
 var games  = [{name: "Round Robin"}, {name: "Match Play"}, {name: "Nassau"}];
@@ -117,7 +118,7 @@ var styles  = StyleSheet.create({
     alignItems: 'center',
   },
   backgroundImage: {
-    marginTop: 20,
+    marginTop:(Platform.OS === 'ios') ? 20 : 0,
     backgroundColor: 'transparent',
     flex: 1,
     alignSelf: 'stretch',

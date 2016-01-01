@@ -3,7 +3,8 @@ var React  = require('react-native');
 var {
   View,
   Text,
-  StyleSheet
+  StyleSheet,
+  Platform
 }=React;
 
 

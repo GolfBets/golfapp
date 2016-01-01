@@ -7,7 +7,8 @@ var {
   Image,
   ListView,
   TouchableOpacity,
-  TextInput
+  TextInput,
+  Platform
 } = React;
 var Tabbar = require('react-native-tabbar');
 var Item = Tabbar.Item;
@@ -34,12 +35,12 @@ module.exports = React.createClass({
       .then((user)=>{this.setState({user: user});});
   },
   componentDidMount: function(){
+
     var username = this.state.user.get('username');
+
     Api(`getFavorites/${username}`)
       .then((data) =>{
-        console.log(this.state.user);
-        console.log("componentDidMount", data);
-        console.log("datasource",this.state.dataSource);
+
         this.setState({
           dataSource: this.state.dataSource.cloneWithRows(data),
           loaded: true,
@@ -169,7 +170,7 @@ var styles = StyleSheet.create({
     backgroundColor: 'transparent',
   },
   backgroundImage: {
-    marginTop: 20,
+    marginTop:(Platform.OS === 'ios') ? 20 : 0,
     backgroundColor: 'transparent',
     flex: 1,
     alignSelf: 'stretch',

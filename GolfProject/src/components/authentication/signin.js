@@ -18,7 +18,7 @@ module.exports =  React.createClass({
     return{
      username: '',
      password: '',
-     errorMessage: ''
+     errorMessage: '',
     };
   },
 
@@ -55,8 +55,9 @@ module.exports =  React.createClass({
   },
 
   onPress: function(){
+
     Parse.User.logIn(this.state.username, this.state.password,{
-      success: (user) => {this.props.navigator.immediatelyResetRouteStack([{name: 'coursefav'}]);},
+      success: (user) => {this.props.navigator.immediatelyResetRouteStack([{name: 'coursefav'}]); },
       error: (data, error) => {this.setState({errorMessage: error.message});}
     });
   }

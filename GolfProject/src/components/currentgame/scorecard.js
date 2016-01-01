@@ -4,7 +4,8 @@ var {
   View,
   Text,
   StyleSheet,
-  Dimensions
+  Dimensions,
+  Platform
 }=React;
 
 var Button  = require('../common/button');

@@ -6,7 +6,8 @@ var {
   TextInput,
   StyleSheet,
   TouchableHighlight,
-  Image
+  Image,
+  Platform
 } = React;
 
 var Button = require('../common/button');
@@ -170,7 +171,7 @@ module.exports = React.createClass({
      justifyContent: 'space-around',
    },
    backgroundImage: {
-     marginTop: 20,
+     marginTop:(Platform.OS === 'ios') ? 20 : 0,
      backgroundColor: 'transparent',
      flex: 1,
      alignSelf: 'stretch',

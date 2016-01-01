@@ -4,7 +4,8 @@ var {
   View,
   Text,
   StyleSheet,
-  ListView
+  ListView,
+  Platform
 }=React;
 
 var Api  = require('../common/api');
