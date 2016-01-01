@@ -53,15 +53,6 @@ module.exports = React.createClass({
     if (this.state.playerCount === 1 || this.state.indexUsed === ""){
       return (
         <Tabbar selected={this.state.selected} onTabItemPress={this.onTabItemPress}>
-          <Item>
-            <Item.Content>
-              <View style={{ flex: 1}}>
-              </View>
-            </Item.Content>
-            <Item.Icon>
-                <Text></Text>
-            </Item.Icon>
-          </Item>
           <Item name="numberplayers">
             <Item.Content>
               <View style={{ flex: 1}}>
@@ -99,15 +90,6 @@ module.exports = React.createClass({
             </Item.Content>
             <Item.Icon>
                 <Text># of Players</Text>
-            </Item.Icon>
-          </Item>
-          <Item>
-            <Item.Content>
-              <View style={{flex:1}}>
-              </View>
-            </Item.Content>
-            <Item.Icon>
-                <Text></Text>
             </Item.Icon>
           </Item>
         </Tabbar>
@@ -164,7 +146,7 @@ module.exports = React.createClass({
               </View>
             </Item.Content>
             <Item.Icon>
-                <Text>Next</Text>
+                <Text>Submit</Text>
             </Item.Icon>
           </Item>
         </Tabbar>

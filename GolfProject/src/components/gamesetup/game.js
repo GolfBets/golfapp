@@ -9,6 +9,9 @@ var {
   Image,
   Platform
 } = React;
+
+var Tabbar = require('react-native-tabbar');
+var Item = Tabbar.Item;
 var Button = require('../common/button');
 var games  = [{name: "Round Robin"}, {name: "Match Play"}, {name: "Nassau"}];
 
@@ -16,6 +19,7 @@ module.exports = React.createClass({
   getInitialState: function(){
     return {
     gameSelected: "",
+    selected: "games",
     dataSource: new ListView.DataSource({
       rowHasChanged: (row1, row2) => row1 !== row2,
     }),
@@ -35,7 +39,15 @@ module.exports = React.createClass({
       loaded: true,
     });
   },
+  onTabItemPress: function (name) {
+    this.setState({
+      selected: name
+    });
+    if (this.state.selected === "setbets"){
+      this.onSetBets();
+    }
 
+  },
   render: function(){
     if (!this.state.loaded){
       return (<Text>Loading...</Text>);
@@ -44,20 +56,40 @@ module.exports = React.createClass({
     //console.log('game' ,this.state);
     //console.log('props', this.props);
     return (
-      <Image source={require('../../assets/grass4.jpeg')} style={styles.backgroundImage}>
-        <View style = {styles.container}>
-          <View  style  = {styles.container2}>
-            <Text style = {styles.label1}>Select your Game</Text>
-            <ListView
-              dataSource = {this.state.dataSource}
-              renderRow = {this.renderGames}
-              style = {[styles.ListView]}
-            />
-          </View>
-          {this.gamePicked()}
-        </View>
-      </Image>
+      <Tabbar selected={this.state.selected} onTabItemPress={this.onTabItemPress}>
+        <Item name="games">
+          <Item.Content>
+            <View style={{ flex: 1}}>
+              <Image source={require('../../assets/grass4.jpeg')} style={styles.backgroundImage}>
+                <View style = {styles.container}>
+                  <View  style  = {styles.container2}>
+                    <Text style = {styles.label1}>Select your Game</Text>
+                    <ListView
+                      dataSource = {this.state.dataSource}
+                      renderRow = {this.renderGames}
+                      style = {[styles.ListView]}
+                    />
+                  </View>
+                  {this.gamePicked()}
+                </View>
+              </Image>
+            </View>
+          </Item.Content>
+          <Item.Icon>
+              <Text>Games</Text>
+          </Item.Icon>
+        </Item>
+        <Item name="setbets">
+          <Item.Content>
+            <View style={{flex:1}}>
 
+            </View>
+          </Item.Content>
+          <Item.Icon>
+              <Text>Next</Text>
+          </Item.Icon>
+        </Item>
+      </Tabbar>
     );
   },
 
@@ -65,10 +97,7 @@ module.exports = React.createClass({
     if (this.state.gameSelected !== ""){
       return(
         <View style  = {styles.container}>
-          <Button text = "Go Back" onPress = {()=> this.setState({'gameSelected':""})}/>
-          <Text style = {styles.label}></Text>
           <Text style = {styles.label}>You selected {this.state.gameSelected}</Text>
-          <Button text = "Set up Bets" onPress = {this.onSetBets}/>
         </View>
     );
     }
