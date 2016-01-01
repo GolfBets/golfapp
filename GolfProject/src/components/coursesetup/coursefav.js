@@ -50,7 +50,6 @@ module.exports = React.createClass({
       .done();
   },
   onTabItemPress: function (name) {
-    console.log(`click on ${name} item`);
     this.setState({
       selected: name
     });
@@ -70,27 +69,12 @@ module.exports = React.createClass({
     return (
 
         <Tabbar selected={this.state.selected} onTabItemPress={this.onTabItemPress}>
-          <Item name="Search By City">
+          <Item name="Profile">
             <Item.Content>
-              <View style = {{flex: 1}}>
-                <Image source={require('../../assets/grass4.jpeg')} style={styles.backgroundImage}>
-                  <View style = {styles.container}>
-                    <View style= {styles.container}>
-                      <Text style = {styles.label}>Search for a new course by city</Text>
-                      <TextInput
-                        placeholder ="Enter City"
-                        style  = {styles.input}
-                        value  = {this.state.city}
-                        onChangeText = {(text)=>this.setState({city: text})}
-                      />
-                    <Button text={'Search'} onPress={this.onSelectCity}/>
-                    </View>
-                  </View>
-                </Image>
-              </View>
+              <View style={{flex:1, backgroundColor: 'yellow' }}></View>
             </Item.Content>
             <Item.Icon>
-                <Text>Search for Course</Text>
+                <Text>Profile</Text>
             </Item.Icon>
           </Item>
           <Item name="Favorites">
@@ -118,12 +102,27 @@ module.exports = React.createClass({
                 <Text>Favorites</Text>
             </Item.Icon>
           </Item>
-          <Item name="test3">
+          <Item name="Search By City">
             <Item.Content>
-              <View style={{flex:1, backgroundColor: 'yellow' }}></View>
+              <View style = {{flex: 1}}>
+                <Image source={require('../../assets/grass4.jpeg')} style={styles.backgroundImage}>
+                  <View style = {styles.container}>
+                    <View style= {styles.container}>
+                      <Text style = {styles.label}>Search for a new course by city</Text>
+                      <TextInput
+                        placeholder ="Enter City"
+                        style  = {styles.input}
+                        value  = {this.state.city}
+                        onChangeText = {(text)=>this.setState({city: text})}
+                      />
+                    <Button text={'Search'} onPress={this.onSelectCity}/>
+                    </View>
+                  </View>
+                </Image>
+              </View>
             </Item.Content>
             <Item.Icon>
-                <Text>Test3 Icon</Text>
+                <Text>Course Search</Text>
             </Item.Icon>
           </Item>
         </Tabbar>

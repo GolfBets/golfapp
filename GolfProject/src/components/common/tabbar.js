@@ -31,7 +31,7 @@ module.exports = React.createClass({
       <Tabbar selected={this.state.selected} onTabItemPress={this.onTabItemPress}>
         <Item name="test1">
           <Item.Content>
-            <View>
+            <View style={{ flex: 1}}>
 
             </View>
           </Item.Content>
@@ -41,7 +41,9 @@ module.exports = React.createClass({
         </Item>
         <Item name="test2">
           <Item.Content>
-            <View style={{ flex: 1, backgroundColor: 'red' }}></View>
+            <View style={{ flex: 1}}>
+
+            </View>
           </Item.Content>
           <Item.Icon>
               <Text>Test2 Icon</Text>
@@ -49,7 +51,9 @@ module.exports = React.createClass({
         </Item>
         <Item name="test3">
           <Item.Content>
-            <View style={{flex:1, backgroundColor: 'yellow' }}></View>
+            <View style={{flex:1}}>
+              
+            </View>
           </Item.Content>
           <Item.Icon>
               <Text>Test3 Icon</Text>

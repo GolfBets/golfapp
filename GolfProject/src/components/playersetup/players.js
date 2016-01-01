@@ -10,7 +10,8 @@ var {
   Image,
   Platform
 } =  React;
-
+var Tabbar = require('react-native-tabbar');
+var Item = Tabbar.Item;
 var Button = require('../common/button');
 
 module.exports = React.createClass({
@@ -27,45 +28,90 @@ module.exports = React.createClass({
       hcpPlayer4: null,
       playerCount: 1,
       indexUsed: "",
+      selected: "numberplayers",
+      selected2: "players"
 
     };
   },
-
+  onTabItemPress: function (name) {
+    this.setState({
+      selected: name
+    });
+    if (this.state.selected === "goback"){
+      this.setState({
+        selected : "numberplayers",
+        indexUsed: "",
+        playerCount: 1
+      });
+    }
+    if (this.state.selected === "submitplayers"){
+      this.onSubmitPlayers();
+    }
+  },
   render: function(){
     console.log(this.state);
     if (this.state.playerCount === 1 || this.state.indexUsed === ""){
       return (
-        <Image source={require('../../assets/grass4.jpeg')} style={styles.backgroundImage}>
-          <View style  = {styles.container}>
-            <Text style  = {styles.label}>Tap number of players</Text>
-            <Text style  = {styles.label}>Including yourself</Text>
-            <Text style  = {styles.label}></Text>
-              <TouchableHighlight
-                onPress={()=>this.setState({playerCount: 2})}>
-                <Text style={styles.label3}>2</Text>
-              </TouchableHighlight>
-              <Text style  = {styles.label}></Text>
-              <TouchableHighlight
-                onPress={()=>this.setState({playerCount: 3})}>
-                <Text style={styles.label3}>3</Text>
-              </TouchableHighlight>
-              <Text style  = {styles.label}></Text>
-              <TouchableHighlight
-                onPress={()=>this.setState({playerCount: 4})}>
-                <Text style={styles.label3}>4</Text>
-              </TouchableHighlight>
-          </View>
-          <View style  = {styles.container}>
-                <Text style  = {styles.label}>Would you like to use Handicaps</Text>
-              <View style = {[styles.flowright]}>
-                <Button text = "Yes" onPress= {()=>this.setState({indexUsed: 'YES'})}/>
-                  <Text style = {styles.label}>     </Text>
-                <Button text = "No" onPress= {()=>this.setState({indexUsed: 'NO'})}/>
+        <Tabbar selected={this.state.selected} onTabItemPress={this.onTabItemPress}>
+          <Item>
+            <Item.Content>
+              <View style={{ flex: 1}}>
               </View>
-              <View style  = {styles.container}></View>
-          </View>
+            </Item.Content>
+            <Item.Icon>
+                <Text></Text>
+            </Item.Icon>
+          </Item>
+          <Item name="numberplayers">
+            <Item.Content>
+              <View style={{ flex: 1}}>
+                <Image source={require('../../assets/grass4.jpeg')} style={styles.backgroundImage}>
+                  <View style  = {styles.container}>
+                    <Text style  = {styles.label}>Tap number of players</Text>
+                    <Text style  = {styles.label}>Including yourself</Text>
+                    <Text style  = {styles.label}></Text>
+                      <TouchableHighlight
+                        onPress={()=>this.setState({playerCount: 2})}>
+                        <Text style={styles.label3}>2</Text>
+                      </TouchableHighlight>
+                      <Text style  = {styles.label}></Text>
+                      <TouchableHighlight
+                        onPress={()=>this.setState({playerCount: 3})}>
+                        <Text style={styles.label3}>3</Text>
+                      </TouchableHighlight>
+                      <Text style  = {styles.label}></Text>
+                      <TouchableHighlight
+                        onPress={()=>this.setState({playerCount: 4})}>
+                        <Text style={styles.label3}>4</Text>
+                      </TouchableHighlight>
+                  </View>
+                  <View style  = {styles.container}>
+                        <Text style  = {styles.label}>Would you like to use Handicaps</Text>
+                      <View style = {[styles.flowright]}>
+                        <Button text = "Yes" onPress= {()=>this.setState({indexUsed: 'YES'})}/>
+                          <Text style = {styles.label}>     </Text>
+                        <Button text = "No" onPress= {()=>this.setState({indexUsed: 'NO'})}/>
+                      </View>
+                      <View style  = {styles.container}></View>
+                  </View>
+                </Image>
+              </View>
+            </Item.Content>
+            <Item.Icon>
+                <Text># of Players</Text>
+            </Item.Icon>
+          </Item>
+          <Item>
+            <Item.Content>
+              <View style={{flex:1}}>
+              </View>
+            </Item.Content>
+            <Item.Icon>
+                <Text></Text>
+            </Item.Icon>
+          </Item>
+        </Tabbar>
 
-        </Image>
       );
     }
     if (this.state.playerCount>=2){
@@ -82,21 +128,48 @@ module.exports = React.createClass({
         }
       }
       return (
-        <Image source={require('../../assets/grass4.jpeg')} style={styles.backgroundImage}>
-          <View style={styles.container}>
-            <Text style ={styles.header}>Enter playing partners below </Text>
-            <View style  = {styles.flowright}>
-              <Text style ={styles.label2}>{this.props.route.player1}</Text>
-              {this.checkIndex()}
-            </View>
-            <View>{players}</View>
+        <Tabbar selected={this.state.selected2} onTabItemPress={this.onTabItemPress}>
+          <Item name="goback">
+            <Item.Content>
+              <View style={{ flex: 1}}>
+              </View>
+            </Item.Content>
+            <Item.Icon>
+                <Text>Go Back</Text>
+            </Item.Icon>
+          </Item>
+          <Item name = "players">
+            <Item.Content>
+              <View style={{ flex: 1}}>
+                <Image source={require('../../assets/grass4.jpeg')} style={styles.backgroundImage}>
+                  <View style={styles.container}>
+                    <Text style ={styles.header}>Enter playing partners below </Text>
+                    <View style  = {styles.flowright}>
+                      <Text style ={styles.label2}>{this.props.route.player1}</Text>
+                      {this.checkIndex()}
+                    </View>
+                    <View>{players}</View>
+                    <View style = {styles.container2}></View>
+                  </View>
+                </Image>
+              </View>
+            </Item.Content>
+            <Item.Icon>
+                <Text>Players</Text>
+            </Item.Icon>
+          </Item>
+          <Item name = "submitplayers">
+            <Item.Content>
+              <View style={{flex:1}}>
+              </View>
+            </Item.Content>
+            <Item.Icon>
+                <Text>Next</Text>
+            </Item.Icon>
+          </Item>
+        </Tabbar>
 
-            <Button text = {"Submit Players"} onPress = {this.onSubmitPlayers}/>
-              <Text  style ={styles.label}></Text>
-            <Button text = {"Oops! Go Back"} onPress = {()=>this.setState({playerCount: 1})}/>
-            <View style = {styles.container2}></View>
-          </View>
-        </Image>
+
       );
     }
   },
