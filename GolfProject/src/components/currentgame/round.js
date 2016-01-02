@@ -65,13 +65,13 @@ module.exports = React.createClass({
           <Item.Content>
             <View style={{ flex: 1}}>
               <Image source={require('../../assets/grass4.jpeg')} style={styles.backgroundImage}>
-                <View style = {styles.container}>
+                <View style = {styles.container2}>
                   <View>
                     <Text style = {styles.label2}>{this.props.route.course}</Text>
-                    <Text style = {styles.label2}></Text>
                   </View>
+                </View>
+                <View style = {styles.container}>
                   {this.gamePicked()}
-                  <Button text = "Start your Round" onPress = {this.onHole}/>
                 </View>
               </Image>
             </View>
@@ -168,9 +168,16 @@ module.exports = React.createClass({
 });
 
 var styles = StyleSheet.create({
-  container: {
+  container2:{
     flex:1,
     justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'transparent'
+  },
+
+  container: {
+    flex:5,
+    justifyContent: 'flex-start',
     alignItems: 'center',
     backgroundColor: 'transparent'
   },
@@ -190,7 +197,7 @@ var styles = StyleSheet.create({
   label2: {
     fontSize: 18,
     color: 'white',
-    alignSelf: "center"
+    alignSelf: "flex-start"
 
   },
   label3: {
