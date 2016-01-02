@@ -39,7 +39,7 @@ var styles = StyleSheet.create({
   container: {
     marginTop:20,
     padding:20,
-    backgroundColor:'black',
+    backgroundColor:'transparent',
     justifyContent: 'center'
   },
   title:{

@@ -155,7 +155,9 @@ module.exports = React.createClass({
         <Item name="Bets">
           <Item.Content>
             <View style={{flex:1}}>
-              <BetResults  player1={this.props.route.player1} player2={this.props.route.player2} player3={this.props.route.player3} player4= {this.props.route.player4} course ={this.props.route.course} player1Results= {this.state.player1Results} player2Results={this.state.player2Results} player3Results={this.state.player3Results} player4Results={this.state.player4Results} playerCount = {this.props.route.playerCount}/>
+              <Image source={this.state.image} style={styles.backgroundImage}>
+                <BetResults  player1={this.props.route.player1} player2={this.props.route.player2} player3={this.props.route.player3} player4= {this.props.route.player4} course ={this.props.route.course} player1Results= {this.state.player1Results} player2Results={this.state.player2Results} player3Results={this.state.player3Results} player4Results={this.state.player4Results} playerCount = {this.props.route.playerCount}/>
+              </Image>
             </View>
           </Item.Content>
           <Item.Icon>
