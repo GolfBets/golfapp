@@ -16,6 +16,7 @@ var Hole = require('./components/currentgame/hole');
 var BetsRoundRobin = require('./components/gamesetup/betsroundrobin');
 var BetsNassau = require('./components/gamesetup/betsnassau');
 var Profile = require('./components/profile/profile');
+var EndGame = require('./components/endgame/endgame');
 
 var ROUTES = {
   signin: Signin,
@@ -29,6 +30,7 @@ var ROUTES = {
   round: Round,
   hole: Hole,
   profile: Profile,
+  endgame: EndGame,
 
 };
 

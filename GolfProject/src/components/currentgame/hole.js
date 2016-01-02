@@ -235,6 +235,9 @@ module.exports = React.createClass({
       }
     }
     this.setState({holeNumber: this.state.holeNumber+1});
+    if (this.state.holeNumber===19){
+      this.endGame();
+    }
     for (i = 1; i<=this.props.route.playerCount; i++){
       var score ={};
       score[`score${i}`]=this.props.route.coursepar[this.state.holeNumber-1];
@@ -253,7 +256,9 @@ module.exports = React.createClass({
       this.setState(score);
     }
   },
-
+  endGame: function(){
+    this.props.navigator.immediatelyResetRouteStack([{name:'endgame'}]);
+  },
   netScoreUpPlayer1: function(){
     this.setState({score1: ++this.state.score1});
     if (this.props.route.hcpPlayer1 >= this.props.route.coursehcp[this.state.holeNumber-1]){
