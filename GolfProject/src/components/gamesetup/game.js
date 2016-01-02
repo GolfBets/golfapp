@@ -44,7 +44,9 @@ module.exports = React.createClass({
       selected: name
     });
     if (this.state.selected === "setbets"){
+      this.setState({selected:'games'})
       this.onSetBets();
+
     }
 
   },
