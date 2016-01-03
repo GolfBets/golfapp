@@ -14,6 +14,7 @@ var Item = Tabbar.Item;
 var Parse  = require('parse/react-native');
 var Button = require('../common/button');
 var Api  = require('../common/api');
+var Post = require('../common/post');
 
 module.exports = React.createClass({
   getInitialState: function(){
@@ -82,22 +83,10 @@ module.exports = React.createClass({
             <View style={{ flex: 1}}>
               <Image source={require('../../assets/grass4.jpeg')} style={styles.backgroundImage}>
                 <View style = {styles.container}>
-                  <View style= {styles.container}>
-                    <Text style = {styles.label}>Select your course below</Text>
-                    <Text style = {styles.label}>If you don't see your course below</Text>
-                    <Text style = {styles.label}>it may not be in our system yet</Text>
-                    <Text style = {styles.label}>double check the spelling of your city</Text>
-                    <Text style = {styles.label}></Text>
-                    <Text style = {styles.label}>You entered {this.props.route.city}</Text>
 
-                  </View>
-                  <View style = {styles.container2}>
-                    <ListView
-                      dataSource = {this.state.dataSource}
-                      renderRow = {this.renderCourse}
-                      style = {styles.ListView}
-                    />
-                  </View>
+                    {this.courseSelected()}
+
+
                 </View>
               </Image>
             </View>
@@ -126,6 +115,47 @@ module.exports = React.createClass({
 
     );
   },
+  courseSelected: function(){
+    if (this.state.course === ""){
+      return (
+        <View style = {styles.container}>
+          <View style= {styles.container}>
+            <Text style = {styles.label}></Text>
+            <Text style = {styles.label}>Select your course below</Text>
+            <Text style = {styles.label}></Text>
+            <Text style = {styles.label2}>If you don't see your course below</Text>
+            <Text style = {styles.label2}>it may not be in our system yet</Text>
+            <Text style = {styles.label2}>or</Text>
+            <Text style = {styles.label2}>the spelling of your city may be incorrect</Text>
+            <Text style = {styles.label}></Text>
+            <Text style = {styles.label}>You entered: {this.props.route.city}</Text>
+          <ListView
+            dataSource = {this.state.dataSource}
+            renderRow = {this.renderCourse}
+            style = {styles.ListView}
+          />
+          </View>
+        </View>
+      );
+    } else {
+      return(
+        <View style = {styles.container}>
+          <Text style = {styles.label}></Text>
+          <Text style  = {styles.label1}>Would you like to add</Text>
+          <Text style = {styles.label}></Text>
+          <Text style  = {styles.label1}>{this.state.course}</Text>
+          <Text style = {styles.label}></Text>
+          <Text style  = {styles.label1}>to your favorites list</Text>
+            <Text style = {styles.label}></Text>
+          <View style = {styles.flowright}>
+            <Button text = "Yes" onPress = {this.addFavorites}/>
+            <Text style = {styles.label3}></Text>
+            <Button text = "No" onPress = {this.dontAddFavorites}/>
+          </View>
+        </View>
+      );
+    }
+  },
 
   renderCourse: function(rowData){
     // console.log('sectionID', sectionID);
@@ -145,6 +175,14 @@ module.exports = React.createClass({
     this.setState({
       course: rowData.name
     });
+
+  },
+  addFavorites: function(){
+    var player1 = this.state.user.get('username');
+    Post('addFavorite', {username: player1, course: this.state.course});
+    this.props.navigator.immediatelyResetRouteStack([{name: 'players', course: this.state.course, player1: player1 }]);
+  },
+  dontAddFavorites: function(){
     var player1 = this.state.user.get('username');
     this.props.navigator.immediatelyResetRouteStack([{name: 'players', course: this.state.course, player1: player1 }]);
   },
@@ -172,8 +210,30 @@ var styles = StyleSheet.create({
     backgroundColor: 'transparent',
     justifyContent:'center'
   },
+  flowright: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+  },
   label: {
     fontSize: 18,
     color: 'white'
+  },
+  label1: {
+    fontSize: 18,
+    color: 'white',
+    alignSelf: 'center'
+  },
+  label2: {
+    fontSize: 14,
+    color: 'white',
+    alignSelf: 'center',
+    fontStyle: 'italic'
+  },
+  label3: {
+    fontSize: 14,
+    color: 'white',
+    alignSelf: 'center',
+    marginLeft: 30,
+    marginRight: 30
   }
 });

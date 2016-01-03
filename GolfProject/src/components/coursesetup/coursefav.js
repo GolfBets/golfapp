@@ -37,8 +37,8 @@ module.exports = React.createClass({
   componentDidMount: function(){
 
     var username = this.state.user.get('username');
-    Api(`coursesbycity/mission viejo`)
-    //Api(`getFavorites/${username}`)
+    //Api(`coursesbycity/mission viejo`)
+    Api(`getFavorites/${username}`)
       .then((data) =>{
 
         this.setState({

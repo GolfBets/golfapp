@@ -1,4 +1,4 @@
-var rootUrl = 'http://192.168.1.220:3000/';
+var rootUrl = 'https://limitless-scrubland-7440.herokuapp.com/';
 
 module.exports = function(serverRoute, content){
   var url  = `${rootUrl}${serverRoute}`;
