@@ -254,11 +254,24 @@ module.exports = React.createClass({
       }
     }
     if (this.state.holeNumber===19){
+      var playerResults;
+      if (this.props.route.gameSelected === "Round Robin"){
+        playerResults  = RoundRobin(this.state, this.props.route);
+      }
+      if (this.props.route.gameSelected === "Nassau"){
+        playerResults  = Nassau(this.state, this.props.route);
+      }
+      this.setState({
+        player1Results: playerResults[1],
+        player2Results: playerResults[2],
+        player3Results: playerResults[3],
+        player4Results: playerResults[4],
+      });
       this.endGame();
     }
   },
   endGame: function(){
-    this.props.navigator.immediatelyResetRouteStack([{name:'endgame'}]);
+    this.props.navigator.immediatelyResetRouteStack([{name:'endgame', player1score: this.state.player1score, player2score: this.state.player2score, player3score: this.state.player3score, player4score: this.state.player4score, course : this.props.route.course, player1: this.props.route.player1, player2: this.props.route.player2, player3:this.props.route.player3, player4: this.props.route.player4, player1Results: this.state.player1Results, player2Results: this.state.player2Results, player3Results: this.state.player3Results, player4Results: this.state.player4Results, gameSelected: this.props.route.gameSelected}]);
   },
   netScoreUpPlayer1: function(){
     this.setState({score1: ++this.state.score1});

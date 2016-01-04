@@ -17,7 +17,7 @@ module.exports = React.createClass({
             value  = {this.props.value1}
             onChangeText = {this.props.onChangeText}
             />
-          {this.checkIndex()}  
+          {this.checkIndex()}
         </View>
     );
   },
@@ -25,6 +25,7 @@ module.exports = React.createClass({
     if (this.props.indexUsed  === "YES"){
       return (
         <TextInput
+          keyboardType = 'numbers-and-punctuation'
           style  = {styles.input2}
           placeholder = "HCP"
           value  = {this.props.value2}

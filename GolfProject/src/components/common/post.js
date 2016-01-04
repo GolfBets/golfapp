@@ -1,5 +1,5 @@
-var rootUrl = 'https://limitless-scrubland-7440.herokuapp.com/';
-
+//var rootUrl = 'https://limitless-scrubland-7440.herokuapp.com/';
+var rootUrl = 'http://localhost:3000/';
 module.exports = function(serverRoute, content){
   var url  = `${rootUrl}${serverRoute}`;
 //  console.log(url);
