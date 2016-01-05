@@ -73,7 +73,50 @@ module.exports = React.createClass({
   },
 
   render: function(){
+    if (this.state.holeNumber===19){
 
+      return(
+        <Tabbar selected={this.state.selected}  onTabItemPress={this.onTabItemPress}>
+          <Item name="Scores">
+            <Item.Content>
+              <View style={{flex: 1}}>
+                <ScoreCard courseInfo = {this.props.route.courseInfo} player1score = {this.state.player1score} player2score = {this.state.player2score} player3score = {this.state.player3score} player4score = {this.state.player4score} player1Netscore = {this.state.player1Netscore} player2Netscore={this.state.player2Netscore} player3Netscore={this.state.player3Netscore} player4Netscore= {this.state.player4Netscore}  player1={this.props.route.player1} player2={this.props.route.player2} player3={this.props.route.player3} player4= {this.props.route.player4} course ={this.props.route.course} player1Results= {this.state.player1Results} player2Results={this.state.player2Results} player3Results={this.state.player3Results} player4Results={this.state.player4Results} playerCount = {this.props.route.playerCount}/>
+              </View>
+            </Item.Content>
+            <Item.Icon>
+              <Text>Scores</Text>
+            </Item.Icon>
+          </Item>
+          <Item name="Bets">
+            <Item.Content>
+              <View style={{flex:1}}>
+                <Image source={this.state.image} style={styles.backgroundImage}>
+                  <BetResults  player1={this.props.route.player1} player2={this.props.route.player2} player3={this.props.route.player3} player4= {this.props.route.player4} course ={this.props.route.course} player1Results= {this.state.player1Results} player2Results={this.state.player2Results} player3Results={this.state.player3Results} player4Results={this.state.player4Results} playerCount = {this.props.route.playerCount}/>
+                </Image>
+              </View>
+            </Item.Content>
+            <Item.Icon>
+              <Text>Bets</Text>
+            </Item.Icon>
+          </Item>
+          <Item name="Save Round">
+            <Item.Content>
+              <View style={{ flex: 1 }}>
+                    <Image source={this.state.image} style={styles.backgroundImage}>
+                    </Image>
+              </View>
+            </Item.Content>
+            <Item.Icon>
+                <Text>Save Round</Text>
+            </Item.Icon>
+          </Item>
+        </Tabbar>
+      );
+
+
+
+
+    }
     var players = [];
     for (var i = 1; i <= this.props.route.playerCount;i++){
       players.push(<PlayersHole key = {i} text1 = {this.props.route[`player${i}`]} onPress1 = {this[`netScoreDownPlayer${i}`]} text2 = {this.state[`score${i}`]} onPress2 = {this[`netScoreUpPlayer${i}`]} text3 = {this.state[`netScore${i}`]}/>);
@@ -173,6 +216,10 @@ module.exports = React.createClass({
     this.setState({
       selected: name
     });
+    if (this.state.selected === "Save Round"){
+      this.setState({selected:"Bets"});
+      this.endGame();
+    }
     if (this.state.selected === 'Scores'){
       // console.log("hello");
       for (var i = 1; i<=this.props.route.playerCount;i++){
@@ -267,11 +314,12 @@ module.exports = React.createClass({
         player3Results: playerResults[3],
         player4Results: playerResults[4],
       });
-      this.endGame();
+      this.setState({selected:"Bets"});
+      //this.endGame();
     }
   },
   endGame: function(){
-    this.props.navigator.immediatelyResetRouteStack([{name:'endgame', player1score: this.state.player1score, player2score: this.state.player2score, player3score: this.state.player3score, player4score: this.state.player4score, course : this.props.route.course, player1: this.props.route.player1, player2: this.props.route.player2, player3:this.props.route.player3, player4: this.props.route.player4, player1Results: this.state.player1Results, player2Results: this.state.player2Results, player3Results: this.state.player3Results, player4Results: this.state.player4Results, gameSelected: this.props.route.gameSelected}]);
+    this.props.navigator.push({name:'endgame', player1score: this.state.player1score, player2score: this.state.player2score, player3score: this.state.player3score, player4score: this.state.player4score, course : this.props.route.course, player1: this.props.route.player1, player2: this.props.route.player2, player3:this.props.route.player3, player4: this.props.route.player4, player1Results: this.state.player1Results, player2Results: this.state.player2Results, player3Results: this.state.player3Results, player4Results: this.state.player4Results, gameSelected: this.props.route.gameSelected});
   },
   netScoreUpPlayer1: function(){
     this.setState({score1: ++this.state.score1});

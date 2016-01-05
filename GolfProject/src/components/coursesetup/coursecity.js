@@ -127,8 +127,10 @@ module.exports = React.createClass({
             <Text style = {styles.label2}>it may not be in our system yet</Text>
             <Text style = {styles.label2}>or</Text>
             <Text style = {styles.label2}>the spelling of your city may be incorrect</Text>
-            <Text style = {styles.label}></Text>
+            <Text style = {styles.label}> </Text>
+            <Text style = {styles.label}> </Text>
             <Text style = {styles.label}>You entered: {this.props.route.city}</Text>
+            <Text style = {styles.label}> </Text>
           <ListView
             dataSource = {this.state.dataSource}
             renderRow = {this.renderCourse}
