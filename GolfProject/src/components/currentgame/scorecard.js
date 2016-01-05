@@ -120,7 +120,7 @@ var styles = StyleSheet.create({
 
   container: {
     transform: [{rotate: '90deg'}],
-    marginTop: width/2 - 48,
+    marginTop: width/2 - 58,
     // marginTop: 20,
     // marginLeft: 10,
     marginRight: 10,
@@ -129,7 +129,7 @@ var styles = StyleSheet.create({
     backgroundColor:'white',
     justifyContent: 'center',
     // flex: 1,
-    width: height - 20,
+    width: height - 40,
     height: width,
     // flexDirection: 'row',
     // alignItems: 'stretch'
@@ -139,6 +139,7 @@ var styles = StyleSheet.create({
     color: "black",
     justifyContent: "center",
     alignSelf: 'center',
+    flex: 1.5
   },
   label: {
     fontSize: 12,
@@ -160,7 +161,8 @@ var styles = StyleSheet.create({
     color: 'black',
     fontStyle: "italic",
     justifyContent: 'center',
-    alignSelf: "center"
+    alignSelf: "center",
+    flex: 1
   },
   label2: {
     fontSize: 12,
@@ -174,7 +176,7 @@ var styles = StyleSheet.create({
   flowright: {
     justifyContent: "space-between",
     flexDirection: 'row',
-
+    flex: 1
   },
 
 
