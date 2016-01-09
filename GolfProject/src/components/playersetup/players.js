@@ -58,6 +58,8 @@ module.exports = React.createClass({
               <View style={{ flex: 1}}>
                 <Image source={require('../../assets/grass4.jpeg')} style={styles.backgroundImage}>
                   <View style  = {styles.container}>
+                    <Text style  = {styles.label}></Text>
+                    <Text style  = {styles.label}></Text>
                     <Text style  = {styles.label}>Tap number of players</Text>
                     <Text style  = {styles.label}>Including yourself</Text>
                     <Text style  = {styles.label}></Text>
@@ -77,6 +79,8 @@ module.exports = React.createClass({
                       </TouchableHighlight>
                   </View>
                   <View style  = {styles.container}>
+                        <Text style  = {styles.label}></Text>
+                        <Text style  = {styles.label}></Text>
                         <Text style  = {styles.label}>Would you like to use Handicaps</Text>
                       <View style = {[styles.flowright]}>
                         <Button text = "Yes" onPress= {()=>this.setState({indexUsed: 'YES'})}/>

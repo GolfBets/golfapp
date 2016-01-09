@@ -43,7 +43,7 @@ var styles = StyleSheet.create({
     justifyContent: 'center'
   },
   title:{
-    fontSize: 25,
+    fontSize: 23,
     color: "white",
     justifyContent: "center",
     alignSelf: 'center'
