@@ -222,6 +222,7 @@ module.exports = React.createClass({
       this.setState({selected:"Bets"});
       this.endGame();
     }
+    
     if (this.state.selected === 'Scores'){
       // console.log("hello");
       for (var i = 1; i<=this.props.route.playerCount;i++){
