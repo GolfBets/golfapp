@@ -7,7 +7,8 @@ var{
   TextInput,
   Image,
   TouchableHighlight,
-  Platform
+  Platform,
+  AsyncStorage
 } = React;
 
 var Tabbar = require('react-native-tabbar');
@@ -70,6 +71,7 @@ module.exports = React.createClass({
       this.setState(score);
     }
 
+    AsyncStorage.setItem("currentGame", "true").done(console.log("game successfully saved to local storage"));
   },
 
   render: function(){
@@ -299,6 +301,7 @@ module.exports = React.createClass({
         }
         this.setState(score);
       }
+      console.log("async", AsyncStorage.getItem("currentGame"));
     }
     if (this.state.holeNumber===19){
       var playerResults;

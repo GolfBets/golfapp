@@ -49,7 +49,7 @@ module.exports = React.createClass({
     }
   },
   render: function(){
-    console.log(this.state);
+    // console.log(this.state);
     if (this.state.playerCount === 1 || this.state.indexUsed === ""){
       return (
         <Tabbar selected={this.state.selected} onTabItemPress={this.onTabItemPress}>

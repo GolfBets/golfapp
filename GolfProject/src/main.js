@@ -1,7 +1,8 @@
 var React  = require('react-native');
 var {
   StyleSheet,
-  Navigator
+  Navigator,
+  AsyncStorage
 } = React;
 
 var Parse  = require('parse/react-native');
@@ -31,13 +32,13 @@ var ROUTES = {
   hole: Hole,
   profile: Profile,
   endgame: EndGame,
-
 };
 
 module.exports = React.createClass({
   componentWillMount: function(){
     Parse.initialize('Ip4K6IbQ8ilmRFAh7dO5LUAlZGm0d423JLpcO39f','NbdmBpotlFLCnq2WY7TMuBT0sDtyNG7lxo28vRxP');
   },
+
   renderScene: function(route, navigator, props){
     var Component = ROUTES[route.name];
     return <Component route ={route} navigator = {navigator} props = {props}/>;
@@ -45,14 +46,25 @@ module.exports = React.createClass({
   render: function(){
     console.log('navigate');
 
-    return(
-      <Navigator
-      style = {styles.container}
-      initialRoute={{name: 'signin'}}
-      renderScene={this.renderScene}
-      configureScene = {()=>{return Navigator.SceneConfigs.FloatFromRight;}}
-      />
-    );
+    if (AsyncStorage.getItem("currentGame")==="true"){
+      return(
+        <Navigator
+        style = {styles.container}
+        initialRoute={{name: 'hole'}}
+        renderScene={this.renderScene}
+        configureScene = {()=>{return Navigator.SceneConfigs.FloatFromRight;}}
+        />
+      );
+     } else {
+      return(
+        <Navigator
+        style = {styles.container}
+        initialRoute={{name: 'signin'}}
+        renderScene={this.renderScene}
+        configureScene = {()=>{return Navigator.SceneConfigs.FloatFromRight;}}
+        />
+      );
+    }
   }
 });
 
