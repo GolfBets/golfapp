@@ -22,6 +22,7 @@ var BetResults = require('./betresults');
 
 module.exports = React.createClass({
   getInitialState: function(){
+
     return {
       holeNumber: 1,
       start: 1,
@@ -222,7 +223,7 @@ module.exports = React.createClass({
       this.setState({selected:"Bets"});
       this.endGame();
     }
-    
+
     if (this.state.selected === 'Scores'){
       // console.log("hello");
       for (var i = 1; i<=this.props.route.playerCount;i++){
@@ -302,7 +303,7 @@ module.exports = React.createClass({
         }
         this.setState(score);
       }
-      console.log("async", AsyncStorage.getItem("currentGame"));
+      AsyncStorage.getItem("currentGame").then((value)=> {if (value  === 'true'){console.log("true");}});
     }
     if (this.state.holeNumber===19){
       var playerResults;

@@ -2,7 +2,9 @@ var React  = require('react-native');
 var {
   StyleSheet,
   Navigator,
-  AsyncStorage
+  AsyncStorage,
+  View,
+  Text,
 } = React;
 
 var Parse  = require('parse/react-native');
@@ -35,9 +37,23 @@ var ROUTES = {
 };
 
 module.exports = React.createClass({
+
+  getInitialState: function(){
+    return {
+      currentGame:'2',
+    };
+  },
+
   componentWillMount: function(){
     Parse.initialize('Ip4K6IbQ8ilmRFAh7dO5LUAlZGm0d423JLpcO39f','NbdmBpotlFLCnq2WY7TMuBT0sDtyNG7lxo28vRxP');
   },
+
+  componentDidMount: function(){
+    AsyncStorage.getItem("currentGame").then((value) => {
+        this.setState({"currentGame": value});
+    }).done();
+  },
+
 
   renderScene: function(route, navigator, props){
     var Component = ROUTES[route.name];
@@ -45,17 +61,23 @@ module.exports = React.createClass({
   },
   render: function(){
     console.log('navigate');
+    console.log('this.state.currentGame ', this.state.currentGame);
 
-    if (AsyncStorage.getItem("currentGame")==="true"){
+    if (this.state.currentGame === '2'){
+      return (<View>
+        <Text>Loading...</Text>
+      </View>);
+    }
+    if (this.state.currentGame === "true"){
       return(
         <Navigator
         style = {styles.container}
-        initialRoute={{name: 'hole'}}
+        initialRoute={{name: 'signup'}}
         renderScene={this.renderScene}
         configureScene = {()=>{return Navigator.SceneConfigs.FloatFromRight;}}
         />
       );
-     } else {
+    } else {
       return(
         <Navigator
         style = {styles.container}
